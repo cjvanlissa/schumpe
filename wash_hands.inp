@@ -1,0 +1,18 @@
+TITLE:
+wash_hands
+DATA:
+FILE = "wash_hands_d5e6359c8917f300f677ff900b595e5c.dat";
+ 
+VARIABLE:
+NAMES = id country DV_wash_hands wash_hands age gender religious politx polity
+     political_view education Dt risk_perception_infect economic_risk_perception
+     distancing_social_norm clear_message trust_government preference_tightness
+     punishing_deviation conspiracy1 employment_status date proximity_corona
+     int_risk_perception_infect int_economic_risk_perception
+     int_distancing_social_norm int_clear_message int_trust_government
+     int_preference_tightness int_punishing_deviation int_conspiracy1
+     int_employment_status int_proximity_corona tightness; 
+ MISSING=.;
+
+OUTPUT:
+sampstat;

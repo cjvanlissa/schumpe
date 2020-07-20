@@ -1,0 +1,85 @@
+Mplus VERSION 8
+MUTHEN & MUTHEN
+07/20/2020   8:24 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+  wash_hands
+  DATA:
+  FILE = "wash_hands_d5e6359c8917f300f677ff900b595e5c.dat";
+
+  VARIABLE:
+  NAMES = id country DV_wash_hands wash_hands age gender religious politx polity
+       political_view education Dt risk_perception_infect economic_risk_perception
+       distancing_social_norm clear_message trust_government preference_tightness
+       punishing_deviation conspiracy1 employment_status date proximity_corona
+       int_risk_perception_infect int_economic_risk_perception
+       int_distancing_social_norm int_clear_message int_trust_government
+       int_preference_tightness int_punishing_deviation int_conspiracy1
+       int_employment_status int_proximity_corona tightness;
+   MISSING=.;
+
+  OUTPUT:
+  sampstat;
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING in MODEL command
+  All variables are uncorrelated with all other variables in the model.
+  Check that this is what is intended.
+*** ERROR
+  One or more variables have a variance greater than the maximum allowed of 1000000.
+  Check your data and format statement or rescale the variable(s) using the DEFINE command.
+
+    Continuous    Number of
+     Variable   Observations    Variance
+
+    **ID           43056      **********
+      COUNTRY      43050          39.719
+      DV_WASH_      2747           1.506
+      WASH_HAN     31366           1.562
+      AGE          43046           2.704
+      GENDER       42945           0.250
+      RELIGIOU     42785           0.248
+      POLITX       43056        4846.710
+      POLITY       43056        3627.611
+      POLITICA     34759           3.805
+      EDUCATIO     42969           1.899
+    **DT           10546      **********
+      RISK_PER     36424           1.426
+      ECONOMIC     36439           2.450
+      DISTANCI     31065           2.133
+      CLEAR_ME     43009           2.683
+      TRUST_GO     42689           3.512
+      PREFEREN     29199           2.467
+      PUNISHIN     32316           3.221
+      CONSPIRA     29182           2.418
+      EMPLOYME     33520           0.250
+    **DATE         43056      **********
+      PROXIMIT     40730           0.175
+    **INT_RISK      6221      **********
+    **INT_ECON      6220      **********
+    **INT_DIST      3071      **********
+    **INT_CLEA     10543      **********
+    **INT_TRUS     10541      **********
+    **INT_PREF      3072      **********
+    **INT_PUNI      4719      **********
+    **INT_CONS      3073      **********
+    **INT_EMPL      4523      **********
+    **INT_PROX      9139      **********
+      TIGHTNES     33870           0.097
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen
