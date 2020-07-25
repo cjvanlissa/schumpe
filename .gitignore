@@ -13,3 +13,6 @@
 !descriptives.csv
 .Rproj.user
 *.sps
+!model_fits.csv
+!results*.csv
+.RData

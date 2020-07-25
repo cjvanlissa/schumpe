@@ -14,8 +14,7 @@ library(foreign)
 library(tidySEM)
 library(multilevel)
 
-#df <- read.spss("RMD10_Birga M. Schumpe_final_variables.csv", use.value.labels = FALSE, to.data.frame = TRUE)
-#df <- read.csv("RMD10_Birga M. Schumpe_final_variables.csv")
+# Load data
 df <- read.spss("RMD10_Birga new_data_final4.sav", to.data.frame = TRUE, use.value.labels = TRUE)
 df <- df[df$representative == "Yes", ]
 names(df) <- tolower(names(df))
@@ -34,17 +33,18 @@ df[names(vnames)] <- NULL
 names(df) <- gsub("_harmonized$", "", names(df))
 names(df) <- gsub("(_b)?_harmonized(?=_)", "", names(df), perl = TRUE)
 
+# Make list with types of variables
 vars <- lapply(c("predictor", "control", "dv"), function(x) names(df)[startsWith(names(df), x)])
 names(vars) <- c("predictor", "control", "dv")
 
+# Rename variables
 rename <- names(df)
 names(rename) <- rename
 rename <- gsub("^(predictor|control|dv)_", "", rename)
-#rename <- gsub("^baseline_(.*)$", "\\1_t1", rename)
-#rename <- gsub("^w4_(.*)$", "\\1_t2", rename)
 names(df) <- rename
 vars <- lapply(vars, function(x){ unname(rename[x]) })
 
+# Plot variable distributions
 # df_plot <- df[, unlist(vars)]
 # df_plot <- pivot_longer(df_plot, cols = names(df_plot))
 # p <- ggplot(df_plot, aes(x = value)) + geom_histogram() +facet_wrap(~name, scales = "free") + theme_bw() + labs(x = "Value", y = "Frequency")
@@ -58,8 +58,7 @@ vars <- lapply(vars, function(x){ unname(rename[x]) })
 # write.csv(desc, "descriptives.csv")
 # plot(density(df$DV_wash_hands, na.rm=T))
 
-# Missing 
-
+# Remove cols / rows with too many missing 
 miss <- colSums(is.na(df))
 df <- df[, !miss == nrow(df)]
 
@@ -70,10 +69,12 @@ df <- df[!miss == ncol(df), ]
 
 # Check time intervals
 dat <- df[grep("start", names(df), value = TRUE)]
+first_time <- min(dat, na.rm = TRUE)
 dat <- t(apply(dat, 1, function(x){diff(as.numeric(x))}))
 range(dat, na.rm = T)
 length(which(apply(dat, 1, function(x){any(x<0)})))
-# Reshape
+
+# Convert everything to numeric for reshape
 df[c("responseid", "representative")] <- NULL
 names(df) <- gsub("multilevel_", "", names(df))
 df$country <- trimws(df$country)
@@ -118,7 +119,7 @@ table(apply(dat, 1, function(x){length(unique(na.omit(x)))}))
 these <- apply(dat, 1, function(x){length(unique(na.omit(x)))}) > 1
 tmp <- dat[these, ]
 
-
+# Reshape
 df$id <- 1:nrow(df)
 long_vars <- gsub("_[bw]\\d{0,}$", "", names(df))
 long_vars <- table(long_vars)
@@ -139,7 +140,10 @@ df_long$time <- as.numeric(df_long$time)
 df_long$variable <- gsub("^(.+?)_([bw]\\d{0,})$", "\\1", df_long$variable)
 
 df_dates <- df_long[df_long$variable == "start_date_survey_taken", c("id", "time", "value")]
-
+# Set 0 to start of data collection
+df_dates$value <- df_dates$value - min(df_dates$value, na.rm = TRUE)
+# Convert to days
+df_dates$value <- df_dates$value / 86400
 df_long <- data.table(df_long)
 df_dates <- data.table(df_dates)
 names(df_dates)[3] <- "date"
@@ -164,17 +168,17 @@ ICCs <- mult.icc(data.frame(df_wide[, longv]), grpid = df_wide$id)
 names(ICCs)[1] <- "id"
 desc$id <- gsub("_[bw]\\d{0,}$", "", desc$name)
 
-#desc$id <- gsub("^.+?_", "", desc$id)
 desc <- merge(desc, ICCs, by = "id", all.x = TRUE)
 desc <- desc[!startsWith(desc$name, "DV_"), ]
 write.csv(desc, "descriptives.csv")
 
+# Get the names of the waves
 the_waves <- unique(df_long$time)
 
-for(thisdv in vars$dv){
-  #thisdv = vars$dv[1]
-  
-  
+write.table(t(c("Title", "LL", "Parameters", "AIC", "BIC", "RMSEA_Estimate", 
+              "CFI", "TLI")), "model_fits.csv", sep = "\t", row.names = FALSE, col.names = FALSE)
+
+for(thisdv in vars$dv[2:length(vars$dv)]){
   use_waves <- unique(df_long$time[df_long$variable == vars$dv[1]])
   next_waves <- use_waves[-length(use_waves)]
   names(next_waves) <- use_waves[-1]
@@ -234,7 +238,7 @@ for(thisdv in vars$dv){
          ggplot(df_plot, aes(x = Var2, y = Var1, fill = Freq)) + geom_raster() + scale_fill_manual(values = c("TRUE" = "grey50", "FALSE" = "white")) + labs(x = "Wave", y = "Variable") + theme(legend.position = "none"),
          device = "png")
   
-  pred_time_var <- c(pred_time_var, thisdv, "date") + coord_flip()
+  pred_time_var <- c(pred_time_var, thisdv)
   
   df_anal[pred_invar] <- lapply(df_anal[pred_invar], function(thisv){
     #thisv = df_anal[[pred_invar[1]]]
@@ -251,21 +255,13 @@ for(thisdv in vars$dv){
   
   
   df_anal[paste0("int_", pred_time_var)] <- lapply(df_anal[pred_time_var], function(x){x*df_anal$Dt})
-  pred_time_var <- c("Dt", pred_time_var, paste0("int_", pred_time_var))
+  pred_time_var <- c("date", "Dt", pred_time_var, paste0("int_", pred_time_var))
 
   use_these <- c(pred_invar, pred_time_var, "tightness")
-
+  use_these <- use_these[!use_these == "int_date"]
   df_anal <- df_anal[!is.na(df_anal$Dt), ]
   
-
-  # model <- paste0(
-  #   paste0("DV_", thisdv),
-  #   " ~ ",
-  #   paste0(c(pred_invar, pred_time_var, thisdv), collapse = " + "),
-  #   " + ",
-  #   paste0(paste0("Dt:", c(pred_time_var, thisdv)), collapse = " + ")
-  # )
-  
+# Make Mplus model object
   mod <- mplusObject(
     TITLE = thisdv,
     VARIABLE = paste0(c(
@@ -283,10 +279,16 @@ for(thisdv in vars$dv){
     OUTPUT = "TECH1 TECH8;",
     rdata = df_anal[c("id", "country", paste0("DV_", thisdv), use_these)]
   )
-  
+  # Estimate Mplus model
   res <- mplusModeler(mod, modelout = paste0(thisdv, ".inp"), run = 1L)
   
+  tab <- table_results(res, columns = NULL)
+  tab <- tab[tab$op == "~", c("param", "level", "est_sig", "pval", "confint")]
+  tab$param <- c(pred_time_var, pred_invar, thisdv, "Dt", "tightness")[pmatch(tolower(tab$param), c(pred_time_var, pred_invar, thisdv, "Dt", "tightness"))]
+  write.csv(tab, paste0("results_", thisdv, ".csv"), row.names = FALSE)
   
+  fit <- SummaryTable(res, keepCols = c("Title", "LL", "Parameters", "AIC", "BIC", "RMSEA_Estimate", "CFI", "TLI"), type = "none")
+  write.table(fit, "model_fits.csv", append = TRUE, sep = "\t", row.names = FALSE, col.names = FALSE)
 }
 
 
