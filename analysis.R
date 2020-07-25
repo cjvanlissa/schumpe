@@ -20,8 +20,19 @@ df <- read.spss("RMD10_Birga new_data_final4.sav", to.data.frame = TRUE, use.val
 df <- df[df$representative == "Yes", ]
 names(df) <- tolower(names(df))
 names(df) <- gsub("predicyot", "predictor", names(df))
-#names(df)[1] <- "country"
-#desc <- descriptives(df)
+
+# Rename political dimensions
+names(df) <- gsub("political_view(?=[xy])", "polit", names(df), perl = TRUE)
+
+# Use only harmonized
+grep("harmoniz", names(df), value = TRUE)
+vnames <- gsub("_harmonized$", "", names(df))
+vnames <- gsub("(_b)?_harmonized(?=_)", "", vnames, perl = TRUE)
+vnames
+vnames <- table(vnames)[table(vnames) == 2]
+df[names(vnames)] <- NULL
+names(df) <- gsub("_harmonized$", "", names(df))
+names(df) <- gsub("(_b)?_harmonized(?=_)", "", names(df), perl = TRUE)
 
 vars <- lapply(c("predictor", "control", "dv"), function(x) names(df)[startsWith(names(df), x)])
 names(vars) <- c("predictor", "control", "dv")
@@ -55,20 +66,13 @@ df <- df[, !miss == nrow(df)]
 miss <- rowSums(is.na(df))
 df <- df[!miss == ncol(df), ]
 
-# Use only harmonized
 
-vnames <- gsub("_harmonized", "", names(df))
-vnames <- table(vnames)[table(vnames) == 2]
-df[names(vnames)] <- NULL
-names(df) <- gsub("_harmonized", "", names(df))
 
 # Check time intervals
 dat <- df[grep("start", names(df), value = TRUE)]
-dat <- apply(dat, 1, diff)
-dim(dat)
-hist(dat[2,])
+dat <- t(apply(dat, 1, function(x){diff(as.numeric(x))}))
 range(dat, na.rm = T)
-
+length(which(apply(dat, 1, function(x){any(x<0)})))
 # Reshape
 df[c("responseid", "representative")] <- NULL
 names(df) <- gsub("multilevel_", "", names(df))
@@ -102,6 +106,19 @@ df[fac_vars] <- lapply(df[fac_vars], function(x){
   as.numeric(x)
 })
 
+for(i in 1:2){
+  vars <- lapply(vars, function(x){unique(gsub(pattern = "(^start_|_([bw]\\d{0,}$|harmonized)|_survey_taken$)", replacement = "", x))})
+}
+
+
+# Check employment status -------------------------------------------------
+
+dat <- df[, grep("employment_status", names(df))]
+table(apply(dat, 1, function(x){length(unique(na.omit(x)))}))
+these <- apply(dat, 1, function(x){length(unique(na.omit(x)))}) > 1
+tmp <- dat[these, ]
+
+
 df$id <- 1:nrow(df)
 long_vars <- gsub("_[bw]\\d{0,}$", "", names(df))
 long_vars <- table(long_vars)
@@ -110,7 +127,10 @@ id_vars <- unname(unlist(sapply(id_vars, function(x){names(df)[startsWith(names(
 long_vars <- names(long_vars)[long_vars > 1]
 long_vars <- unname(unlist(sapply(long_vars, function(x){names(df)[startsWith(names(df), x)]})))
 df_long <- pivot_longer(df, cols = all_of(long_vars), names_to = "variable")
-names(df_long) <- c("country", "tightness", "age", "gender", "religious", "political_viewx", "political_viewy", "political_view", "education", "id", "variable", "value")
+for(i in 1:2){
+  long_vars <- unique(gsub(pattern = "(^start_|_([bw]\\d{0,}$|harmonized)|_survey_taken$)", replacement = "", long_vars))
+}
+names(df_long) <- c("country", "tightness", "age", "gender", "religious", "politx", "polity", "political_view", "education", "id", "variable", "value")
 df_long$time <- gsub("^.+?_([bw]\\d{0,})$", "\\1", df_long$variable)
 df_long$time[df_long$time == "b"] <- "0"
 df_long$time <- gsub("w", "", df_long$time)
@@ -119,92 +139,138 @@ df_long$time <- as.numeric(df_long$time)
 df_long$variable <- gsub("^(.+?)_([bw]\\d{0,})$", "\\1", df_long$variable)
 
 df_dates <- df_long[df_long$variable == "start_date_survey_taken", c("id", "time", "value")]
-df_long <- df_long[!df_long$variable == "start_date_survey_taken", ]
 
 df_long <- data.table(df_long)
 df_dates <- data.table(df_dates)
 names(df_dates)[3] <- "date"
 
 df_long <- merge(df_long, df_dates, by = c("id", "time"), all.x = TRUE)
-
+df_long <- df_long[!df_long$variable == "start_date_survey_taken", ]
 df_long <- df_long[!is.na("date"), ]
-df_long <- df_long[!duplicated(df_long[, .SD, .SDcols = names(df_long)[!names(df_long) == "value"]]), ]
 
-df_wide <- pivot_wider(df_long, names_from = "variable", values_from = "value")
-df_wide <- df_wide[!is.na(df_wide$date), ]
-
-df_nextwave <- df_long[df_long$variable %in% gsub("_([bw]\\d{0,})$", "", vars$dv), .SD, .SDcols = c("id", "time", "variable", "value", "date")]
-df_nextwave$time <- df_nextwave$time-1
-df_nextwave <- df_nextwave[!time < 0, ]
-df_nextwave <- df_nextwave[!duplicated(df_nextwave[, .SD, .SDcols = names(df_nextwave)[!names(df_nextwave) == "value"]]), ]
-
-df_nextwave <- pivot_wider(df_nextwave, names_from = "variable", values_from = "value")
-df_nextwave <- df_nextwave[!is.na(df_nextwave$date), ]
-names(df_nextwave)[3:15] <- paste0("DV_", names(df_nextwave)[3:15])
-
-df_anal <- merge(df_wide, df_nextwave, by = c("id", "time"), all.x = TRUE)
-
-df_anal$Dt <- df_anal$DV_date - df_anal$date
-table(sign(df_anal$Dt))
-
-desc <- descriptives(df_anal)
-
-
-# Descriptives ------------------------------------------------------------
-for(i in 1:2){
-  vars <- lapply(vars, function(x){unique(gsub(pattern = "(^start_|_([bw]\\d{0,}$|harmonized)|_survey_taken$)", replacement = "", x))})
-  long_vars <- unique(gsub(pattern = "(^start_|_([bw]\\d{0,}$|harmonized)|_survey_taken$)", replacement = "", long_vars))
+if(any(duplicated(df_long[, .SD, .SDcols = names(df_long)[!names(df_long) == "value"]]))){
+  browser()
+  df_long <- df_long[!duplicated(df_long[, .SD, .SDcols = names(df_long)[!names(df_long) == "value"]]), ]
 }
 
-unlist(vars)[!unlist(vars) %in% names(df_anal)]
-long_vars[!long_vars %in% names(df_anal)]
+# Descriptives ------------------------------------------------------------
 
-
-ICCs <- mult.icc(df_anal[, long_vars], grpid = df_anal$id)
+desc <- descriptives(df)
+df_wide <- pivot_wider(df_long, names_from = "variable", values_from = "value")
+df_wide <- df_wide[!is.na(df_wide$date), ]
+longv <- unique(c("start_date_survey_taken", long_vars))[-1]
+longv[!longv %in% names(df_wide)]
+ICCs <- mult.icc(data.frame(df_wide[, longv]), grpid = df_wide$id)
 names(ICCs)[1] <- "id"
 desc$id <- gsub("_[bw]\\d{0,}$", "", desc$name)
+
 #desc$id <- gsub("^.+?_", "", desc$id)
 desc <- merge(desc, ICCs, by = "id", all.x = TRUE)
 desc <- desc[!startsWith(desc$name, "DV_"), ]
 write.csv(desc, "descriptives.csv")
 
-center_these <- unlist(vars[c("predictor", "control")])
-center_these <- center_these[center_these %in% desc$name[desc$unique > 3]]
-center_these <- c(center_these, "tightness", "Dt")
-
-df_anal[center_these] <-  sapply(df_anal[center_these], function(x){as.vector(scale(x, scale = TRUE))})
-
-df_anal[paste0("int_", pred_time_var)] <- lapply(df_anal[pred_time_var], function(x){x*df_anal$Dt})
-
-pred_invar <- c(vars$predictor, vars$control)[!c(vars$predictor, vars$control) %in% long_vars]
-pred_time_var <- c(vars$predictor, vars$control)[c(vars$predictor, vars$control) %in% long_vars]
-
-pred_time_var <- c("Dt", pred_time_var, paste0("int_", pred_time_var))
-pred_time_var <- pred_time_var[!pred_time_var %in% c("int_date")]
-
-use_these <- c(thisdv, pred_invar, pred_time_var, "tightness")
-
-names(df_anal)[match(c("political_viewx", "political_viewy"), names(df_anal))] <- c("politx", "polity")
-pred_invar[match(c("political_viewx", "political_viewy"), pred_invar)] <- c("politx", "polity")
-
-df_anal <- df_anal[!is.na(df_anal$Dt), ]
-tmp <- read.table("wash_hands_d5e6359c8917f300f677ff900b595e5c.dat", na.strings = ".")
+the_waves <- unique(df_long$time)
 
 for(thisdv in vars$dv){
-  #thisdv=vars$dv[1]
-  model <- paste0(
-    paste0("DV_", thisdv),
-    " ~ ",
-    paste0(c(pred_invar, "Dt", pred_time_var, thisdv), collapse = " + "),
-    " + ",
-    paste0(paste0("Dt:", c(pred_time_var, thisdv)), collapse = " + ")
-  )
+  #thisdv = vars$dv[1]
+  
+  
+  use_waves <- unique(df_long$time[df_long$variable == vars$dv[1]])
+  next_waves <- use_waves[-length(use_waves)]
+  names(next_waves) <- use_waves[-1]
+  
+  # Add next wave -----------------------------------------------------------
+  
+  df_nextwave <- df_long[df_long$variable == thisdv, .SD, .SDcols = c("id", "time", "variable", "value", "date")]
+  df_nextwave <- df_nextwave[df_nextwave$time %in% names(next_waves), ]
+  df_nextwave$time <- next_waves[as.character(df_nextwave$time)]
+  df_nextwave <- df_nextwave[!time < 0, ]
+  df_nextwave <- df_nextwave[!duplicated(df_nextwave[, .SD, .SDcols = names(df_nextwave)[!names(df_nextwave) == "value"]]), ]
+  
+  df_nextwave <- pivot_wider(df_nextwave, names_from = "variable", values_from = "value")
+  df_nextwave <- df_nextwave[!is.na(df_nextwave$date), ]
+  names(df_nextwave)[match(c("date", thisdv), names(df_nextwave))] <- paste0("DV_", c("date", thisdv))
+  
+  df_anal <- merge(df_wide, df_nextwave, by = c("id", "time"), all.x = TRUE)
+  
+  df_anal$Dt <- df_anal$DV_date - df_anal$date
+  table(sign(df_anal$Dt))
+  
+  
+  thisdv_preds <- tapply(df_long$time, df_long$variable, table)
+
+  pred_invar <- c(vars$predictor, vars$control)[!c(vars$predictor, vars$control) %in% longv]
+  pred_time_var <- c(vars$predictor, vars$control)[c(vars$predictor, vars$control) %in% longv]
+
+  
+  keep_timevar <- rep(TRUE, length(pred_time_var))
+  make_invar <- rep(FALSE, length(pred_time_var))
+  for(v in 1:length(pred_time_var)){
+    this_pred <- pred_time_var[v]
+    has_waves <- as.numeric(names(thisdv_preds[[this_pred]]))
+    has_waves <- has_waves[has_waves %in% use_waves[-length(use_waves)]]
+    if(length(has_waves) == 0){
+      keep_timevar[which(pred_time_var == this_pred)] <- FALSE
+    }
+    if(length(has_waves) == 1){
+      keep_timevar[which(pred_time_var == this_pred)] <- FALSE
+      make_invar[which(pred_time_var == this_pred)] <- TRUE
+    }
+  }
+  
+  pred_invar <- c(pred_invar, pred_time_var[make_invar])
+  pred_time_var <- pred_time_var[keep_timevar]
+  
+  # Make plot of available data
+  use_data <- t(sapply(c(thisdv, pred_time_var), function(x){
+    the_waves %in% names(thisdv_preds[[x]])[names(thisdv_preds[[x]]) %in% use_waves]
+  }))
+  use_data[2:nrow(use_data), ncol(use_data)] <- FALSE
+  colnames(use_data) <- the_waves
+  df_plot <- as.data.frame.table(use_data)
+  df_plot[1:2] <- lapply(df_plot[1:2], ordered)
+  df_plot$Var1 <- ordered(df_plot$Var1, levels = rev(levels(df_plot$Var1)))
+  ggsave(paste0("used_waves_", thisdv, ".png"), 
+         ggplot(df_plot, aes(x = Var2, y = Var1, fill = Freq)) + geom_raster() + scale_fill_manual(values = c("TRUE" = "grey50", "FALSE" = "white")) + labs(x = "Wave", y = "Variable") + theme(legend.position = "none"),
+         device = "png")
+  
+  pred_time_var <- c(pred_time_var, thisdv, "date") + coord_flip()
+  
+  df_anal[pred_invar] <- lapply(df_anal[pred_invar], function(thisv){
+    #thisv = df_anal[[pred_invar[1]]]
+    unlist(tapply(thisv, df_anal$id, function(x){
+      rep(unique(na.omit(x))[1], length(x))
+      }))
+  })
+  
+  center_these <- c(pred_invar, pred_time_var)
+  center_these <- center_these[sapply(df_anal[center_these], function(x){length(unique(x))}) > 3]
+  center_these <- c(center_these, "tightness", "Dt")
+  
+  df_anal[center_these] <-  sapply(df_anal[center_these], function(x){as.vector(scale(x, scale = TRUE))})
+  
+  
+  df_anal[paste0("int_", pred_time_var)] <- lapply(df_anal[pred_time_var], function(x){x*df_anal$Dt})
+  pred_time_var <- c("Dt", pred_time_var, paste0("int_", pred_time_var))
+
+  use_these <- c(pred_invar, pred_time_var, "tightness")
+
+  df_anal <- df_anal[!is.na(df_anal$Dt), ]
+  
+
+  # model <- paste0(
+  #   paste0("DV_", thisdv),
+  #   " ~ ",
+  #   paste0(c(pred_invar, pred_time_var, thisdv), collapse = " + "),
+  #   " + ",
+  #   paste0(paste0("Dt:", c(pred_time_var, thisdv)), collapse = " + ")
+  # )
   
   mod <- mplusObject(
     TITLE = thisdv,
     VARIABLE = paste0(c(
       "CLUSTER = country id;",
-      paste0(c("WITHIN = ", thisdv, pred_time_var, ";"), collapse = "\n"),
+      paste0(c("WITHIN = ", pred_time_var, ";"), collapse = "\n"),
       paste0(c("BETWEEN = (country) tightness", paste0("(id) ", pred_invar)), collapse = "\n"), ";"), collapse = "\n"),
     ANALYSIS = "TYPE = THREELEVEL RANDOM;",
     MODEL = c(
@@ -223,6 +289,8 @@ for(thisdv in vars$dv){
   
 }
 
+
+}
 # Tot hier
 
 
