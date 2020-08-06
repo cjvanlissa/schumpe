@@ -1,0 +1,3247 @@
+Mplus VERSION 8
+MUTHEN & MUTHEN
+08/06/2020   4:02 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+  contain_protest
+  DATA:
+  FILE = "contain_protest_3f803a9408e0cda97376bda9f0db3d0c.dat";
+
+  VARIABLE:
+  NAMES = id country DV_contain_protest age gender religious politx polity
+       political_view education date Dt clear_message trust_government
+       proximity_corona contain_protest tightness;
+   MISSING=.;
+   CLUSTER = country id;
+  WITHIN =
+  date
+  Dt
+  clear_message
+  trust_government
+  proximity_corona
+  contain_protest
+  age
+  gender
+  religious
+  politx
+  polity
+  political_view
+  education
+  ;
+  BETWEEN = tightness;
+  ANALYSIS:
+  TYPE = COMPLEX TWOLEVEL RANDOM;
+  MODEL:
+  %WITHIN%
+  s1 | DV_contain_protest ON date;
+  s2 | DV_contain_protest ON Dt;
+  s3 | DV_contain_protest ON clear_message;
+  s4 | DV_contain_protest ON trust_government;
+  s5 | DV_contain_protest ON proximity_corona;
+  s6 | DV_contain_protest ON contain_protest;
+  s7 | DV_contain_protest ON age;
+  s8 | DV_contain_protest ON gender;
+  s9 | DV_contain_protest ON religious;
+  s10 | DV_contain_protest ON politx;
+  s11 | DV_contain_protest ON polity;
+  s12 | DV_contain_protest ON political_view;
+  s13 | DV_contain_protest ON education;
+  %BETWEEN%
+  DV_contain_protest ON tightness;
+  OUTPUT:
+  TECH1 TECH8 stdyx;
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING
+  One or more individual-level variables have no variation within a
+  cluster for the following clusters.
+
+     Variable   Cluster IDs with no within-cluster variation
+
+      DV_CONTA    4407 22224 259 1358 4462 4486 18181 22236 22244 22248 14900 22597 4502 14826
+                  18442 4418 14827 93 17800 14828 13737 14918 14920 13738 14929 1399 17815 12715
+                  14934 22 127 14936 12765 21118 2408 14843 14845 12698 12699 14951 17835 16890
+                  12723 1271 17845 21154 14852 86 4476 14856 14858 14794 12814 4434 4479 17867
+                  4436 8618 1323 21190 4441 1362 1280 3354 8625 17882 12785 12727 24294 1395 1415
+                  105 14812 14884 15886 15887 14814 22185 12822 12754 12755 22197 22205 1330 22209
+                  22210 4458 12709 22214
+      AGE         4407 22224 259 1358 4462 4486 4488 18181 22236 4495 22244 112 22248 14900 14904
+                  22597 14905 4502 1298 269 14826 14909 18442 4418 14827 4468 93 17800 14828 13736
+                  13737 14918 14920 14921 13738 12831 14924 14929 1399 117 1411 17815 12715 14934
+                  16864 22 127 14936 12765 21118 2408 14843 14845 12698 23302 21126 2886 1269
+                  12699 167 14951 17834 17835 16890 12723 12724 15023 17844 1271 17845 236 21154
+                  14852 86 4476 14856 8598 14858 14794 14795 12814 4434 4479 14864 17867 4436
+                  3344 8618 21189 1323 21190 12815 14799 4441 1362 21501 1280 3349 3354 8625 14868
+                  17882 14870 14803 12785 12727 12819 245 24292 88 24294 1395 1415 105 8634 15674
+                  14812 4449 14884 14885 15886 15887 14814 22185 22189 22191 12822 12754 12755
+                  22197 1293 12825 1370 22205 110 1330 4457 22208 22209 22210 4458 12709 22214
+      GENDER      4407 22224 259 1358 4462 4486 4488 18181 22236 4495 22244 112 22248 14900 14904
+                  22597 14905 4502 1298 269 14826 14909 18442 4418 14827 4468 93 17800 14828 13736
+                  13737 14918 14920 14921 13738 12831 14924 14929 1399 117 1411 17815 12715 14934
+                  16864 22 127 14936 12765 21118 2408 14843 14845 12698 23302 21126 2886 1269
+                  12699 167 14951 17834 17835 16890 12723 12724 15023 17844 1271 17845 236 21154
+                  14852 86 4476 14856 8598 14858 14794 14795 12814 4434 4479 14864 17867 4436
+                  3344 8618 21189 1323 21190 12815 14799 4441 1362 21501 1280 3349 3354 8625 14868
+                  17882 14870 14803 12785 12727 12819 245 24292 88 24294 1395 1415 105 8634 15674
+                  14812 4449 14884 14885 15886 15887 14814 22185 22189 22191 12822 12754 12755
+                  22197 1293 12825 1370 22205 110 1330 4457 22208 22209 22210 4458 12709 22214
+      RELIGIOU    4407 22224 259 1358 4462 4486 4488 18181 22236 4495 22244 112 22248 14900 14904
+                  22597 14905 4502 1298 269 14826 14909 18442 4418 14827 4468 93 17800 14828 13736
+                  13737 14918 14920 14921 13738 12831 14924 14929 1399 117 1411 17815 12715 14934
+                  16864 22 127 14936 12765 21118 2408 14843 14845 12698 23302 21126 2886 1269
+                  12699 167 14951 17834 17835 16890 12723 12724 15023 17844 1271 17845 236 21154
+                  14852 86 4476 14856 8598 14858 14794 14795 12814 4434 4479 14864 17867 4436
+                  3344 8618 21189 1323 21190 12815 14799 4441 1362 21501 1280 3349 3354 8625 14868
+                  17882 14870 14803 12785 12727 12819 245 24292 88 24294 1395 1415 105 8634 15674
+                  14812 4449 14884 14885 15886 15887 14814 22185 22189 22191 12822 12754 12755
+                  22197 1293 12825 1370 22205 110 1330 4457 22208 22209 22210 4458 12709 22214
+      POLITX      4407 22224 259 1358 4462 4486 4488 18181 22236 4495 22244 112 22248 14900 14904
+                  22597 14905 4502 1298 269 14826 14909 18442 4418 14827 4468 93 17800 14828 13736
+                  13737 14918 14920 14921 13738 12831 14924 14929 1399 117 1411 17815 12715 14934
+                  16864 22 127 14936 12765 21118 2408 14843 14845 12698 23302 21126 2886 1269
+                  12699 167 14951 17834 17835 16890 12723 12724 15023 17844 1271 17845 236 21154
+                  14852 86 4476 14856 8598 14858 14794 14795 12814 4434 4479 14864 17867 4436
+                  3344 8618 21189 1323 21190 12815 14799 4441 1362 21501 1280 3349 3354 8625 14868
+                  17882 14870 14803 12785 12727 12819 245 24292 88 24294 1395 1415 105 8634 15674
+                  14812 4449 14884 14885 15886 15887 14814 22185 22189 22191 12822 12754 12755
+                  22197 1293 12825 1370 22205 110 1330 4457 22208 22209 22210 4458 12709 22214
+      POLITY      4407 22224 259 1358 4462 4486 4488 18181 22236 4495 22244 112 22248 14900 14904
+                  22597 14905 4502 1298 269 14826 14909 18442 4418 14827 4468 93 17800 14828 13736
+                  13737 14918 14920 14921 13738 12831 14924 14929 1399 117 1411 17815 12715 14934
+                  16864 22 127 14936 12765 21118 2408 14843 14845 12698 23302 21126 2886 1269
+                  12699 167 14951 17834 17835 16890 12723 12724 15023 17844 1271 17845 236 21154
+                  14852 86 4476 14856 8598 14858 14794 14795 12814 4434 4479 14864 17867 4436
+                  3344 8618 21189 1323 21190 12815 14799 4441 1362 21501 1280 3349 3354 8625 14868
+                  17882 14870 14803 12785 12727 12819 245 24292 88 24294 1395 1415 105 8634 15674
+                  14812 4449 14884 14885 15886 15887 14814 22185 22189 22191 12822 12754 12755
+                  22197 1293 12825 1370 22205 110 1330 4457 22208 22209 22210 4458 12709 22214
+      POLITICA    4407 22224 259 1358 4462 4486 4488 18181 22236 4495 22244 112 22248 14900 14904
+                  22597 14905 4502 1298 269 14826 14909 18442 4418 14827 4468 93 17800 14828 13736
+                  13737 14918 14920 14921 13738 12831 14924 14929 1399 117 1411 17815 12715 14934
+                  16864 22 127 14936 12765 21118 2408 14843 14845 12698 23302 21126 2886 1269
+                  12699 167 14951 17834 17835 16890 12723 12724 15023 17844 1271 17845 236 21154
+                  14852 86 4476 14856 8598 14858 14794 14795 12814 4434 4479 14864 17867 4436
+                  3344 8618 21189 1323 21190 12815 14799 4441 1362 21501 1280 3349 3354 8625 14868
+                  17882 14870 14803 12785 12727 12819 245 24292 88 24294 1395 1415 105 8634 15674
+                  14812 4449 14884 14885 15886 15887 14814 22185 22189 22191 12822 12754 12755
+                  22197 1293 12825 1370 22205 110 1330 4457 22208 22209 22210 4458 12709 22214
+      EDUCATIO    4407 22224 259 1358 4462 4486 4488 18181 22236 4495 22244 112 22248 14900 14904
+                  22597 14905 4502 1298 269 14826 14909 18442 4418 14827 4468 93 17800 14828 13736
+                  13737 14918 14920 14921 13738 12831 14924 14929 1399 117 1411 17815 12715 14934
+                  16864 22 127 14936 12765 21118 2408 14843 14845 12698 23302 21126 2886 1269
+                  12699 167 14951 17834 17835 16890 12723 12724 15023 17844 1271 17845 236 21154
+                  14852 86 4476 14856 8598 14858 14794 14795 12814 4434 4479 14864 17867 4436
+                  3344 8618 21189 1323 21190 12815 14799 4441 1362 21501 1280 3349 3354 8625 14868
+                  17882 14870 14803 12785 12727 12819 245 24292 88 24294 1395 1415 105 8634 15674
+                  14812 4449 14884 14885 15886 15887 14814 22185 22189 22191 12822 12754 12755
+                  22197 1293 12825 1370 22205 110 1330 4457 22208 22209 22210 4458 12709 22214
+      CLEAR_ME    22224 4462 18181 22244 112 22597 14905 4502 269 14909 18442 14827 4468 93 14828
+                  14918 14921 14929 17815 127 12765 2408 14843 12698 2886 1269 12699 167 17835
+                  12723 17845 14852 14795 12814 17867 4436 3344 3354 14868 14870 12785 12727 245
+                  24294 8634 14885 22185 22189 22191 22197 1293 22205 1330 4457 22210 12709 22214
+      TRUST_GO    22224 259 4462 4488 18181 22236 4495 22244 112 22248 14904 22597 4502 269 14909
+                  4418 4468 17800 13736 13737 14920 14921 13738 12831 14929 1399 1411 17815 12715
+                  14934 16864 22 127 14936 12765 21118 14845 12698 23302 21126 1269 12699 17834
+                  17835 16890 12723 12724 15023 236 14852 4476 14856 8598 14858 14795 12814 4479
+                  17867 4436 3344 21189 12815 14799 4441 1280 3354 17882 14870 12785 12727 24292
+                  24294 1415 15674 14812 14885 15886 15887 22189 22191 12822 12754 1370 22205
+                  1330 4457 22208 22209 22210 4458 22214
+      PROXIMIT    22224 1358 4488 22244 112 22248 14900 22597 14905 14909 18442 4418 14827 4468
+                  17800 14828 13736 14918 14920 13738 12831 14924 1399 117 1411 14934 14936 21118
+                  2408 14843 14845 12698 23302 21126 2886 12699 167 14951 17835 12723 12724 15023
+                  1271 21154 14852 4476 14856 8598 14858 4434 4479 17867 4436 3344 8618 1323 12815
+                  14799 4441 1280 3349 3354 8625 14803 12785 12819 245 24292 88 24294 1415 105
+                  8634 15674 4449 14884 15886 15887 22185 22189 22191 12754 12755 22197 12825
+                  22205 110 1330 4457 22209 22210 4458 22214
+      CONTAIN_    4407 22224 259 1358 4462 4486 18181 22236 4495 22244 22248 14900 14904 22597
+                  1298 269 14826 18442 4418 4468 93 17800 14828 13737 14918 14920 13738 17815
+                  12715 14934 22 127 14936 12765 21118 2408 14845 12698 23302 1269 12699 167 14951
+                  17835 16890 12723 12724 1271 21154 14852 86 4476 14856 8598 14858 14794 12814
+                  4434 4479 17867 4436 8618 1323 21190 12815 14799 4441 21501 1280 3354 17882
+                  12785 12727 12819 88 24294 105 15674 14812 4449 14884 15886 15887 14814 22185
+                  22189 22191 12822 22197 22205 22208 22209 22210 4458 12709 22214
+
+*** WARNING in OUTPUT command
+  STANDARDIZED (STD, STDY, STDYX) options are available only for TYPE=TWOLEVEL RANDOM
+  with ESTIMATOR=BAYES.  Request for STANDARDIZED (STD, STDY, STDYX) is ignored.
+*** WARNING
+  Data set contains cases with missing on x-variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on x-variables:  1812
+   4 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+contain_protest
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1096
+
+Number of dependent variables                                    1
+Number of independent variables                                 14
+Number of continuous latent variables                           13
+
+Observed dependent variables
+
+  Continuous
+   DV_CONTAIN
+
+Observed independent variables
+   AGE         GENDER      RELIGIOU    POLITX      POLITY      POLITICA
+   EDUCATIO    DATE        DT          CLEAR_ME    TRUST_GO    PROXIMIT
+   CONTAIN_    TIGHTNES
+
+Continuous latent variables
+   S1          S2          S3          S4          S5          S6
+   S7          S8          S9          S10         S11         S12
+   S13
+
+Variables with special functions
+
+  Cluster variables     COUNTRY   ID
+
+  Within variables
+   AGE         GENDER      RELIGIOU    POLITX      POLITY      POLITICA
+   EDUCATIO    DATE        DT          CLEAR_ME    TRUST_GO    PROXIMIT
+   CONTAIN_
+
+  Between variables
+   TIGHTNES
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  contain_protest_3f803a9408e0cda97376bda9f0db3d0c.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of COUNTRY clusters            18
+     Number of ID clusters                953
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+ DV_CONTA       1.000
+ AGE            1.000         1.000
+ GENDER         1.000         1.000         1.000
+ RELIGIOU       1.000         1.000         1.000         1.000
+ POLITX         1.000         1.000         1.000         1.000         1.000
+ POLITY         1.000         1.000         1.000         1.000         1.000
+ POLITICA       1.000         1.000         1.000         1.000         1.000
+ EDUCATIO       1.000         1.000         1.000         1.000         1.000
+ DATE           1.000         1.000         1.000         1.000         1.000
+ DT             1.000         1.000         1.000         1.000         1.000
+ CLEAR_ME       1.000         1.000         1.000         1.000         1.000
+ TRUST_GO       1.000         1.000         1.000         1.000         1.000
+ PROXIMIT       1.000         1.000         1.000         1.000         1.000
+ CONTAIN_       1.000         1.000         1.000         1.000         1.000
+ TIGHTNES       1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+ POLITY         1.000
+ POLITICA       1.000         1.000
+ EDUCATIO       1.000         1.000         1.000
+ DATE           1.000         1.000         1.000         1.000
+ DT             1.000         1.000         1.000         1.000         1.000
+ CLEAR_ME       1.000         1.000         1.000         1.000         1.000
+ TRUST_GO       1.000         1.000         1.000         1.000         1.000
+ PROXIMIT       1.000         1.000         1.000         1.000         1.000
+ CONTAIN_       1.000         1.000         1.000         1.000         1.000
+ TIGHTNES       1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_      TIGHTNES
+              ________      ________      ________      ________      ________
+ CLEAR_ME       1.000
+ TRUST_GO       1.000         1.000
+ PROXIMIT       1.000         1.000         1.000
+ CONTAIN_       1.000         1.000         1.000         1.000
+ TIGHTNES       1.000         1.000         1.000         1.000         1.000
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     DV_CONTAIN_PROT       1.940       1.738       1.000   60.86%       1.000      1.000      1.000
+            1096.000       2.287       2.302       7.000    2.74%       1.000      3.000
+     AGE                   0.518      -0.602      -1.798    1.37%       0.026      0.634      0.634
+            1096.000       0.642      -0.030       2.459    0.27%       0.634      1.242
+     GENDER                0.498       0.007       0.000   50.18%       0.000      0.000      0.000
+            1096.000       0.250      -2.000       1.000   49.82%       1.000      1.000
+     RELIGIOUS             0.503      -0.011       0.000   49.73%       0.000      0.000      1.000
+            1096.000       0.250      -2.000       1.000   50.27%       1.000      1.000
+     POLITX               -0.065       0.102      -3.451    0.09%      -1.110     -0.220     -0.047
+            1096.000       1.222      -0.497       3.257    0.09%       0.025      1.016
+     POLITY                0.210      -0.114      -2.640    0.27%      -0.432     -0.249      0.083
+            1096.000       1.085      -0.302       2.623    0.18%       0.481      1.129
+     POLITICAL_VIEW        0.064      -0.293      -1.632    9.40%      -1.120     -0.094     -0.094
+            1096.000       0.918      -1.073       1.444   10.22%       0.931      0.931
+     EDUCATION             0.028       0.092      -2.162    1.28%      -0.711      0.015      0.015
+            1096.000       1.029      -0.779       2.192    3.10%       0.015      0.741
+     DATE                 41.364      -1.589      29.103    0.09%      43.095     43.151     43.207
+            1096.000      28.686       1.295      59.993    0.09%      43.299     43.847
+     DT                    0.056       0.036      -8.426    0.09%      -0.119     -0.053     -0.023
+            1096.000       0.894      34.674      10.183    0.09%       0.004      0.286
+     CLEAR_MESSAGE         0.022      -0.683      -2.323    4.38%      -0.935     -0.241      0.453
+            1096.000       0.963      -0.381       1.147   25.55%       0.453      1.147
+     TRUST_GOVERNMEN      -0.093      -0.085      -1.652   20.07%      -1.652     -0.051     -0.051
+            1096.000       1.107      -1.105       1.549   13.23%      -0.051      0.749
+     PROXIMITY_CORON       0.307       0.839       0.000   69.34%       0.000      0.000      0.000
+            1096.000       0.213      -1.296       1.000   30.66%       0.000      1.000
+     CONTAIN_PROTEST      -0.137       1.825      -0.675   64.51%      -0.675     -0.675     -0.675
+            1096.000       0.847       2.540       3.018    2.46%      -0.675      0.556
+     TIGHTNESS            -0.181       0.468      -1.306   12.91%      -0.985     -0.470     -0.245
+             953.000       0.644       0.018       2.426    0.73%       0.013      0.270
+
+     WARNING: THE MODEL ESTIMATION HAS REACHED A SADDLE POINT OR A POINT WHERE THE
+     OBSERVED AND THE EXPECTED INFORMATION MATRICES DO NOT MATCH.
+     AN ADJUSTMENT TO THE ESTIMATION OF THE INFORMATION MATRIX HAS BEEN MADE.
+     THE CONDITION NUMBER IS      -0.595D-05.
+     THE PROBLEM MAY ALSO BE RESOLVED BY DECREASING THE VALUE OF THE
+     MCONVERGENCE OR LOGCRITERION OPTIONS OR BY CHANGING THE STARTING VALUES
+     OR BY USING THE MLF ESTIMATOR.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       30
+
+Loglikelihood
+
+          H0 Value                       -1554.625
+          H0 Scaling Correction Factor      4.0191
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    3169.249
+          Bayesian (BIC)                  3319.232
+          Sample-Size Adjusted BIC        3223.945
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ Residual Variances
+    DV_CONTAIN         0.492      0.540      0.911      0.362
+
+Between Level
+
+ DV_CONTAIN ON
+    TIGHTNESS          0.024      0.097      0.244      0.807
+
+ Means
+    S1                 0.004      0.008      0.544      0.586
+    S2                -0.020      0.050     -0.393      0.695
+    S3                -0.080      0.050     -1.580      0.114
+    S4                -0.027      0.080     -0.336      0.737
+    S5                 0.045      0.126      0.357      0.721
+    S6                 1.059      0.209      5.077      0.000
+    S7                -0.108      0.150     -0.719      0.472
+    S8                 0.097      0.144      0.676      0.499
+    S9                 0.136      0.051      2.642      0.008
+    S10               -0.011      0.056     -0.197      0.844
+    S11               -0.042      0.042     -1.016      0.310
+    S12                0.060      0.118      0.511      0.609
+    S13                0.000      0.028     -0.015      0.988
+
+ Intercepts
+    DV_CONTAIN         1.857      0.384      4.830      0.000
+
+ Variances
+    S1                 0.000      0.000      0.006      0.996
+    S2                 0.001      0.013      0.101      0.920
+    S3                 0.164      0.377      0.435      0.663
+    S4                 0.004      0.144      0.029      0.977
+    S5                 0.149      0.570      0.261      0.794
+    S6                 0.344      0.123      2.789      0.005
+    S7                 0.007      0.362      0.019      0.985
+    S8                 0.021      1.160      0.018      0.985
+    S9                 0.182      0.391      0.467      0.641
+    S10                0.003      0.499      0.006      0.995
+    S11                0.001      0.918      0.002      0.999
+    S12                0.004      0.491      0.009      0.993
+    S13                0.010      0.156      0.062      0.951
+
+ Residual Variances
+    DV_CONTAIN         0.004      0.908      0.005      0.996
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix             -0.595E-05
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           NU
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           NU
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           LAMBDA
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+ DV_CONTA           0             0             0             0             0
+ AGE                0             0             0             0             0
+ GENDER             0             0             0             0             0
+ RELIGIOU           0             0             0             0             0
+ POLITX             0             0             0             0             0
+ POLITY             0             0             0             0             0
+ POLITICA           0             0             0             0             0
+ EDUCATIO           0             0             0             0             0
+ DATE               0             0             0             0             0
+ DT                 0             0             0             0             0
+ CLEAR_ME           0             0             0             0             0
+ TRUST_GO           0             0             0             0             0
+ PROXIMIT           0             0             0             0             0
+ CONTAIN_           0             0             0             0             0
+
+
+           LAMBDA
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+ DV_CONTA           0             0             0             0             0
+ AGE                0             0             0             0             0
+ GENDER             0             0             0             0             0
+ RELIGIOU           0             0             0             0             0
+ POLITX             0             0             0             0             0
+ POLITY             0             0             0             0             0
+ POLITICA           0             0             0             0             0
+ EDUCATIO           0             0             0             0             0
+ DATE               0             0             0             0             0
+ DT                 0             0             0             0             0
+ CLEAR_ME           0             0             0             0             0
+ TRUST_GO           0             0             0             0             0
+ PROXIMIT           0             0             0             0             0
+ CONTAIN_           0             0             0             0             0
+
+
+           LAMBDA
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_
+              ________      ________      ________      ________
+ DV_CONTA           0             0             0             0
+ AGE                0             0             0             0
+ GENDER             0             0             0             0
+ RELIGIOU           0             0             0             0
+ POLITX             0             0             0             0
+ POLITY             0             0             0             0
+ POLITICA           0             0             0             0
+ EDUCATIO           0             0             0             0
+ DATE               0             0             0             0
+ DT                 0             0             0             0
+ CLEAR_ME           0             0             0             0
+ TRUST_GO           0             0             0             0
+ PROXIMIT           0             0             0             0
+ CONTAIN_           0             0             0             0
+
+
+           THETA
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+ DV_CONTA           0
+ AGE                0             0
+ GENDER             0             0             0
+ RELIGIOU           0             0             0             0
+ POLITX             0             0             0             0             0
+ POLITY             0             0             0             0             0
+ POLITICA           0             0             0             0             0
+ EDUCATIO           0             0             0             0             0
+ DATE               0             0             0             0             0
+ DT                 0             0             0             0             0
+ CLEAR_ME           0             0             0             0             0
+ TRUST_GO           0             0             0             0             0
+ PROXIMIT           0             0             0             0             0
+ CONTAIN_           0             0             0             0             0
+
+
+           THETA
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+ POLITY             0
+ POLITICA           0             0
+ EDUCATIO           0             0             0
+ DATE               0             0             0             0
+ DT                 0             0             0             0             0
+ CLEAR_ME           0             0             0             0             0
+ TRUST_GO           0             0             0             0             0
+ PROXIMIT           0             0             0             0             0
+ CONTAIN_           0             0             0             0             0
+
+
+           THETA
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_
+              ________      ________      ________      ________
+ CLEAR_ME           0
+ TRUST_GO           0             0
+ PROXIMIT           0             0             0
+ CONTAIN_           0             0             0             0
+
+
+           ALPHA
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           ALPHA
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           ALPHA
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           BETA
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+ DV_CONTA           0             0             0             0             0
+ AGE                0             0             0             0             0
+ GENDER             0             0             0             0             0
+ RELIGIOU           0             0             0             0             0
+ POLITX             0             0             0             0             0
+ POLITY             0             0             0             0             0
+ POLITICA           0             0             0             0             0
+ EDUCATIO           0             0             0             0             0
+ DATE               0             0             0             0             0
+ DT                 0             0             0             0             0
+ CLEAR_ME           0             0             0             0             0
+ TRUST_GO           0             0             0             0             0
+ PROXIMIT           0             0             0             0             0
+ CONTAIN_           0             0             0             0             0
+
+
+           BETA
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+ DV_CONTA           0             0             0             0             0
+ AGE                0             0             0             0             0
+ GENDER             0             0             0             0             0
+ RELIGIOU           0             0             0             0             0
+ POLITX             0             0             0             0             0
+ POLITY             0             0             0             0             0
+ POLITICA           0             0             0             0             0
+ EDUCATIO           0             0             0             0             0
+ DATE               0             0             0             0             0
+ DT                 0             0             0             0             0
+ CLEAR_ME           0             0             0             0             0
+ TRUST_GO           0             0             0             0             0
+ PROXIMIT           0             0             0             0             0
+ CONTAIN_           0             0             0             0             0
+
+
+           BETA
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_
+              ________      ________      ________      ________
+ DV_CONTA           0             0             0             0
+ AGE                0             0             0             0
+ GENDER             0             0             0             0
+ RELIGIOU           0             0             0             0
+ POLITX             0             0             0             0
+ POLITY             0             0             0             0
+ POLITICA           0             0             0             0
+ EDUCATIO           0             0             0             0
+ DATE               0             0             0             0
+ DT                 0             0             0             0
+ CLEAR_ME           0             0             0             0
+ TRUST_GO           0             0             0             0
+ PROXIMIT           0             0             0             0
+ CONTAIN_           0             0             0             0
+
+
+           PSI
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+ DV_CONTA           1
+ AGE                0             0
+ GENDER             0             0             0
+ RELIGIOU           0             0             0             0
+ POLITX             0             0             0             0             0
+ POLITY             0             0             0             0             0
+ POLITICA           0             0             0             0             0
+ EDUCATIO           0             0             0             0             0
+ DATE               0             0             0             0             0
+ DT                 0             0             0             0             0
+ CLEAR_ME           0             0             0             0             0
+ TRUST_GO           0             0             0             0             0
+ PROXIMIT           0             0             0             0             0
+ CONTAIN_           0             0             0             0             0
+
+
+           PSI
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+ POLITY             0
+ POLITICA           0             0
+ EDUCATIO           0             0             0
+ DATE               0             0             0             0
+ DT                 0             0             0             0             0
+ CLEAR_ME           0             0             0             0             0
+ TRUST_GO           0             0             0             0             0
+ PROXIMIT           0             0             0             0             0
+ CONTAIN_           0             0             0             0             0
+
+
+           PSI
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_
+              ________      ________      ________      ________
+ CLEAR_ME           0
+ TRUST_GO           0             0
+ PROXIMIT           0             0             0
+ CONTAIN_           0             0             0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              DV_CONTA      TIGHTNES
+              ________      ________
+                    0             0
+
+
+           LAMBDA
+              S1            S2            S3            S4            S5
+              ________      ________      ________      ________      ________
+ DV_CONTA           0             0             0             0             0
+ TIGHTNES           0             0             0             0             0
+
+
+           LAMBDA
+              S6            S7            S8            S9            S10
+              ________      ________      ________      ________      ________
+ DV_CONTA           0             0             0             0             0
+ TIGHTNES           0             0             0             0             0
+
+
+           LAMBDA
+              S11           S12           S13           DV_CONTA      TIGHTNES
+              ________      ________      ________      ________      ________
+ DV_CONTA           0             0             0             0             0
+ TIGHTNES           0             0             0             0             0
+
+
+           THETA
+              DV_CONTA      TIGHTNES
+              ________      ________
+ DV_CONTA           0
+ TIGHTNES           0             0
+
+
+           ALPHA
+              S1            S2            S3            S4            S5
+              ________      ________      ________      ________      ________
+                    2             3             4             5             6
+
+
+           ALPHA
+              S6            S7            S8            S9            S10
+              ________      ________      ________      ________      ________
+                    7             8             9            10            11
+
+
+           ALPHA
+              S11           S12           S13           DV_CONTA      TIGHTNES
+              ________      ________      ________      ________      ________
+                   12            13            14            15             0
+
+
+           BETA
+              S1            S2            S3            S4            S5
+              ________      ________      ________      ________      ________
+ S1                 0             0             0             0             0
+ S2                 0             0             0             0             0
+ S3                 0             0             0             0             0
+ S4                 0             0             0             0             0
+ S5                 0             0             0             0             0
+ S6                 0             0             0             0             0
+ S7                 0             0             0             0             0
+ S8                 0             0             0             0             0
+ S9                 0             0             0             0             0
+ S10                0             0             0             0             0
+ S11                0             0             0             0             0
+ S12                0             0             0             0             0
+ S13                0             0             0             0             0
+ DV_CONTA           0             0             0             0             0
+ TIGHTNES           0             0             0             0             0
+
+
+           BETA
+              S6            S7            S8            S9            S10
+              ________      ________      ________      ________      ________
+ S1                 0             0             0             0             0
+ S2                 0             0             0             0             0
+ S3                 0             0             0             0             0
+ S4                 0             0             0             0             0
+ S5                 0             0             0             0             0
+ S6                 0             0             0             0             0
+ S7                 0             0             0             0             0
+ S8                 0             0             0             0             0
+ S9                 0             0             0             0             0
+ S10                0             0             0             0             0
+ S11                0             0             0             0             0
+ S12                0             0             0             0             0
+ S13                0             0             0             0             0
+ DV_CONTA           0             0             0             0             0
+ TIGHTNES           0             0             0             0             0
+
+
+           BETA
+              S11           S12           S13           DV_CONTA      TIGHTNES
+              ________      ________      ________      ________      ________
+ S1                 0             0             0             0             0
+ S2                 0             0             0             0             0
+ S3                 0             0             0             0             0
+ S4                 0             0             0             0             0
+ S5                 0             0             0             0             0
+ S6                 0             0             0             0             0
+ S7                 0             0             0             0             0
+ S8                 0             0             0             0             0
+ S9                 0             0             0             0             0
+ S10                0             0             0             0             0
+ S11                0             0             0             0             0
+ S12                0             0             0             0             0
+ S13                0             0             0             0             0
+ DV_CONTA           0             0             0             0            16
+ TIGHTNES           0             0             0             0             0
+
+
+           PSI
+              S1            S2            S3            S4            S5
+              ________      ________      ________      ________      ________
+ S1                17
+ S2                 0            18
+ S3                 0             0            19
+ S4                 0             0             0            20
+ S5                 0             0             0             0            21
+ S6                 0             0             0             0             0
+ S7                 0             0             0             0             0
+ S8                 0             0             0             0             0
+ S9                 0             0             0             0             0
+ S10                0             0             0             0             0
+ S11                0             0             0             0             0
+ S12                0             0             0             0             0
+ S13                0             0             0             0             0
+ DV_CONTA           0             0             0             0             0
+ TIGHTNES           0             0             0             0             0
+
+
+           PSI
+              S6            S7            S8            S9            S10
+              ________      ________      ________      ________      ________
+ S6                22
+ S7                 0            23
+ S8                 0             0            24
+ S9                 0             0             0            25
+ S10                0             0             0             0            26
+ S11                0             0             0             0             0
+ S12                0             0             0             0             0
+ S13                0             0             0             0             0
+ DV_CONTA           0             0             0             0             0
+ TIGHTNES           0             0             0             0             0
+
+
+           PSI
+              S11           S12           S13           DV_CONTA      TIGHTNES
+              ________      ________      ________      ________      ________
+ S11               27
+ S12                0            28
+ S13                0             0            29
+ DV_CONTA           0             0             0            30
+ TIGHTNES           0             0             0             0             0
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+ DV_CONTA       1.000         0.000         0.000         0.000         0.000
+ AGE            0.000         1.000         0.000         0.000         0.000
+ GENDER         0.000         0.000         1.000         0.000         0.000
+ RELIGIOU       0.000         0.000         0.000         1.000         0.000
+ POLITX         0.000         0.000         0.000         0.000         1.000
+ POLITY         0.000         0.000         0.000         0.000         0.000
+ POLITICA       0.000         0.000         0.000         0.000         0.000
+ EDUCATIO       0.000         0.000         0.000         0.000         0.000
+ DATE           0.000         0.000         0.000         0.000         0.000
+ DT             0.000         0.000         0.000         0.000         0.000
+ CLEAR_ME       0.000         0.000         0.000         0.000         0.000
+ TRUST_GO       0.000         0.000         0.000         0.000         0.000
+ PROXIMIT       0.000         0.000         0.000         0.000         0.000
+ CONTAIN_       0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+ DV_CONTA       0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ GENDER         0.000         0.000         0.000         0.000         0.000
+ RELIGIOU       0.000         0.000         0.000         0.000         0.000
+ POLITX         0.000         0.000         0.000         0.000         0.000
+ POLITY         1.000         0.000         0.000         0.000         0.000
+ POLITICA       0.000         1.000         0.000         0.000         0.000
+ EDUCATIO       0.000         0.000         1.000         0.000         0.000
+ DATE           0.000         0.000         0.000         1.000         0.000
+ DT             0.000         0.000         0.000         0.000         1.000
+ CLEAR_ME       0.000         0.000         0.000         0.000         0.000
+ TRUST_GO       0.000         0.000         0.000         0.000         0.000
+ PROXIMIT       0.000         0.000         0.000         0.000         0.000
+ CONTAIN_       0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_
+              ________      ________      ________      ________
+ DV_CONTA       0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000
+ GENDER         0.000         0.000         0.000         0.000
+ RELIGIOU       0.000         0.000         0.000         0.000
+ POLITX         0.000         0.000         0.000         0.000
+ POLITY         0.000         0.000         0.000         0.000
+ POLITICA       0.000         0.000         0.000         0.000
+ EDUCATIO       0.000         0.000         0.000         0.000
+ DATE           0.000         0.000         0.000         0.000
+ DT             0.000         0.000         0.000         0.000
+ CLEAR_ME       1.000         0.000         0.000         0.000
+ TRUST_GO       0.000         1.000         0.000         0.000
+ PROXIMIT       0.000         0.000         1.000         0.000
+ CONTAIN_       0.000         0.000         0.000         1.000
+
+
+           THETA
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+ DV_CONTA       0.000
+ AGE            0.000         0.000
+ GENDER         0.000         0.000         0.000
+ RELIGIOU       0.000         0.000         0.000         0.000
+ POLITX         0.000         0.000         0.000         0.000         0.000
+ POLITY         0.000         0.000         0.000         0.000         0.000
+ POLITICA       0.000         0.000         0.000         0.000         0.000
+ EDUCATIO       0.000         0.000         0.000         0.000         0.000
+ DATE           0.000         0.000         0.000         0.000         0.000
+ DT             0.000         0.000         0.000         0.000         0.000
+ CLEAR_ME       0.000         0.000         0.000         0.000         0.000
+ TRUST_GO       0.000         0.000         0.000         0.000         0.000
+ PROXIMIT       0.000         0.000         0.000         0.000         0.000
+ CONTAIN_       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+ POLITY         0.000
+ POLITICA       0.000         0.000
+ EDUCATIO       0.000         0.000         0.000
+ DATE           0.000         0.000         0.000         0.000
+ DT             0.000         0.000         0.000         0.000         0.000
+ CLEAR_ME       0.000         0.000         0.000         0.000         0.000
+ TRUST_GO       0.000         0.000         0.000         0.000         0.000
+ PROXIMIT       0.000         0.000         0.000         0.000         0.000
+ CONTAIN_       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_
+              ________      ________      ________      ________
+ CLEAR_ME       0.000
+ TRUST_GO       0.000         0.000
+ PROXIMIT       0.000         0.000         0.000
+ CONTAIN_       0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           BETA
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+ DV_CONTA       0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ GENDER         0.000         0.000         0.000         0.000         0.000
+ RELIGIOU       0.000         0.000         0.000         0.000         0.000
+ POLITX         0.000         0.000         0.000         0.000         0.000
+ POLITY         0.000         0.000         0.000         0.000         0.000
+ POLITICA       0.000         0.000         0.000         0.000         0.000
+ EDUCATIO       0.000         0.000         0.000         0.000         0.000
+ DATE           0.000         0.000         0.000         0.000         0.000
+ DT             0.000         0.000         0.000         0.000         0.000
+ CLEAR_ME       0.000         0.000         0.000         0.000         0.000
+ TRUST_GO       0.000         0.000         0.000         0.000         0.000
+ PROXIMIT       0.000         0.000         0.000         0.000         0.000
+ CONTAIN_       0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+ DV_CONTA       0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ GENDER         0.000         0.000         0.000         0.000         0.000
+ RELIGIOU       0.000         0.000         0.000         0.000         0.000
+ POLITX         0.000         0.000         0.000         0.000         0.000
+ POLITY         0.000         0.000         0.000         0.000         0.000
+ POLITICA       0.000         0.000         0.000         0.000         0.000
+ EDUCATIO       0.000         0.000         0.000         0.000         0.000
+ DATE           0.000         0.000         0.000         0.000         0.000
+ DT             0.000         0.000         0.000         0.000         0.000
+ CLEAR_ME       0.000         0.000         0.000         0.000         0.000
+ TRUST_GO       0.000         0.000         0.000         0.000         0.000
+ PROXIMIT       0.000         0.000         0.000         0.000         0.000
+ CONTAIN_       0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_
+              ________      ________      ________      ________
+ DV_CONTA       0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000
+ GENDER         0.000         0.000         0.000         0.000
+ RELIGIOU       0.000         0.000         0.000         0.000
+ POLITX         0.000         0.000         0.000         0.000
+ POLITY         0.000         0.000         0.000         0.000
+ POLITICA       0.000         0.000         0.000         0.000
+ EDUCATIO       0.000         0.000         0.000         0.000
+ DATE           0.000         0.000         0.000         0.000
+ DT             0.000         0.000         0.000         0.000
+ CLEAR_ME       0.000         0.000         0.000         0.000
+ TRUST_GO       0.000         0.000         0.000         0.000
+ PROXIMIT       0.000         0.000         0.000         0.000
+ CONTAIN_       0.000         0.000         0.000         0.000
+
+
+           PSI
+              DV_CONTA      AGE           GENDER        RELIGIOU      POLITX
+              ________      ________      ________      ________      ________
+ DV_CONTA       1.143
+ AGE            0.000         0.321
+ GENDER         0.000         0.000         0.125
+ RELIGIOU       0.000         0.000         0.000         0.125
+ POLITX         0.000         0.000         0.000         0.000         0.611
+ POLITY         0.000         0.000         0.000         0.000         0.000
+ POLITICA       0.000         0.000         0.000         0.000         0.000
+ EDUCATIO       0.000         0.000         0.000         0.000         0.000
+ DATE           0.000         0.000         0.000         0.000         0.000
+ DT             0.000         0.000         0.000         0.000         0.000
+ CLEAR_ME       0.000         0.000         0.000         0.000         0.000
+ TRUST_GO       0.000         0.000         0.000         0.000         0.000
+ PROXIMIT       0.000         0.000         0.000         0.000         0.000
+ CONTAIN_       0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              POLITY        POLITICA      EDUCATIO      DATE          DT
+              ________      ________      ________      ________      ________
+ POLITY         0.543
+ POLITICA       0.000         0.459
+ EDUCATIO       0.000         0.000         0.514
+ DATE           0.000         0.000         0.000        14.343
+ DT             0.000         0.000         0.000         0.000         0.447
+ CLEAR_ME       0.000         0.000         0.000         0.000         0.000
+ TRUST_GO       0.000         0.000         0.000         0.000         0.000
+ PROXIMIT       0.000         0.000         0.000         0.000         0.000
+ CONTAIN_       0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              CLEAR_ME      TRUST_GO      PROXIMIT      CONTAIN_
+              ________      ________      ________      ________
+ CLEAR_ME       0.482
+ TRUST_GO       0.000         0.554
+ PROXIMIT       0.000         0.000         0.106
+ CONTAIN_       0.000         0.000         0.000         0.423
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              DV_CONTA      TIGHTNES
+              ________      ________
+                0.000         0.000
+
+
+           LAMBDA
+              S1            S2            S3            S4            S5
+              ________      ________      ________      ________      ________
+ DV_CONTA       0.000         0.000         0.000         0.000         0.000
+ TIGHTNES       0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              S6            S7            S8            S9            S10
+              ________      ________      ________      ________      ________
+ DV_CONTA       0.000         0.000         0.000         0.000         0.000
+ TIGHTNES       0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              S11           S12           S13           DV_CONTA      TIGHTNES
+              ________      ________      ________      ________      ________
+ DV_CONTA       0.000         0.000         0.000         1.000         0.000
+ TIGHTNES       0.000         0.000         0.000         0.000         1.000
+
+
+           THETA
+              DV_CONTA      TIGHTNES
+              ________      ________
+ DV_CONTA       0.000
+ TIGHTNES       0.000         0.000
+
+
+           ALPHA
+              S1            S2            S3            S4            S5
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              S6            S7            S8            S9            S10
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              S11           S12           S13           DV_CONTA      TIGHTNES
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         1.940         0.000
+
+
+           BETA
+              S1            S2            S3            S4            S5
+              ________      ________      ________      ________      ________
+ S1             0.000         0.000         0.000         0.000         0.000
+ S2             0.000         0.000         0.000         0.000         0.000
+ S3             0.000         0.000         0.000         0.000         0.000
+ S4             0.000         0.000         0.000         0.000         0.000
+ S5             0.000         0.000         0.000         0.000         0.000
+ S6             0.000         0.000         0.000         0.000         0.000
+ S7             0.000         0.000         0.000         0.000         0.000
+ S8             0.000         0.000         0.000         0.000         0.000
+ S9             0.000         0.000         0.000         0.000         0.000
+ S10            0.000         0.000         0.000         0.000         0.000
+ S11            0.000         0.000         0.000         0.000         0.000
+ S12            0.000         0.000         0.000         0.000         0.000
+ S13            0.000         0.000         0.000         0.000         0.000
+ DV_CONTA       0.000         0.000         0.000         0.000         0.000
+ TIGHTNES       0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              S6            S7            S8            S9            S10
+              ________      ________      ________      ________      ________
+ S1             0.000         0.000         0.000         0.000         0.000
+ S2             0.000         0.000         0.000         0.000         0.000
+ S3             0.000         0.000         0.000         0.000         0.000
+ S4             0.000         0.000         0.000         0.000         0.000
+ S5             0.000         0.000         0.000         0.000         0.000
+ S6             0.000         0.000         0.000         0.000         0.000
+ S7             0.000         0.000         0.000         0.000         0.000
+ S8             0.000         0.000         0.000         0.000         0.000
+ S9             0.000         0.000         0.000         0.000         0.000
+ S10            0.000         0.000         0.000         0.000         0.000
+ S11            0.000         0.000         0.000         0.000         0.000
+ S12            0.000         0.000         0.000         0.000         0.000
+ S13            0.000         0.000         0.000         0.000         0.000
+ DV_CONTA       0.000         0.000         0.000         0.000         0.000
+ TIGHTNES       0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              S11           S12           S13           DV_CONTA      TIGHTNES
+              ________      ________      ________      ________      ________
+ S1             0.000         0.000         0.000         0.000         0.000
+ S2             0.000         0.000         0.000         0.000         0.000
+ S3             0.000         0.000         0.000         0.000         0.000
+ S4             0.000         0.000         0.000         0.000         0.000
+ S5             0.000         0.000         0.000         0.000         0.000
+ S6             0.000         0.000         0.000         0.000         0.000
+ S7             0.000         0.000         0.000         0.000         0.000
+ S8             0.000         0.000         0.000         0.000         0.000
+ S9             0.000         0.000         0.000         0.000         0.000
+ S10            0.000         0.000         0.000         0.000         0.000
+ S11            0.000         0.000         0.000         0.000         0.000
+ S12            0.000         0.000         0.000         0.000         0.000
+ S13            0.000         0.000         0.000         0.000         0.000
+ DV_CONTA       0.000         0.000         0.000         0.000         0.000
+ TIGHTNES       0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              S1            S2            S3            S4            S5
+              ________      ________      ________      ________      ________
+ S1             1.000
+ S2             0.000         1.000
+ S3             0.000         0.000         1.000
+ S4             0.000         0.000         0.000         1.000
+ S5             0.000         0.000         0.000         0.000         1.000
+ S6             0.000         0.000         0.000         0.000         0.000
+ S7             0.000         0.000         0.000         0.000         0.000
+ S8             0.000         0.000         0.000         0.000         0.000
+ S9             0.000         0.000         0.000         0.000         0.000
+ S10            0.000         0.000         0.000         0.000         0.000
+ S11            0.000         0.000         0.000         0.000         0.000
+ S12            0.000         0.000         0.000         0.000         0.000
+ S13            0.000         0.000         0.000         0.000         0.000
+ DV_CONTA       0.000         0.000         0.000         0.000         0.000
+ TIGHTNES       0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              S6            S7            S8            S9            S10
+              ________      ________      ________      ________      ________
+ S6             1.000
+ S7             0.000         1.000
+ S8             0.000         0.000         1.000
+ S9             0.000         0.000         0.000         1.000
+ S10            0.000         0.000         0.000         0.000         1.000
+ S11            0.000         0.000         0.000         0.000         0.000
+ S12            0.000         0.000         0.000         0.000         0.000
+ S13            0.000         0.000         0.000         0.000         0.000
+ DV_CONTA       0.000         0.000         0.000         0.000         0.000
+ TIGHTNES       0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              S11           S12           S13           DV_CONTA      TIGHTNES
+              ________      ________      ________      ________      ________
+ S11            1.000
+ S12            0.000         1.000
+ S13            0.000         0.000         1.000
+ DV_CONTA       0.000         0.000         0.000         1.143
+ TIGHTNES       0.000         0.000         0.000         0.000         0.317
+
+
+TECHNICAL 8 OUTPUT
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.47206277D+04    0.0000000    0.0000000  EM
+              2 -0.27290821D+04 1991.5456560    0.4218815  EM
+              3 -0.25589336D+04  170.1484719    0.0623464  EM
+              4 -0.24725011D+04   86.4325372    0.0337768  EM
+              5 -0.24115688D+04   60.9322720    0.0246440  EM
+              6 -0.23620368D+04   49.5319569    0.0205393  EM
+              7 -0.23188422D+04   43.1946562    0.0182870  EM
+              8 -0.22797375D+04   39.1046978    0.0168639  EM
+              9 -0.22435787D+04   36.1588070    0.0158610  EM
+             10 -0.22097237D+04   33.8549613    0.0150897  EM
+             11 -0.21777846D+04   31.9391023    0.0144539  EM
+             12 -0.21475125D+04   30.2720727    0.0139004  EM
+             13 -0.21187396D+04   28.7729464    0.0133983  EM
+             14 -0.20913471D+04   27.3924768    0.0129287  EM
+             15 -0.20652474D+04   26.0997091    0.0124799  EM
+             16 -0.20403727D+04   24.8747546    0.0120444  EM
+             17 -0.20166680D+04   23.7046958    0.0116178  EM
+             18 -0.19940868D+04   22.5811419    0.0111973  EM
+             19 -0.19725881D+04   21.4987092    0.0107812  EM
+             20 -0.19521341D+04   20.4540345    0.0103691  EM
+             21 -0.19326890D+04   19.4451171    0.0099610  EM
+             22 -0.19142181D+04   18.4708606    0.0095571  EM
+             23 -0.18966873D+04   17.5307544    0.0091582  EM
+             24 -0.18800627D+04   16.6246368    0.0087651  EM
+             25 -0.18643102D+04   15.7525304    0.0083787  EM
+             26 -0.18493957D+04   14.9145212    0.0080000  EM
+             27 -0.18352850D+04   14.1106718    0.0076299  EM
+             28 -0.18219440D+04   13.3409649    0.0072692  EM
+             29 -0.18093388D+04   12.6052663    0.0069186  EM
+             30 -0.17974354D+04   11.9033062    0.0065788  EM
+             31 -0.17862008D+04   11.2346717    0.0062504  EM
+             32 -0.17756020D+04   10.5988110    0.0059337  EM
+             33 -0.17656069D+04    9.9950424    0.0056291  EM
+             34 -0.17561844D+04    9.4225702    0.0053367  EM
+
+
+  THE OPTIMIZATION ALGORITHM HAS CHANGED TO THE EM ALGORITHM.
+
+
+
+   E STEP  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE  ALGORITHM
+              1 -0.47206277D+04    0.0000000    0.0000000  EM
+              2 -0.27290821D+04 1991.5456560    0.4218815  EM
+              3 -0.25589336D+04  170.1484719    0.0623464  EM
+              4 -0.24725011D+04   86.4325372    0.0337768  EM
+              5 -0.24115688D+04   60.9322720    0.0246440  EM
+              6 -0.23620368D+04   49.5319569    0.0205393  EM
+              7 -0.23188422D+04   43.1946562    0.0182870  EM
+              8 -0.22797375D+04   39.1046978    0.0168639  EM
+              9 -0.22435787D+04   36.1588070    0.0158610  EM
+             10 -0.22097237D+04   33.8549613    0.0150897  EM
+             11 -0.21777846D+04   31.9391023    0.0144539  EM
+             12 -0.21475125D+04   30.2720727    0.0139004  EM
+             13 -0.21187396D+04   28.7729464    0.0133983  EM
+             14 -0.20913471D+04   27.3924768    0.0129287  EM
+             15 -0.20652474D+04   26.0997091    0.0124799  EM
+             16 -0.20403727D+04   24.8747546    0.0120444  EM
+             17 -0.20166680D+04   23.7046958    0.0116178  EM
+             18 -0.19940868D+04   22.5811419    0.0111973  EM
+             19 -0.19725881D+04   21.4987092    0.0107812  EM
+             20 -0.19521341D+04   20.4540345    0.0103691  EM
+             21 -0.19326890D+04   19.4451171    0.0099610  EM
+             22 -0.19142181D+04   18.4708606    0.0095571  EM
+             23 -0.18966873D+04   17.5307544    0.0091582  EM
+             24 -0.18800627D+04   16.6246368    0.0087651  EM
+             25 -0.18643102D+04   15.7525304    0.0083787  EM
+             26 -0.18493957D+04   14.9145212    0.0080000  EM
+             27 -0.18352850D+04   14.1106718    0.0076299  EM
+             28 -0.18219440D+04   13.3409649    0.0072692  EM
+             29 -0.18093388D+04   12.6052663    0.0069186  EM
+             30 -0.17974354D+04   11.9033062    0.0065788  EM
+             31 -0.17862008D+04   11.2346717    0.0062504  EM
+             32 -0.17756020D+04   10.5988110    0.0059337  EM
+             33 -0.17656069D+04    9.9950424    0.0056291  EM
+             34 -0.17561844D+04    9.4225702    0.0053367  EM
+             35 -0.17473039D+04    8.8805010    0.0050567  EM
+             36 -0.17389360D+04    8.3678628    0.0047890  EM
+             37 -0.17310524D+04    7.8836224    0.0045336  EM
+             38 -0.17236257D+04    7.4267036    0.0042903  EM
+             39 -0.17166297D+04    6.9960015    0.0040589  EM
+             40 -0.17100393D+04    6.5903964    0.0038391  EM
+             41 -0.17038305D+04    6.2087654    0.0036308  EM
+             42 -0.16979805D+04    5.8499910    0.0034334  EM
+             43 -0.16924675D+04    5.5129690    0.0032468  EM
+             44 -0.16872709D+04    5.1966141    0.0030704  EM
+             45 -0.16823711D+04    4.8998640    0.0029040  EM
+             46 -0.16777494D+04    4.6216830    0.0027471  EM
+             47 -0.16733883D+04    4.3610643    0.0025994  EM
+             48 -0.16692713D+04    4.1170315    0.0024603  EM
+             49 -0.16653826D+04    3.8886402    0.0023295  EM
+             50 -0.16617077D+04    3.6749789    0.0022067  EM
+             51 -0.16582325D+04    3.4751697    0.0020913  EM
+             52 -0.16549441D+04    3.2883688    0.0019831  EM
+             53 -0.16518304D+04    3.1137674    0.0018815  EM
+             54 -0.16488798D+04    2.9505910    0.0017863  EM
+             55 -0.16460817D+04    2.7981006    0.0016970  EM
+             56 -0.16434261D+04    2.6555925    0.0016133  EM
+             57 -0.16409037D+04    2.5223979    0.0015348  EM
+             58 -0.16385058D+04    2.3978828    0.0014613  EM
+             59 -0.16362243D+04    2.2814480    0.0013924  EM
+             60 -0.16340518D+04    2.1725282    0.0013278  EM
+             61 -0.16319812D+04    2.0705916    0.0012672  EM
+             62 -0.16300061D+04    1.9751387    0.0012103  EM
+             63 -0.16281204D+04    1.8857020    0.0011569  EM
+             64 -0.16263185D+04    1.8018445    0.0011067  EM
+             65 -0.16245954D+04    1.7231589    0.0010595  EM
+             66 -0.16229461D+04    1.6492658    0.0010152  EM
+             67 -0.16213663D+04    1.5798134    0.0009734  EM
+             68 -0.16198518D+04    1.5144751    0.0009341  EM
+             69 -0.16183989D+04    1.4529490    0.0008970  EM
+             70 -0.16170039D+04    1.3949560    0.0008619  EM
+             71 -0.16156637D+04    1.3402387    0.0008288  EM
+             72 -0.16143751D+04    1.2885596    0.0007975  EM
+             73 -0.16131354D+04    1.2397013    0.0007679  EM
+             74 -0.16119420D+04    1.1934623    0.0007398  EM
+             75 -0.16107923D+04    1.1496583    0.0007132  EM
+             76 -0.16096842D+04    1.1081202    0.0006879  EM
+             77 -0.16086155D+04    1.0686924    0.0006639  EM
+             78 -0.16075843D+04    1.0312323    0.0006411  EM
+             79 -0.16065886D+04    0.9956095    0.0006193  EM
+             80 -0.16056269D+04    0.9617034    0.0005986  EM
+             81 -0.16046975D+04    0.9294039    0.0005788  EM
+             82 -0.16037989D+04    0.8986098    0.0005600  EM
+             83 -0.16029297D+04    0.8692280    0.0005420  EM
+             84 -0.16020885D+04    0.8411728    0.0005248  EM
+             85 -0.16012742D+04    0.8143653    0.0005083  EM
+             86 -0.16004854D+04    0.7887327    0.0004926  EM
+             87 -0.15997212D+04    0.7642079    0.0004775  EM
+             88 -0.15989805D+04    0.7407287    0.0004630  EM
+             89 -0.15982623D+04    0.7182374    0.0004492  EM
+             90 -0.15975656D+04    0.6966808    0.0004359  EM
+             91 -0.15968896D+04    0.6760093    0.0004231  EM
+             92 -0.15962334D+04    0.6561766    0.0004109  EM
+             93 -0.15955963D+04    0.6371396    0.0003992  EM
+             94 -0.15949774D+04    0.6188583    0.0003879  EM
+             95 -0.15943761D+04    0.6012950    0.0003770  EM
+             96 -0.15937917D+04    0.5844145    0.0003665  EM
+             97 -0.15932235D+04    0.5681838    0.0003565  EM
+             98 -0.15926709D+04    0.5525718    0.0003468  EM
+             99 -0.15921334D+04    0.5375495    0.0003375  EM
+            100 -0.15916103D+04    0.5230892    0.0003285  EM
+            101 -0.15911011D+04    0.5091652    0.0003199  EM
+            102 -0.15906054D+04    0.4957529    0.0003116  EM
+            103 -0.15901225D+04    0.4828292    0.0003036  EM
+            104 -0.15896522D+04    0.4703724    0.0002958  EM
+            105 -0.15891938D+04    0.4583616    0.0002883  EM
+            106 -0.15887470D+04    0.4467774    0.0002811  EM
+            107 -0.15883114D+04    0.4356011    0.0002742  EM
+            108 -0.15878866D+04    0.4248151    0.0002675  EM
+            109 -0.15874722D+04    0.4144028    0.0002610  EM
+            110 -0.15870679D+04    0.4043481    0.0002547  EM
+            111 -0.15866732D+04    0.3946360    0.0002487  EM
+            112 -0.15862880D+04    0.3852522    0.0002428  EM
+            113 -0.15859118D+04    0.3761830    0.0002371  EM
+            114 -0.15855444D+04    0.3674155    0.0002317  EM
+            115 -0.15851854D+04    0.3589372    0.0002264  EM
+            116 -0.15848347D+04    0.3507363    0.0002213  EM
+            117 -0.15844919D+04    0.3428017    0.0002163  EM
+            118 -0.15841568D+04    0.3351226    0.0002115  EM
+            119 -0.15838291D+04    0.3276890    0.0002069  EM
+            120 -0.15835086D+04    0.3204909    0.0002024  EM
+            121 -0.15831951D+04    0.3135192    0.0001980  EM
+            122 -0.15828883D+04    0.3067650    0.0001938  EM
+            123 -0.15825881D+04    0.3002199    0.0001897  EM
+            124 -0.15822942D+04    0.2938758    0.0001857  EM
+            125 -0.15820065D+04    0.2877250    0.0001818  EM
+            126 -0.15817247D+04    0.2817602    0.0001781  EM
+            127 -0.15814488D+04    0.2759742    0.0001745  EM
+            128 -0.15811784D+04    0.2703604    0.0001710  EM
+            129 -0.15809135D+04    0.2649122    0.0001675  EM
+            130 -0.15806539D+04    0.2596240    0.0001642  EM
+            131 -0.15803994D+04    0.2544893    0.0001610  EM
+            132 -0.15801499D+04    0.2495028    0.0001579  EM
+            133 -0.15799052D+04    0.2446590    0.0001548  EM
+            134 -0.15796653D+04    0.2399527    0.0001519  EM
+            135 -0.15794299D+04    0.2353791    0.0001490  EM
+            136 -0.15791989D+04    0.2309334    0.0001462  EM
+            137 -0.15789723D+04    0.2266112    0.0001435  EM
+            138 -0.15787499D+04    0.2224079    0.0001409  EM
+            139 -0.15785316D+04    0.2183196    0.0001383  EM
+            140 -0.15783173D+04    0.2143420    0.0001358  EM
+            141 -0.15781068D+04    0.2104718    0.0001334  EM
+            142 -0.15779001D+04    0.2067049    0.0001310  EM
+            143 -0.15776971D+04    0.2030378    0.0001287  EM
+            144 -0.15774976D+04    0.1994673    0.0001264  EM
+            145 -0.15773016D+04    0.1959900    0.0001242  EM
+            146 -0.15771090D+04    0.1926030    0.0001221  EM
+            147 -0.15769197D+04    0.1893031    0.0001200  EM
+            148 -0.15767336D+04    0.1860875    0.0001180  EM
+            149 -0.15765506D+04    0.1829534    0.0001160  EM
+            150 -0.15763707D+04    0.1798982    0.0001141  EM
+            151 -0.15761938D+04    0.1769194    0.0001122  EM
+            152 -0.15760198D+04    0.1740144    0.0001104  EM
+            153 -0.15758486D+04    0.1711810    0.0001086  EM
+            154 -0.15756802D+04    0.1684169    0.0001069  EM
+            155 -0.15755145D+04    0.1657198    0.0001052  EM
+            156 -0.15753514D+04    0.1630877    0.0001035  EM
+            157 -0.15751909D+04    0.1605186    0.0001019  EM
+            158 -0.15750329D+04    0.1580105    0.0001003  EM
+            159 -0.15748773D+04    0.1555616    0.0000988  EM
+            160 -0.15747241D+04    0.1531699    0.0000973  EM
+            161 -0.15745733D+04    0.1508339    0.0000958  EM
+            162 -0.15744248D+04    0.1485518    0.0000943  EM
+            163 -0.15742784D+04    0.1463220    0.0000929  EM
+            164 -0.15741343D+04    0.1441429    0.0000916  EM
+            165 -0.15739923D+04    0.1420131    0.0000902  EM
+            166 -0.15738524D+04    0.1399311    0.0000889  EM
+            167 -0.15737145D+04    0.1378955    0.0000876  EM
+            168 -0.15735786D+04    0.1359049    0.0000864  EM
+            169 -0.15734446D+04    0.1339581    0.0000851  EM
+            170 -0.15733125D+04    0.1320538    0.0000839  EM
+            171 -0.15731824D+04    0.1301908    0.0000827  EM
+            172 -0.15730540D+04    0.1283678    0.0000816  EM
+            173 -0.15729274D+04    0.1265839    0.0000805  EM
+            174 -0.15728026D+04    0.1248378    0.0000794  EM
+            175 -0.15726794D+04    0.1231286    0.0000783  EM
+            176 -0.15725580D+04    0.1214552    0.0000772  EM
+            177 -0.15724382D+04    0.1198166    0.0000762  EM
+            178 -0.15723199D+04    0.1182119    0.0000752  EM
+            179 -0.15722033D+04    0.1166402    0.0000742  EM
+            180 -0.15720882D+04    0.1151005    0.0000732  EM
+            181 -0.15719746D+04    0.1135920    0.0000723  EM
+            182 -0.15718625D+04    0.1121139    0.0000713  EM
+            183 -0.15717518D+04    0.1106653    0.0000704  EM
+            184 -0.15716426D+04    0.1092456    0.0000695  EM
+            185 -0.15715347D+04    0.1078538    0.0000686  EM
+            186 -0.15714282D+04    0.1064893    0.0000678  EM
+            187 -0.15713231D+04    0.1051515    0.0000669  EM
+            188 -0.15712193D+04    0.1038395    0.0000661  EM
+            189 -0.15711167D+04    0.1025528    0.0000653  EM
+            190 -0.15710154D+04    0.1012906    0.0000645  EM
+            191 -0.15709154D+04    0.1000524    0.0000637  EM
+            192 -0.15708165D+04    0.0988376    0.0000629  EM
+            193 -0.15707189D+04    0.0976455    0.0000622  EM
+            194 -0.15706224D+04    0.0964757    0.0000614  EM
+            195 -0.15705271D+04    0.0953276    0.0000607  EM
+            196 -0.15704329D+04    0.0942005    0.0000600  EM
+            197 -0.15703398D+04    0.0930941    0.0000593  EM
+            198 -0.15702478D+04    0.0920078    0.0000586  EM
+            199 -0.15701568D+04    0.0909411    0.0000579  EM
+            200 -0.15700669D+04    0.0898935    0.0000573  EM
+            201 -0.15699781D+04    0.0888646    0.0000566  EM
+            202 -0.15698902D+04    0.0878540    0.0000560  EM
+            203 -0.15698034D+04    0.0868612    0.0000553  EM
+            204 -0.15697175D+04    0.0858857    0.0000547  EM
+            205 -0.15696325D+04    0.0849273    0.0000541  EM
+            206 -0.15695486D+04    0.0839854    0.0000535  EM
+            207 -0.15694655D+04    0.0830598    0.0000529  EM
+            208 -0.15693833D+04    0.0821500    0.0000523  EM
+            209 -0.15693021D+04    0.0812556    0.0000518  EM
+            210 -0.15692217D+04    0.0803764    0.0000512  EM
+            211 -0.15691422D+04    0.0795119    0.0000507  EM
+            212 -0.15690635D+04    0.0786619    0.0000501  EM
+            213 -0.15689857D+04    0.0778259    0.0000496  EM
+            214 -0.15689087D+04    0.0770038    0.0000491  EM
+            215 -0.15688325D+04    0.0761952    0.0000486  EM
+            216 -0.15687571D+04    0.0753998    0.0000481  EM
+            217 -0.15686825D+04    0.0746173    0.0000476  EM
+            218 -0.15686087D+04    0.0738474    0.0000471  EM
+            219 -0.15685356D+04    0.0730899    0.0000466  EM
+            220 -0.15684632D+04    0.0723445    0.0000461  EM
+            221 -0.15683916D+04    0.0716108    0.0000457  EM
+            222 -0.15683207D+04    0.0708888    0.0000452  EM
+            223 -0.15682505D+04    0.0701781    0.0000447  EM
+            224 -0.15681811D+04    0.0694785    0.0000443  EM
+            225 -0.15681123D+04    0.0687897    0.0000439  EM
+            226 -0.15680442D+04    0.0681116    0.0000434  EM
+            227 -0.15679767D+04    0.0674439    0.0000430  EM
+            228 -0.15679099D+04    0.0667863    0.0000426  EM
+            229 -0.15678438D+04    0.0661388    0.0000422  EM
+            230 -0.15677783D+04    0.0655010    0.0000418  EM
+            231 -0.15677134D+04    0.0648729    0.0000414  EM
+            232 -0.15676492D+04    0.0642541    0.0000410  EM
+            233 -0.15675855D+04    0.0636445    0.0000406  EM
+            234 -0.15675225D+04    0.0630439    0.0000402  EM
+            235 -0.15674600D+04    0.0624521    0.0000398  EM
+            236 -0.15673982D+04    0.0618690    0.0000395  EM
+            237 -0.15673369D+04    0.0612944    0.0000391  EM
+            238 -0.15672761D+04    0.0607281    0.0000387  EM
+            239 -0.15672160D+04    0.0601700    0.0000384  EM
+            240 -0.15671563D+04    0.0596199    0.0000380  EM
+            241 -0.15670973D+04    0.0590776    0.0000377  EM
+            242 -0.15670387D+04    0.0585430    0.0000374  EM
+            243 -0.15669807D+04    0.0580160    0.0000370  EM
+            244 -0.15669232D+04    0.0574964    0.0000367  EM
+            245 -0.15668662D+04    0.0569840    0.0000364  EM
+            246 -0.15668097D+04    0.0564788    0.0000360  EM
+            247 -0.15667538D+04    0.0559805    0.0000357  EM
+            248 -0.15666983D+04    0.0554891    0.0000354  EM
+            249 -0.15666433D+04    0.0550045    0.0000351  EM
+            250 -0.15665887D+04    0.0545264    0.0000348  EM
+            251 -0.15665347D+04    0.0540549    0.0000345  EM
+            252 -0.15664811D+04    0.0535897    0.0000342  EM
+            253 -0.15664280D+04    0.0531308    0.0000339  EM
+            254 -0.15663753D+04    0.0526780    0.0000336  EM
+            255 -0.15663231D+04    0.0522312    0.0000333  EM
+            256 -0.15662713D+04    0.0517904    0.0000331  EM
+            257 -0.15662199D+04    0.0513554    0.0000328  EM
+            258 -0.15661690D+04    0.0509260    0.0000325  EM
+            259 -0.15661185D+04    0.0505023    0.0000322  EM
+            260 -0.15660684D+04    0.0500842    0.0000320  EM
+            261 -0.15660187D+04    0.0496714    0.0000317  EM
+            262 -0.15659695D+04    0.0492639    0.0000315  EM
+            263 -0.15659206D+04    0.0488617    0.0000312  EM
+            264 -0.15658721D+04    0.0484646    0.0000309  EM
+            265 -0.15658241D+04    0.0480726    0.0000307  EM
+            266 -0.15657764D+04    0.0476856    0.0000305  EM
+            267 -0.15657291D+04    0.0473034    0.0000302  EM
+            268 -0.15656822D+04    0.0469260    0.0000300  EM
+            269 -0.15656356D+04    0.0465533    0.0000297  EM
+            270 -0.15655894D+04    0.0461853    0.0000295  EM
+            271 -0.15655436D+04    0.0458218    0.0000293  EM
+            272 -0.15654981D+04    0.0454628    0.0000290  EM
+            273 -0.15654530D+04    0.0451082    0.0000288  EM
+            274 -0.15654083D+04    0.0447579    0.0000286  EM
+            275 -0.15653639D+04    0.0444120    0.0000284  EM
+            276 -0.15653198D+04    0.0440702    0.0000282  EM
+            277 -0.15652761D+04    0.0437325    0.0000279  EM
+            278 -0.15652327D+04    0.0433989    0.0000277  EM
+            279 -0.15651896D+04    0.0430693    0.0000275  EM
+            280 -0.15651468D+04    0.0427436    0.0000273  EM
+            281 -0.15651044D+04    0.0424218    0.0000271  EM
+            282 -0.15650623D+04    0.0421037    0.0000269  EM
+            283 -0.15650205D+04    0.0417895    0.0000267  EM
+            284 -0.15649790D+04    0.0414789    0.0000265  EM
+            285 -0.15649379D+04    0.0411719    0.0000263  EM
+            286 -0.15648970D+04    0.0408685    0.0000261  EM
+            287 -0.15648564D+04    0.0405686    0.0000259  EM
+            288 -0.15648162D+04    0.0402722    0.0000257  EM
+            289 -0.15647762D+04    0.0399792    0.0000255  EM
+            290 -0.15647365D+04    0.0396896    0.0000254  EM
+            291 -0.15646971D+04    0.0394032    0.0000252  EM
+            292 -0.15646580D+04    0.0391201    0.0000250  EM
+            293 -0.15646191D+04    0.0388402    0.0000248  EM
+            294 -0.15645806D+04    0.0385635    0.0000246  EM
+            295 -0.15645423D+04    0.0382898    0.0000245  EM
+            296 -0.15645043D+04    0.0380192    0.0000243  EM
+            297 -0.15644665D+04    0.0377517    0.0000241  EM
+            298 -0.15644290D+04    0.0374871    0.0000240  EM
+            299 -0.15643918D+04    0.0372254    0.0000238  EM
+            300 -0.15643548D+04    0.0369666    0.0000236  EM
+            301 -0.15643181D+04    0.0367106    0.0000235  EM
+            302 -0.15642817D+04    0.0364575    0.0000233  EM
+            303 -0.15642455D+04    0.0362071    0.0000231  EM
+            304 -0.15642095D+04    0.0359594    0.0000230  EM
+            305 -0.15641738D+04    0.0357144    0.0000228  EM
+            306 -0.15641383D+04    0.0354720    0.0000227  EM
+            307 -0.15641031D+04    0.0352322    0.0000225  EM
+            308 -0.15640681D+04    0.0349950    0.0000224  EM
+            309 -0.15640333D+04    0.0347603    0.0000222  EM
+            310 -0.15639988D+04    0.0345281    0.0000221  EM
+            311 -0.15639645D+04    0.0342984    0.0000219  EM
+            312 -0.15639304D+04    0.0340711    0.0000218  EM
+            313 -0.15638966D+04    0.0338461    0.0000216  EM
+            314 -0.15638630D+04    0.0336235    0.0000215  EM
+            315 -0.15638296D+04    0.0334033    0.0000214  EM
+            316 -0.15637964D+04    0.0331853    0.0000212  EM
+            317 -0.15637634D+04    0.0329695    0.0000211  EM
+            318 -0.15637306D+04    0.0327560    0.0000209  EM
+            319 -0.15636981D+04    0.0325447    0.0000208  EM
+            320 -0.15636658D+04    0.0323356    0.0000207  EM
+            321 -0.15636336D+04    0.0321285    0.0000205  EM
+            322 -0.15636017D+04    0.0319236    0.0000204  EM
+            323 -0.15635700D+04    0.0317208    0.0000203  EM
+            324 -0.15635385D+04    0.0315200    0.0000202  EM
+            325 -0.15635071D+04    0.0313212    0.0000200  EM
+            326 -0.15634760D+04    0.0311245    0.0000199  EM
+            327 -0.15634451D+04    0.0309296    0.0000198  EM
+            328 -0.15634144D+04    0.0307368    0.0000197  EM
+            329 -0.15633838D+04    0.0305458    0.0000195  EM
+            330 -0.15633535D+04    0.0303567    0.0000194  EM
+            331 -0.15633233D+04    0.0301695    0.0000193  EM
+            332 -0.15632933D+04    0.0299841    0.0000192  EM
+            333 -0.15632635D+04    0.0298006    0.0000191  EM
+            334 -0.15632339D+04    0.0296188    0.0000189  EM
+            335 -0.15632044D+04    0.0294388    0.0000188  EM
+            336 -0.15631752D+04    0.0292606    0.0000187  EM
+            337 -0.15631461D+04    0.0290840    0.0000186  EM
+            338 -0.15631172D+04    0.0289092    0.0000185  EM
+            339 -0.15630884D+04    0.0287360    0.0000184  EM
+            340 -0.15630599D+04    0.0285645    0.0000183  EM
+            341 -0.15630315D+04    0.0283947    0.0000182  EM
+            342 -0.15630033D+04    0.0282264    0.0000181  EM
+            343 -0.15629752D+04    0.0280598    0.0000180  EM
+            344 -0.15629473D+04    0.0278947    0.0000178  EM
+            345 -0.15629196D+04    0.0277311    0.0000177  EM
+            346 -0.15628920D+04    0.0275691    0.0000176  EM
+            347 -0.15628646D+04    0.0274087    0.0000175  EM
+            348 -0.15628374D+04    0.0272497    0.0000174  EM
+            349 -0.15628103D+04    0.0270921    0.0000173  EM
+            350 -0.15627833D+04    0.0269361    0.0000172  EM
+            351 -0.15627565D+04    0.0267815    0.0000171  EM
+            352 -0.15627299D+04    0.0266283    0.0000170  EM
+            353 -0.15627034D+04    0.0264765    0.0000169  EM
+            354 -0.15626771D+04    0.0263261    0.0000168  EM
+            355 -0.15626509D+04    0.0261771    0.0000168  EM
+            356 -0.15626249D+04    0.0260294    0.0000167  EM
+            357 -0.15625990D+04    0.0258830    0.0000166  EM
+            358 -0.15625733D+04    0.0257380    0.0000165  EM
+            359 -0.15625477D+04    0.0255943    0.0000164  EM
+            360 -0.15625222D+04    0.0254519    0.0000163  EM
+            361 -0.15624969D+04    0.0253107    0.0000162  EM
+            362 -0.15624718D+04    0.0251708    0.0000161  EM
+            363 -0.15624467D+04    0.0250322    0.0000160  EM
+            364 -0.15624218D+04    0.0248948    0.0000159  EM
+            365 -0.15623971D+04    0.0247586    0.0000158  EM
+            366 -0.15623724D+04    0.0246236    0.0000158  EM
+            367 -0.15623480D+04    0.0244897    0.0000157  EM
+            368 -0.15623236D+04    0.0243571    0.0000156  EM
+            369 -0.15622994D+04    0.0242256    0.0000155  EM
+            370 -0.15622753D+04    0.0240952    0.0000154  EM
+            371 -0.15622513D+04    0.0239660    0.0000153  EM
+            372 -0.15622275D+04    0.0238379    0.0000153  EM
+            373 -0.15622038D+04    0.0237109    0.0000152  EM
+            374 -0.15621802D+04    0.0235850    0.0000151  EM
+            375 -0.15621567D+04    0.0234602    0.0000150  EM
+            376 -0.15621334D+04    0.0233364    0.0000149  EM
+            377 -0.15621102D+04    0.0232137    0.0000149  EM
+            378 -0.15620871D+04    0.0230921    0.0000148  EM
+            379 -0.15620641D+04    0.0229714    0.0000147  EM
+            380 -0.15620413D+04    0.0228518    0.0000146  EM
+            381 -0.15620185D+04    0.0227332    0.0000146  EM
+            382 -0.15619959D+04    0.0226156    0.0000145  EM
+            383 -0.15619734D+04    0.0224990    0.0000144  EM
+            384 -0.15619510D+04    0.0223833    0.0000143  EM
+            385 -0.15619288D+04    0.0222686    0.0000143  EM
+            386 -0.15619066D+04    0.0221549    0.0000142  EM
+            387 -0.15618846D+04    0.0220421    0.0000141  EM
+            388 -0.15618626D+04    0.0219302    0.0000140  EM
+            389 -0.15618408D+04    0.0218193    0.0000140  EM
+            390 -0.15618191D+04    0.0217092    0.0000139  EM
+            391 -0.15617975D+04    0.0216001    0.0000138  EM
+            392 -0.15617760D+04    0.0214918    0.0000138  EM
+            393 -0.15617546D+04    0.0213845    0.0000137  EM
+            394 -0.15617333D+04    0.0212780    0.0000136  EM
+            395 -0.15617122D+04    0.0211723    0.0000136  EM
+            396 -0.15616911D+04    0.0210675    0.0000135  EM
+            397 -0.15616701D+04    0.0209636    0.0000134  EM
+            398 -0.15616493D+04    0.0208605    0.0000134  EM
+            399 -0.15616285D+04    0.0207582    0.0000133  EM
+            400 -0.15616079D+04    0.0206567    0.0000132  EM
+            401 -0.15615873D+04    0.0205560    0.0000132  EM
+            402 -0.15615669D+04    0.0204561    0.0000131  EM
+            403 -0.15615465D+04    0.0203570    0.0000130  EM
+            404 -0.15615262D+04    0.0202587    0.0000130  EM
+            405 -0.15615061D+04    0.0201612    0.0000129  EM
+            406 -0.15614860D+04    0.0200644    0.0000128  EM
+            407 -0.15614660D+04    0.0199684    0.0000128  EM
+            408 -0.15614462D+04    0.0198731    0.0000127  EM
+            409 -0.15614264D+04    0.0197786    0.0000127  EM
+            410 -0.15614067D+04    0.0196848    0.0000126  EM
+            411 -0.15613871D+04    0.0195918    0.0000125  EM
+            412 -0.15613676D+04    0.0194994    0.0000125  EM
+            413 -0.15613482D+04    0.0194077    0.0000124  EM
+            414 -0.15613289D+04    0.0193168    0.0000124  EM
+            415 -0.15613097D+04    0.0192266    0.0000123  EM
+            416 -0.15612905D+04    0.0191370    0.0000123  EM
+            417 -0.15612715D+04    0.0190481    0.0000122  EM
+            418 -0.15612525D+04    0.0189599    0.0000121  EM
+            419 -0.15612336D+04    0.0188723    0.0000121  EM
+            420 -0.15612149D+04    0.0187855    0.0000120  EM
+            421 -0.15611962D+04    0.0186992    0.0000120  EM
+            422 -0.15611775D+04    0.0186136    0.0000119  EM
+            423 -0.15611590D+04    0.0185287    0.0000119  EM
+            424 -0.15611406D+04    0.0184444    0.0000118  EM
+            425 -0.15611222D+04    0.0183607    0.0000118  EM
+            426 -0.15611039D+04    0.0182776    0.0000117  EM
+            427 -0.15610857D+04    0.0181951    0.0000117  EM
+            428 -0.15610676D+04    0.0181133    0.0000116  EM
+            429 -0.15610496D+04    0.0180320    0.0000116  EM
+            430 -0.15610316D+04    0.0179514    0.0000115  EM
+            431 -0.15610138D+04    0.0178713    0.0000114  EM
+            432 -0.15609960D+04    0.0177918    0.0000114  EM
+            433 -0.15609783D+04    0.0177129    0.0000113  EM
+            434 -0.15609606D+04    0.0176346    0.0000113  EM
+            435 -0.15609431D+04    0.0175568    0.0000112  EM
+            436 -0.15609256D+04    0.0174796    0.0000112  EM
+            437 -0.15609082D+04    0.0174030    0.0000111  EM
+            438 -0.15608909D+04    0.0173269    0.0000111  EM
+            439 -0.15608736D+04    0.0172513    0.0000111  EM
+            440 -0.15608564D+04    0.0171763    0.0000110  EM
+            441 -0.15608393D+04    0.0171018    0.0000110  EM
+            442 -0.15608223D+04    0.0170278    0.0000109  EM
+            443 -0.15608054D+04    0.0169544    0.0000109  EM
+            444 -0.15607885D+04    0.0168815    0.0000108  EM
+            445 -0.15607717D+04    0.0168090    0.0000108  EM
+            446 -0.15607549D+04    0.0167371    0.0000107  EM
+            447 -0.15607383D+04    0.0166657    0.0000107  EM
+            448 -0.15607217D+04    0.0165948    0.0000106  EM
+            449 -0.15607051D+04    0.0165244    0.0000106  EM
+            450 -0.15606887D+04    0.0164545    0.0000105  EM
+            451 -0.15606723D+04    0.0163851    0.0000105  EM
+            452 -0.15606560D+04    0.0163161    0.0000105  EM
+            453 -0.15606397D+04    0.0162476    0.0000104  EM
+            454 -0.15606236D+04    0.0161796    0.0000104  EM
+            455 -0.15606074D+04    0.0161121    0.0000103  EM
+            456 -0.15605914D+04    0.0160450    0.0000103  EM
+            457 -0.15605754D+04    0.0159784    0.0000102  EM
+            458 -0.15605595D+04    0.0159122    0.0000102  EM
+            459 -0.15605437D+04    0.0158465    0.0000102  EM
+            460 -0.15605279D+04    0.0157812    0.0000101  EM
+            461 -0.15605122D+04    0.0157163    0.0000101  EM
+            462 -0.15604965D+04    0.0156519    0.0000100  EM
+            463 -0.15604809D+04    0.0155879    0.0000100  EM
+            464 -0.15604654D+04    0.0155244    0.0000099  EM
+            465 -0.15604499D+04    0.0154612    0.0000099  EM
+            466 -0.15604345D+04    0.0153985    0.0000099  EM
+            467 -0.15604192D+04    0.0153362    0.0000098  EM
+            468 -0.15604039D+04    0.0152744    0.0000098  EM
+            469 -0.15603887D+04    0.0152129    0.0000097  EM
+            470 -0.15603736D+04    0.0151518    0.0000097  EM
+            471 -0.15603585D+04    0.0150911    0.0000097  EM
+            472 -0.15603434D+04    0.0150309    0.0000096  EM
+            473 -0.15603285D+04    0.0149710    0.0000096  EM
+            474 -0.15603136D+04    0.0149115    0.0000096  EM
+            475 -0.15602987D+04    0.0148524    0.0000095  EM
+            476 -0.15602839D+04    0.0147937    0.0000095  EM
+            477 -0.15602692D+04    0.0147353    0.0000094  EM
+            478 -0.15602545D+04    0.0146773    0.0000094  EM
+            479 -0.15602399D+04    0.0146198    0.0000094  EM
+            480 -0.15602253D+04    0.0145625    0.0000093  EM
+            481 -0.15602108D+04    0.0145057    0.0000093  EM
+            482 -0.15601964D+04    0.0144492    0.0000093  EM
+            483 -0.15601820D+04    0.0143930    0.0000092  EM
+            484 -0.15601676D+04    0.0143372    0.0000092  EM
+            485 -0.15601534D+04    0.0142818    0.0000092  EM
+            486 -0.15601391D+04    0.0142267    0.0000091  EM
+            487 -0.15601250D+04    0.0141720    0.0000091  EM
+            488 -0.15601108D+04    0.0141176    0.0000090  EM
+            489 -0.15600968D+04    0.0140635    0.0000090  EM
+            490 -0.15600828D+04    0.0140098    0.0000090  EM
+            491 -0.15600688D+04    0.0139564    0.0000089  EM
+            492 -0.15600549D+04    0.0139034    0.0000089  EM
+            493 -0.15600411D+04    0.0138506    0.0000089  EM
+            494 -0.15600273D+04    0.0137982    0.0000088  EM
+            495 -0.15600135D+04    0.0137462    0.0000088  EM
+            496 -0.15599998D+04    0.0136944    0.0000088  EM
+            497 -0.15599862D+04    0.0136430    0.0000087  EM
+            498 -0.15599726D+04    0.0135918    0.0000087  EM
+            499 -0.15599590D+04    0.0135410    0.0000087  EM
+            500 -0.15599456D+04    0.0134905    0.0000086  EM
+            501 -0.15599321D+04    0.0134403    0.0000086  EM
+            502 -0.15599187D+04    0.0133904    0.0000086  EM
+            503 -0.15599054D+04    0.0133408    0.0000086  EM
+            504 -0.15598921D+04    0.0132915    0.0000085  EM
+            505 -0.15598788D+04    0.0132425    0.0000085  EM
+            506 -0.15598657D+04    0.0131938    0.0000085  EM
+            507 -0.15598525D+04    0.0131454    0.0000084  EM
+            508 -0.15598394D+04    0.0130973    0.0000084  EM
+            509 -0.15598264D+04    0.0130494    0.0000084  EM
+            510 -0.15598134D+04    0.0130019    0.0000083  EM
+            511 -0.15598004D+04    0.0129546    0.0000083  EM
+            512 -0.15597875D+04    0.0129076    0.0000083  EM
+            513 -0.15597746D+04    0.0128608    0.0000082  EM
+            514 -0.15597618D+04    0.0128144    0.0000082  EM
+            515 -0.15597491D+04    0.0127682    0.0000082  EM
+            516 -0.15597363D+04    0.0127223    0.0000082  EM
+            517 -0.15597237D+04    0.0126766    0.0000081  EM
+            518 -0.15597110D+04    0.0126313    0.0000081  EM
+            519 -0.15596984D+04    0.0125861    0.0000081  EM
+            520 -0.15596859D+04    0.0125413    0.0000080  EM
+            521 -0.15596734D+04    0.0124967    0.0000080  EM
+            522 -0.15596609D+04    0.0124523    0.0000080  EM
+            523 -0.15596485D+04    0.0124082    0.0000080  EM
+            524 -0.15596362D+04    0.0123644    0.0000079  EM
+            525 -0.15596239D+04    0.0123208    0.0000079  EM
+            526 -0.15596116D+04    0.0122775    0.0000079  EM
+            527 -0.15595993D+04    0.0122344    0.0000078  EM
+            528 -0.15595871D+04    0.0121915    0.0000078  EM
+            529 -0.15595750D+04    0.0121489    0.0000078  EM
+            530 -0.15595629D+04    0.0121065    0.0000078  EM
+            531 -0.15595508D+04    0.0120644    0.0000077  EM
+            532 -0.15595388D+04    0.0120225    0.0000077  EM
+            533 -0.15595268D+04    0.0119808    0.0000077  EM
+            534 -0.15595149D+04    0.0119394    0.0000077  EM
+            535 -0.15595030D+04    0.0118982    0.0000076  EM
+            536 -0.15594911D+04    0.0118572    0.0000076  EM
+            537 -0.15594793D+04    0.0118164    0.0000076  EM
+            538 -0.15594675D+04    0.0117759    0.0000076  EM
+            539 -0.15594558D+04    0.0117356    0.0000075  EM
+            540 -0.15594441D+04    0.0116955    0.0000075  EM
+            541 -0.15594325D+04    0.0116557    0.0000075  EM
+            542 -0.15594208D+04    0.0116160    0.0000074  EM
+            543 -0.15594093D+04    0.0115766    0.0000074  EM
+            544 -0.15593977D+04    0.0115374    0.0000074  EM
+            545 -0.15593862D+04    0.0114984    0.0000074  EM
+            546 -0.15593748D+04    0.0114596    0.0000073  EM
+            547 -0.15593633D+04    0.0114210    0.0000073  EM
+            548 -0.15593520D+04    0.0113826    0.0000073  EM
+            549 -0.15593406D+04    0.0113444    0.0000073  EM
+            550 -0.15593293D+04    0.0113064    0.0000073  EM
+            551 -0.15593180D+04    0.0112687    0.0000072  EM
+            552 -0.15593068D+04    0.0112311    0.0000072  EM
+            553 -0.15592956D+04    0.0111937    0.0000072  EM
+            554 -0.15592845D+04    0.0111566    0.0000072  EM
+            555 -0.15592733D+04    0.0111196    0.0000071  EM
+            556 -0.15592623D+04    0.0110828    0.0000071  EM
+            557 -0.15592512D+04    0.0110462    0.0000071  EM
+            558 -0.15592402D+04    0.0110098    0.0000071  EM
+            559 -0.15592292D+04    0.0109736    0.0000070  EM
+            560 -0.15592183D+04    0.0109376    0.0000070  EM
+            561 -0.15592074D+04    0.0109017    0.0000070  EM
+            562 -0.15591965D+04    0.0108661    0.0000070  EM
+            563 -0.15591857D+04    0.0108306    0.0000069  EM
+            564 -0.15591749D+04    0.0107954    0.0000069  EM
+            565 -0.15591641D+04    0.0107603    0.0000069  EM
+            566 -0.15591534D+04    0.0107253    0.0000069  EM
+            567 -0.15591427D+04    0.0106906    0.0000069  EM
+            568 -0.15591321D+04    0.0106560    0.0000068  EM
+            569 -0.15591214D+04    0.0106216    0.0000068  EM
+            570 -0.15591109D+04    0.0105874    0.0000068  EM
+            571 -0.15591003D+04    0.0105534    0.0000068  EM
+            572 -0.15590898D+04    0.0105195    0.0000067  EM
+            573 -0.15590793D+04    0.0104858    0.0000067  EM
+            574 -0.15590688D+04    0.0104523    0.0000067  EM
+            575 -0.15590584D+04    0.0104189    0.0000067  EM
+            576 -0.15590480D+04    0.0103857    0.0000067  EM
+            577 -0.15590377D+04    0.0103527    0.0000066  EM
+            578 -0.15590274D+04    0.0103198    0.0000066  EM
+            579 -0.15590171D+04    0.0102871    0.0000066  EM
+            580 -0.15590068D+04    0.0102546    0.0000066  EM
+            581 -0.15589966D+04    0.0102222    0.0000066  EM
+            582 -0.15589864D+04    0.0101900    0.0000065  EM
+            583 -0.15589763D+04    0.0101579    0.0000065  EM
+            584 -0.15589661D+04    0.0101260    0.0000065  EM
+            585 -0.15589560D+04    0.0100943    0.0000065  EM
+            586 -0.15589460D+04    0.0100627    0.0000065  EM
+            587 -0.15589359D+04    0.0100313    0.0000064  EM
+            588 -0.15589259D+04    0.0100000    0.0000064  EM
+            589 -0.15589160D+04    0.0099688    0.0000064  EM
+            590 -0.15589060D+04    0.0099379    0.0000064  EM
+            591 -0.15588961D+04    0.0099070    0.0000064  EM
+            592 -0.15588863D+04    0.0098763    0.0000063  EM
+            593 -0.15588764D+04    0.0098458    0.0000063  EM
+            594 -0.15588666D+04    0.0098154    0.0000063  EM
+            595 -0.15588568D+04    0.0097852    0.0000063  EM
+            596 -0.15588470D+04    0.0097551    0.0000063  EM
+            597 -0.15588373D+04    0.0097251    0.0000062  EM
+            598 -0.15588276D+04    0.0096953    0.0000062  EM
+            599 -0.15588180D+04    0.0096656    0.0000062  EM
+            600 -0.15588083D+04    0.0096361    0.0000062  EM
+            601 -0.15587987D+04    0.0096067    0.0000062  EM
+            602 -0.15587891D+04    0.0095774    0.0000061  EM
+            603 -0.15587796D+04    0.0095483    0.0000061  EM
+            604 -0.15587701D+04    0.0095193    0.0000061  EM
+            605 -0.15587606D+04    0.0094904    0.0000061  EM
+            606 -0.15587511D+04    0.0094617    0.0000061  EM
+            607 -0.15587417D+04    0.0094331    0.0000061  EM
+            608 -0.15587323D+04    0.0094047    0.0000060  EM
+            609 -0.15587229D+04    0.0093763    0.0000060  EM
+            610 -0.15587136D+04    0.0093482    0.0000060  EM
+            611 -0.15587042D+04    0.0093201    0.0000060  EM
+            612 -0.15586949D+04    0.0092922    0.0000060  EM
+            613 -0.15586857D+04    0.0092644    0.0000059  EM
+            614 -0.15586764D+04    0.0092367    0.0000059  EM
+            615 -0.15586672D+04    0.0092091    0.0000059  EM
+            616 -0.15586581D+04    0.0091817    0.0000059  EM
+            617 -0.15586489D+04    0.0091544    0.0000059  EM
+            618 -0.15586398D+04    0.0091272    0.0000059  EM
+            619 -0.15586307D+04    0.0091001    0.0000058  EM
+            620 -0.15586216D+04    0.0090732    0.0000058  EM
+            621 -0.15586126D+04    0.0090464    0.0000058  EM
+            622 -0.15586035D+04    0.0090197    0.0000058  EM
+            623 -0.15585945D+04    0.0089931    0.0000058  EM
+            624 -0.15585856D+04    0.0089667    0.0000058  EM
+            625 -0.15585766D+04    0.0089403    0.0000057  EM
+            626 -0.15585677D+04    0.0089141    0.0000057  EM
+            627 -0.15585588D+04    0.0088880    0.0000057  EM
+            628 -0.15585500D+04    0.0088620    0.0000057  EM
+            629 -0.15585411D+04    0.0088361    0.0000057  EM
+            630 -0.15585323D+04    0.0088104    0.0000057  EM
+            631 -0.15585235D+04    0.0087847    0.0000056  EM
+            632 -0.15585148D+04    0.0087592    0.0000056  EM
+            633 -0.15585060D+04    0.0087337    0.0000056  EM
+            634 -0.15584973D+04    0.0087084    0.0000056  EM
+            635 -0.15584887D+04    0.0086832    0.0000056  EM
+            636 -0.15584800D+04    0.0086581    0.0000056  EM
+            637 -0.15584714D+04    0.0086331    0.0000055  EM
+            638 -0.15584628D+04    0.0086083    0.0000055  EM
+            639 -0.15584542D+04    0.0085835    0.0000055  EM
+            640 -0.15584456D+04    0.0085588    0.0000055  EM
+            641 -0.15584371D+04    0.0085343    0.0000055  EM
+            642 -0.15584286D+04    0.0085098    0.0000055  EM
+            643 -0.15584201D+04    0.0084855    0.0000054  EM
+            644 -0.15584116D+04    0.0084612    0.0000054  EM
+            645 -0.15584032D+04    0.0084371    0.0000054  EM
+            646 -0.15583948D+04    0.0084130    0.0000054  EM
+            647 -0.15583864D+04    0.0083891    0.0000054  EM
+            648 -0.15583780D+04    0.0083653    0.0000054  EM
+            649 -0.15583697D+04    0.0083415    0.0000054  EM
+            650 -0.15583614D+04    0.0083179    0.0000053  EM
+            651 -0.15583531D+04    0.0082943    0.0000053  EM
+            652 -0.15583448D+04    0.0082709    0.0000053  EM
+            653 -0.15583365D+04    0.0082476    0.0000053  EM
+            654 -0.15583283D+04    0.0082243    0.0000053  EM
+            655 -0.15583201D+04    0.0082012    0.0000053  EM
+            656 -0.15583119D+04    0.0081781    0.0000052  EM
+            657 -0.15583038D+04    0.0081552    0.0000052  EM
+            658 -0.15582957D+04    0.0081323    0.0000052  EM
+            659 -0.15582875D+04    0.0081095    0.0000052  EM
+            660 -0.15582795D+04    0.0080869    0.0000052  EM
+            661 -0.15582714D+04    0.0080643    0.0000052  EM
+            662 -0.15582634D+04    0.0080418    0.0000052  EM
+            663 -0.15582553D+04    0.0080194    0.0000051  EM
+            664 -0.15582473D+04    0.0079971    0.0000051  EM
+            665 -0.15582394D+04    0.0079749    0.0000051  EM
+            666 -0.15582314D+04    0.0079528    0.0000051  EM
+            667 -0.15582235D+04    0.0079308    0.0000051  EM
+            668 -0.15582156D+04    0.0079088    0.0000051  EM
+            669 -0.15582077D+04    0.0078870    0.0000051  EM
+            670 -0.15581998D+04    0.0078652    0.0000050  EM
+            671 -0.15581920D+04    0.0078435    0.0000050  EM
+            672 -0.15581842D+04    0.0078219    0.0000050  EM
+            673 -0.15581764D+04    0.0078004    0.0000050  EM
+            674 -0.15581686D+04    0.0077790    0.0000050  EM
+            675 -0.15581608D+04    0.0077577    0.0000050  EM
+            676 -0.15581531D+04    0.0077365    0.0000050  EM
+            677 -0.15581454D+04    0.0077153    0.0000050  EM
+            678 -0.15581377D+04    0.0076942    0.0000049  EM
+            679 -0.15581300D+04    0.0076732    0.0000049  EM
+            680 -0.15581223D+04    0.0076523    0.0000049  EM
+            681 -0.15581147D+04    0.0076315    0.0000049  EM
+            682 -0.15581071D+04    0.0076108    0.0000049  EM
+            683 -0.15580995D+04    0.0075901    0.0000049  EM
+            684 -0.15580919D+04    0.0075695    0.0000049  EM
+            685 -0.15580844D+04    0.0075490    0.0000048  EM
+            686 -0.15580769D+04    0.0075286    0.0000048  EM
+            687 -0.15580694D+04    0.0075083    0.0000048  EM
+            688 -0.15580619D+04    0.0074880    0.0000048  EM
+            689 -0.15580544D+04    0.0074678    0.0000048  EM
+            690 -0.15580470D+04    0.0074477    0.0000048  EM
+            691 -0.15580395D+04    0.0074277    0.0000048  EM
+            692 -0.15580321D+04    0.0074078    0.0000048  EM
+            693 -0.15580247D+04    0.0073879    0.0000047  EM
+            694 -0.15580174D+04    0.0073681    0.0000047  EM
+            695 -0.15580100D+04    0.0073484    0.0000047  EM
+            696 -0.15580027D+04    0.0073288    0.0000047  EM
+            697 -0.15579954D+04    0.0073092    0.0000047  EM
+            698 -0.15579881D+04    0.0072897    0.0000047  EM
+            699 -0.15579808D+04    0.0072703    0.0000047  EM
+            700 -0.15579736D+04    0.0072509    0.0000047  EM
+            701 -0.15579663D+04    0.0072317    0.0000046  EM
+            702 -0.15579591D+04    0.0072125    0.0000046  EM
+            703 -0.15579519D+04    0.0071934    0.0000046  EM
+            704 -0.15579448D+04    0.0071743    0.0000046  EM
+            705 -0.15579376D+04    0.0071554    0.0000046  EM
+            706 -0.15579305D+04    0.0071365    0.0000046  EM
+            707 -0.15579233D+04    0.0071176    0.0000046  EM
+            708 -0.15579162D+04    0.0070989    0.0000046  EM
+            709 -0.15579092D+04    0.0070802    0.0000045  EM
+            710 -0.15579021D+04    0.0070616    0.0000045  EM
+            711 -0.15578951D+04    0.0070430    0.0000045  EM
+            712 -0.15578880D+04    0.0070245    0.0000045  EM
+            713 -0.15578810D+04    0.0070061    0.0000045  EM
+            714 -0.15578740D+04    0.0069878    0.0000045  EM
+            715 -0.15578671D+04    0.0069695    0.0000045  EM
+            716 -0.15578601D+04    0.0069513    0.0000045  EM
+            717 -0.15578532D+04    0.0069332    0.0000045  EM
+            718 -0.15578463D+04    0.0069151    0.0000044  EM
+            719 -0.15578394D+04    0.0068971    0.0000044  EM
+            720 -0.15578325D+04    0.0068792    0.0000044  EM
+            721 -0.15578256D+04    0.0068613    0.0000044  EM
+            722 -0.15578188D+04    0.0068435    0.0000044  EM
+            723 -0.15578120D+04    0.0068258    0.0000044  EM
+            724 -0.15578052D+04    0.0068081    0.0000044  EM
+            725 -0.15577984D+04    0.0067905    0.0000044  EM
+            726 -0.15577916D+04    0.0067730    0.0000043  EM
+            727 -0.15577848D+04    0.0067555    0.0000043  EM
+            728 -0.15577781D+04    0.0067381    0.0000043  EM
+            729 -0.15577714D+04    0.0067207    0.0000043  EM
+            730 -0.15577647D+04    0.0067035    0.0000043  EM
+            731 -0.15577580D+04    0.0066862    0.0000043  EM
+            732 -0.15577513D+04    0.0066691    0.0000043  EM
+            733 -0.15577447D+04    0.0066520    0.0000043  EM
+            734 -0.15577380D+04    0.0066349    0.0000043  EM
+            735 -0.15577314D+04    0.0066180    0.0000042  EM
+            736 -0.15577248D+04    0.0066011    0.0000042  EM
+            737 -0.15577182D+04    0.0065842    0.0000042  EM
+            738 -0.15577117D+04    0.0065674    0.0000042  EM
+            739 -0.15577051D+04    0.0065507    0.0000042  EM
+            740 -0.15576986D+04    0.0065340    0.0000042  EM
+            741 -0.15576921D+04    0.0065174    0.0000042  EM
+            742 -0.15576856D+04    0.0065009    0.0000042  EM
+            743 -0.15576791D+04    0.0064844    0.0000042  EM
+            744 -0.15576726D+04    0.0064680    0.0000042  EM
+            745 -0.15576662D+04    0.0064516    0.0000041  EM
+            746 -0.15576597D+04    0.0064353    0.0000041  EM
+            747 -0.15576533D+04    0.0064190    0.0000041  EM
+            748 -0.15576469D+04    0.0064028    0.0000041  EM
+            749 -0.15576405D+04    0.0063867    0.0000041  EM
+            750 -0.15576341D+04    0.0063706    0.0000041  EM
+            751 -0.15576278D+04    0.0063546    0.0000041  EM
+            752 -0.15576214D+04    0.0063386    0.0000041  EM
+            753 -0.15576151D+04    0.0063227    0.0000041  EM
+            754 -0.15576088D+04    0.0063069    0.0000040  EM
+            755 -0.15576025D+04    0.0062911    0.0000040  EM
+            756 -0.15575963D+04    0.0062753    0.0000040  EM
+            757 -0.15575900D+04    0.0062597    0.0000040  EM
+            758 -0.15575837D+04    0.0062440    0.0000040  EM
+            759 -0.15575775D+04    0.0062284    0.0000040  EM
+            760 -0.15575713D+04    0.0062129    0.0000040  EM
+            761 -0.15575651D+04    0.0061975    0.0000040  EM
+            762 -0.15575589D+04    0.0061820    0.0000040  EM
+            763 -0.15575528D+04    0.0061667    0.0000040  EM
+            764 -0.15575466D+04    0.0061514    0.0000039  EM
+            765 -0.15575405D+04    0.0061361    0.0000039  EM
+            766 -0.15575344D+04    0.0061209    0.0000039  EM
+            767 -0.15575282D+04    0.0061058    0.0000039  EM
+            768 -0.15575222D+04    0.0060907    0.0000039  EM
+            769 -0.15575161D+04    0.0060757    0.0000039  EM
+            770 -0.15575100D+04    0.0060607    0.0000039  EM
+            771 -0.15575040D+04    0.0060458    0.0000039  EM
+            772 -0.15574979D+04    0.0060309    0.0000039  EM
+            773 -0.15574919D+04    0.0060160    0.0000039  EM
+            774 -0.15574859D+04    0.0060013    0.0000039  EM
+            775 -0.15574799D+04    0.0059865    0.0000038  EM
+            776 -0.15574740D+04    0.0059719    0.0000038  EM
+            777 -0.15574680D+04    0.0059572    0.0000038  EM
+            778 -0.15574621D+04    0.0059427    0.0000038  EM
+            779 -0.15574561D+04    0.0059281    0.0000038  EM
+            780 -0.15574502D+04    0.0059137    0.0000038  EM
+            781 -0.15574443D+04    0.0058992    0.0000038  EM
+            782 -0.15574384D+04    0.0058849    0.0000038  EM
+            783 -0.15574326D+04    0.0058705    0.0000038  EM
+            784 -0.15574267D+04    0.0058563    0.0000038  EM
+            785 -0.15574209D+04    0.0058420    0.0000038  EM
+            786 -0.15574150D+04    0.0058278    0.0000037  EM
+            787 -0.15574092D+04    0.0058137    0.0000037  EM
+            788 -0.15574034D+04    0.0057996    0.0000037  EM
+            789 -0.15573976D+04    0.0057856    0.0000037  EM
+            790 -0.15573919D+04    0.0057716    0.0000037  EM
+            791 -0.15573861D+04    0.0057577    0.0000037  EM
+            792 -0.15573804D+04    0.0057438    0.0000037  EM
+            793 -0.15573746D+04    0.0057299    0.0000037  EM
+            794 -0.15573689D+04    0.0057161    0.0000037  EM
+            795 -0.15573632D+04    0.0057024    0.0000037  EM
+            796 -0.15573575D+04    0.0056887    0.0000037  EM
+            797 -0.15573519D+04    0.0056750    0.0000036  EM
+            798 -0.15573462D+04    0.0056614    0.0000036  EM
+            799 -0.15573406D+04    0.0056479    0.0000036  EM
+            800 -0.15573349D+04    0.0056343    0.0000036  EM
+            801 -0.15573293D+04    0.0056209    0.0000036  EM
+            802 -0.15573237D+04    0.0056074    0.0000036  EM
+            803 -0.15573181D+04    0.0055941    0.0000036  EM
+            804 -0.15573125D+04    0.0055807    0.0000036  EM
+            805 -0.15573069D+04    0.0055674    0.0000036  EM
+            806 -0.15573014D+04    0.0055542    0.0000036  EM
+            807 -0.15572959D+04    0.0055410    0.0000036  EM
+            808 -0.15572903D+04    0.0055278    0.0000035  EM
+            809 -0.15572848D+04    0.0055147    0.0000035  EM
+            810 -0.15572793D+04    0.0055016    0.0000035  EM
+            811 -0.15572738D+04    0.0054886    0.0000035  EM
+            812 -0.15572683D+04    0.0054756    0.0000035  EM
+            813 -0.15572629D+04    0.0054627    0.0000035  EM
+            814 -0.15572574D+04    0.0054498    0.0000035  EM
+            815 -0.15572520D+04    0.0054369    0.0000035  EM
+            816 -0.15572466D+04    0.0054241    0.0000035  EM
+            817 -0.15572412D+04    0.0054113    0.0000035  EM
+            818 -0.15572358D+04    0.0053986    0.0000035  EM
+            819 -0.15572304D+04    0.0053859    0.0000035  EM
+            820 -0.15572250D+04    0.0053733    0.0000035  EM
+            821 -0.15572196D+04    0.0053607    0.0000034  EM
+            822 -0.15572143D+04    0.0053481    0.0000034  EM
+            823 -0.15572090D+04    0.0053356    0.0000034  EM
+            824 -0.15572036D+04    0.0053231    0.0000034  EM
+            825 -0.15571983D+04    0.0053107    0.0000034  EM
+            826 -0.15571930D+04    0.0052983    0.0000034  EM
+            827 -0.15571877D+04    0.0052860    0.0000034  EM
+            828 -0.15571825D+04    0.0052737    0.0000034  EM
+            829 -0.15571772D+04    0.0052614    0.0000034  EM
+            830 -0.15571720D+04    0.0052492    0.0000034  EM
+            831 -0.15571667D+04    0.0052370    0.0000034  EM
+            832 -0.15571615D+04    0.0052248    0.0000034  EM
+            833 -0.15571563D+04    0.0052127    0.0000033  EM
+            834 -0.15571511D+04    0.0052006    0.0000033  EM
+            835 -0.15571459D+04    0.0051886    0.0000033  EM
+            836 -0.15571407D+04    0.0051766    0.0000033  EM
+            837 -0.15571355D+04    0.0051647    0.0000033  EM
+            838 -0.15571304D+04    0.0051528    0.0000033  EM
+            839 -0.15571253D+04    0.0051409    0.0000033  EM
+            840 -0.15571201D+04    0.0051291    0.0000033  EM
+            841 -0.15571150D+04    0.0051173    0.0000033  EM
+            842 -0.15571099D+04    0.0051055    0.0000033  EM
+            843 -0.15571048D+04    0.0050938    0.0000033  EM
+            844 -0.15570997D+04    0.0050821    0.0000033  EM
+            845 -0.15570947D+04    0.0050705    0.0000033  EM
+            846 -0.15570896D+04    0.0050589    0.0000032  EM
+            847 -0.15570845D+04    0.0050473    0.0000032  EM
+            848 -0.15570795D+04    0.0050358    0.0000032  EM
+            849 -0.15570745D+04    0.0050243    0.0000032  EM
+            850 -0.15570695D+04    0.0050128    0.0000032  EM
+            851 -0.15570645D+04    0.0050014    0.0000032  EM
+            852 -0.15570595D+04    0.0049900    0.0000032  EM
+            853 -0.15570545D+04    0.0049787    0.0000032  EM
+            854 -0.15570495D+04    0.0049674    0.0000032  EM
+            855 -0.15570446D+04    0.0049561    0.0000032  EM
+            856 -0.15570396D+04    0.0049449    0.0000032  EM
+            857 -0.15570347D+04    0.0049337    0.0000032  EM
+            858 -0.15570298D+04    0.0049226    0.0000032  EM
+            859 -0.15570249D+04    0.0049114    0.0000032  EM
+            860 -0.15570200D+04    0.0049003    0.0000031  EM
+            861 -0.15570151D+04    0.0048893    0.0000031  EM
+            862 -0.15570102D+04    0.0048783    0.0000031  EM
+            863 -0.15570053D+04    0.0048673    0.0000031  EM
+            864 -0.15570005D+04    0.0048564    0.0000031  EM
+            865 -0.15569956D+04    0.0048455    0.0000031  EM
+            866 -0.15569908D+04    0.0048346    0.0000031  EM
+            867 -0.15569860D+04    0.0048237    0.0000031  EM
+            868 -0.15569812D+04    0.0048129    0.0000031  EM
+            869 -0.15569764D+04    0.0048022    0.0000031  EM
+            870 -0.15569716D+04    0.0047914    0.0000031  EM
+            871 -0.15569668D+04    0.0047807    0.0000031  EM
+            872 -0.15569620D+04    0.0047701    0.0000031  EM
+            873 -0.15569573D+04    0.0047594    0.0000031  EM
+            874 -0.15569525D+04    0.0047488    0.0000031  EM
+            875 -0.15569478D+04    0.0047383    0.0000030  EM
+            876 -0.15569430D+04    0.0047278    0.0000030  EM
+            877 -0.15569383D+04    0.0047173    0.0000030  EM
+            878 -0.15569336D+04    0.0047068    0.0000030  EM
+            879 -0.15569289D+04    0.0046964    0.0000030  EM
+            880 -0.15569242D+04    0.0046860    0.0000030  EM
+            881 -0.15569196D+04    0.0046756    0.0000030  EM
+            882 -0.15569149D+04    0.0046653    0.0000030  EM
+            883 -0.15569102D+04    0.0046550    0.0000030  EM
+            884 -0.15569056D+04    0.0046447    0.0000030  EM
+            885 -0.15569010D+04    0.0046345    0.0000030  EM
+            886 -0.15568963D+04    0.0046243    0.0000030  EM
+            887 -0.15568917D+04    0.0046141    0.0000030  EM
+            888 -0.15568871D+04    0.0046040    0.0000030  EM
+            889 -0.15568825D+04    0.0045939    0.0000030  EM
+            890 -0.15568779D+04    0.0045838    0.0000029  EM
+            891 -0.15568734D+04    0.0045738    0.0000029  EM
+            892 -0.15568688D+04    0.0045638    0.0000029  EM
+            893 -0.15568642D+04    0.0045538    0.0000029  EM
+            894 -0.15568597D+04    0.0045439    0.0000029  EM
+            895 -0.15568552D+04    0.0045340    0.0000029  EM
+            896 -0.15568506D+04    0.0045241    0.0000029  EM
+            897 -0.15568461D+04    0.0045142    0.0000029  EM
+            898 -0.15568416D+04    0.0045044    0.0000029  EM
+            899 -0.15568371D+04    0.0044946    0.0000029  EM
+            900 -0.15568326D+04    0.0044849    0.0000029  EM
+            901 -0.15568282D+04    0.0044752    0.0000029  EM
+            902 -0.15568237D+04    0.0044655    0.0000029  EM
+            903 -0.15568193D+04    0.0044558    0.0000029  EM
+            904 -0.15568148D+04    0.0044462    0.0000029  EM
+            905 -0.15568104D+04    0.0044366    0.0000028  EM
+            906 -0.15568059D+04    0.0044270    0.0000028  EM
+            907 -0.15568015D+04    0.0044175    0.0000028  EM
+            908 -0.15567971D+04    0.0044079    0.0000028  EM
+            909 -0.15567927D+04    0.0043985    0.0000028  EM
+            910 -0.15567883D+04    0.0043890    0.0000028  EM
+            911 -0.15567840D+04    0.0043796    0.0000028  EM
+            912 -0.15567796D+04    0.0043702    0.0000028  EM
+            913 -0.15567752D+04    0.0043608    0.0000028  EM
+            914 -0.15567709D+04    0.0043515    0.0000028  EM
+            915 -0.15567665D+04    0.0043422    0.0000028  EM
+            916 -0.15567622D+04    0.0043329    0.0000028  EM
+            917 -0.15567579D+04    0.0043237    0.0000028  EM
+            918 -0.15567536D+04    0.0043144    0.0000028  EM
+            919 -0.15567493D+04    0.0043053    0.0000028  EM
+            920 -0.15567450D+04    0.0042961    0.0000028  EM
+            921 -0.15567407D+04    0.0042870    0.0000028  EM
+            922 -0.15567364D+04    0.0042779    0.0000027  EM
+            923 -0.15567321D+04    0.0042688    0.0000027  EM
+            924 -0.15567279D+04    0.0042597    0.0000027  EM
+            925 -0.15567236D+04    0.0042507    0.0000027  EM
+            926 -0.15567194D+04    0.0042417    0.0000027  EM
+            927 -0.15567151D+04    0.0042328    0.0000027  EM
+            928 -0.15567109D+04    0.0042238    0.0000027  EM
+            929 -0.15567067D+04    0.0042149    0.0000027  EM
+            930 -0.15567025D+04    0.0042060    0.0000027  EM
+            931 -0.15566983D+04    0.0041972    0.0000027  EM
+            932 -0.15566941D+04    0.0041884    0.0000027  EM
+            933 -0.15566899D+04    0.0041796    0.0000027  EM
+            934 -0.15566858D+04    0.0041708    0.0000027  EM
+            935 -0.15566816D+04    0.0041621    0.0000027  EM
+            936 -0.15566774D+04    0.0041533    0.0000027  EM
+            937 -0.15566733D+04    0.0041446    0.0000027  EM
+            938 -0.15566692D+04    0.0041360    0.0000027  EM
+            939 -0.15566650D+04    0.0041273    0.0000027  EM
+            940 -0.15566609D+04    0.0041187    0.0000026  EM
+            941 -0.15566568D+04    0.0041102    0.0000026  EM
+            942 -0.15566527D+04    0.0041016    0.0000026  EM
+            943 -0.15566486D+04    0.0040931    0.0000026  EM
+            944 -0.15566445D+04    0.0040846    0.0000026  EM
+            945 -0.15566404D+04    0.0040761    0.0000026  EM
+            946 -0.15566364D+04    0.0040676    0.0000026  EM
+            947 -0.15566323D+04    0.0040592    0.0000026  EM
+            948 -0.15566283D+04    0.0040508    0.0000026  EM
+            949 -0.15566242D+04    0.0040424    0.0000026  EM
+            950 -0.15566202D+04    0.0040341    0.0000026  EM
+            951 -0.15566162D+04    0.0040258    0.0000026  EM
+            952 -0.15566122D+04    0.0040175    0.0000026  EM
+            953 -0.15566081D+04    0.0040092    0.0000026  EM
+            954 -0.15566041D+04    0.0040009    0.0000026  EM
+            955 -0.15566001D+04    0.0039927    0.0000026  EM
+            956 -0.15565962D+04    0.0039845    0.0000026  EM
+            957 -0.15565922D+04    0.0039763    0.0000026  EM
+            958 -0.15565882D+04    0.0039682    0.0000025  EM
+            959 -0.15565843D+04    0.0039601    0.0000025  EM
+            960 -0.15565803D+04    0.0039520    0.0000025  EM
+            961 -0.15565764D+04    0.0039439    0.0000025  EM
+            962 -0.15565724D+04    0.0039359    0.0000025  EM
+            963 -0.15565685D+04    0.0039278    0.0000025  EM
+            964 -0.15565646D+04    0.0039198    0.0000025  EM
+            965 -0.15565607D+04    0.0039119    0.0000025  EM
+            966 -0.15565568D+04    0.0039039    0.0000025  EM
+            967 -0.15565529D+04    0.0038960    0.0000025  EM
+            968 -0.15565490D+04    0.0038881    0.0000025  EM
+            969 -0.15565451D+04    0.0038802    0.0000025  EM
+            970 -0.15565412D+04    0.0038723    0.0000025  EM
+            971 -0.15565374D+04    0.0038645    0.0000025  EM
+            972 -0.15565335D+04    0.0038567    0.0000025  EM
+            973 -0.15565297D+04    0.0038489    0.0000025  EM
+            974 -0.15565258D+04    0.0038411    0.0000025  EM
+            975 -0.15565220D+04    0.0038334    0.0000025  EM
+            976 -0.15565182D+04    0.0038257    0.0000025  EM
+            977 -0.15565143D+04    0.0038180    0.0000025  EM
+            978 -0.15565105D+04    0.0038103    0.0000024  EM
+            979 -0.15565067D+04    0.0038027    0.0000024  EM
+            980 -0.15565029D+04    0.0037951    0.0000024  EM
+            981 -0.15564991D+04    0.0037875    0.0000024  EM
+            982 -0.15564954D+04    0.0037799    0.0000024  EM
+            983 -0.15564916D+04    0.0037723    0.0000024  EM
+            984 -0.15564878D+04    0.0037648    0.0000024  EM
+            985 -0.15564841D+04    0.0037573    0.0000024  EM
+            986 -0.15564803D+04    0.0037498    0.0000024  EM
+            987 -0.15564766D+04    0.0037423    0.0000024  EM
+            988 -0.15564728D+04    0.0037349    0.0000024  EM
+            989 -0.15564691D+04    0.0037275    0.0000024  EM
+            990 -0.15564654D+04    0.0037201    0.0000024  EM
+            991 -0.15564617D+04    0.0037127    0.0000024  EM
+            992 -0.15564580D+04    0.0037053    0.0000024  EM
+            993 -0.15564543D+04    0.0036980    0.0000024  EM
+            994 -0.15564506D+04    0.0036907    0.0000024  EM
+            995 -0.15564469D+04    0.0036834    0.0000024  EM
+            996 -0.15564432D+04    0.0036762    0.0000024  EM
+            997 -0.15564396D+04    0.0036689    0.0000024  EM
+            998 -0.15564359D+04    0.0036617    0.0000024  EM
+            999 -0.15564322D+04    0.0036545    0.0000023  EM
+           1000 -0.15564286D+04    0.0036473    0.0000023  EM
+           1001 -0.15564250D+04    0.0036401    0.0000023  EM
+           1002 -0.15564213D+04    0.0036330    0.0000023  EM
+           1003 -0.15564177D+04    0.0036259    0.0000023  EM
+           1004 -0.15564141D+04    0.0036188    0.0000023  EM
+           1005 -0.15564105D+04    0.0036117    0.0000023  EM
+           1006 -0.15564069D+04    0.0036046    0.0000023  EM
+           1007 -0.15564033D+04    0.0035976    0.0000023  EM
+           1008 -0.15563997D+04    0.0035906    0.0000023  EM
+           1009 -0.15563961D+04    0.0035836    0.0000023  EM
+           1010 -0.15563925D+04    0.0035766    0.0000023  EM
+           1011 -0.15563889D+04    0.0035697    0.0000023  EM
+           1012 -0.15563854D+04    0.0035628    0.0000023  EM
+           1013 -0.15563818D+04    0.0035558    0.0000023  EM
+           1014 -0.15563783D+04    0.0035489    0.0000023  EM
+           1015 -0.15563747D+04    0.0035421    0.0000023  EM
+           1016 -0.15563712D+04    0.0035352    0.0000023  EM
+           1017 -0.15563677D+04    0.0035284    0.0000023  EM
+           1018 -0.15563641D+04    0.0035216    0.0000023  EM
+           1019 -0.15563606D+04    0.0035148    0.0000023  EM
+           1020 -0.15563571D+04    0.0035080    0.0000023  EM
+           1021 -0.15563536D+04    0.0035013    0.0000022  EM
+           1022 -0.15563501D+04    0.0034945    0.0000022  EM
+           1023 -0.15563466D+04    0.0034878    0.0000022  EM
+           1024 -0.15563432D+04    0.0034811    0.0000022  EM
+           1025 -0.15563397D+04    0.0034745    0.0000022  EM
+           1026 -0.15563362D+04    0.0034678    0.0000022  EM
+           1027 -0.15563328D+04    0.0034612    0.0000022  EM
+           1028 -0.15563293D+04    0.0034546    0.0000022  EM
+           1029 -0.15563259D+04    0.0034480    0.0000022  EM
+           1030 -0.15563224D+04    0.0034414    0.0000022  EM
+           1031 -0.15563190D+04    0.0034348    0.0000022  EM
+           1032 -0.15563155D+04    0.0034283    0.0000022  EM
+           1033 -0.15563121D+04    0.0034218    0.0000022  EM
+           1034 -0.15563087D+04    0.0034153    0.0000022  EM
+           1035 -0.15563053D+04    0.0034088    0.0000022  EM
+           1036 -0.15563019D+04    0.0034023    0.0000022  EM
+           1037 -0.15562985D+04    0.0033959    0.0000022  EM
+           1038 -0.15562951D+04    0.0033894    0.0000022  EM
+           1039 -0.15562917D+04    0.0033830    0.0000022  EM
+           1040 -0.15562884D+04    0.0033766    0.0000022  EM
+           1041 -0.15562850D+04    0.0033703    0.0000022  EM
+           1042 -0.15562816D+04    0.0033639    0.0000022  EM
+           1043 -0.15562783D+04    0.0033576    0.0000022  EM
+           1044 -0.15562749D+04    0.0033513    0.0000022  EM
+           1045 -0.15562716D+04    0.0033450    0.0000021  EM
+           1046 -0.15562682D+04    0.0033387    0.0000021  EM
+           1047 -0.15562649D+04    0.0033324    0.0000021  EM
+           1048 -0.15562616D+04    0.0033262    0.0000021  EM
+           1049 -0.15562583D+04    0.0033199    0.0000021  EM
+           1050 -0.15562549D+04    0.0033137    0.0000021  EM
+           1051 -0.15562516D+04    0.0033075    0.0000021  EM
+           1052 -0.15562483D+04    0.0033014    0.0000021  EM
+           1053 -0.15562450D+04    0.0032952    0.0000021  EM
+           1054 -0.15562417D+04    0.0032891    0.0000021  EM
+           1055 -0.15562385D+04    0.0032829    0.0000021  EM
+           1056 -0.15562352D+04    0.0032768    0.0000021  EM
+           1057 -0.15562319D+04    0.0032707    0.0000021  EM
+           1058 -0.15562286D+04    0.0032647    0.0000021  EM
+           1059 -0.15562254D+04    0.0032586    0.0000021  EM
+           1060 -0.15562221D+04    0.0032526    0.0000021  EM
+           1061 -0.15562189D+04    0.0032466    0.0000021  EM
+           1062 -0.15562157D+04    0.0032406    0.0000021  EM
+           1063 -0.15562124D+04    0.0032346    0.0000021  EM
+           1064 -0.15562092D+04    0.0032286    0.0000021  EM
+           1065 -0.15562060D+04    0.0032227    0.0000021  EM
+           1066 -0.15562027D+04    0.0032167    0.0000021  EM
+           1067 -0.15561995D+04    0.0032108    0.0000021  EM
+           1068 -0.15561963D+04    0.0032049    0.0000021  EM
+           1069 -0.15561931D+04    0.0031990    0.0000021  EM
+           1070 -0.15561899D+04    0.0031932    0.0000021  EM
+           1071 -0.15561868D+04    0.0031873    0.0000020  EM
+           1072 -0.15561836D+04    0.0031815    0.0000020  EM
+           1073 -0.15561804D+04    0.0031756    0.0000020  EM
+           1074 -0.15561772D+04    0.0031698    0.0000020  EM
+           1075 -0.15561741D+04    0.0031641    0.0000020  EM
+           1076 -0.15561709D+04    0.0031583    0.0000020  EM
+           1077 -0.15561678D+04    0.0031525    0.0000020  EM
+           1078 -0.15561646D+04    0.0031468    0.0000020  EM
+           1079 -0.15561615D+04    0.0031411    0.0000020  EM
+           1080 -0.15561583D+04    0.0031354    0.0000020  EM
+           1081 -0.15561552D+04    0.0031297    0.0000020  EM
+           1082 -0.15561521D+04    0.0031240    0.0000020  EM
+           1083 -0.15561490D+04    0.0031183    0.0000020  EM
+           1084 -0.15561458D+04    0.0031127    0.0000020  EM
+           1085 -0.15561427D+04    0.0031071    0.0000020  EM
+           1086 -0.15561396D+04    0.0031015    0.0000020  EM
+           1087 -0.15561365D+04    0.0030959    0.0000020  EM
+           1088 -0.15561334D+04    0.0030903    0.0000020  EM
+           1089 -0.15561304D+04    0.0030847    0.0000020  EM
+           1090 -0.15561273D+04    0.0030792    0.0000020  EM
+           1091 -0.15561242D+04    0.0030736    0.0000020  EM
+           1092 -0.15561211D+04    0.0030681    0.0000020  EM
+           1093 -0.15561181D+04    0.0030626    0.0000020  EM
+           1094 -0.15561150D+04    0.0030571    0.0000020  EM
+           1095 -0.15561120D+04    0.0030516    0.0000020  EM
+           1096 -0.15561089D+04    0.0030462    0.0000020  EM
+           1097 -0.15561059D+04    0.0030407    0.0000020  EM
+           1098 -0.15561028D+04    0.0030353    0.0000020  EM
+           1099 -0.15560998D+04    0.0030299    0.0000019  EM
+           1100 -0.15560968D+04    0.0030245    0.0000019  EM
+           1101 -0.15560938D+04    0.0030191    0.0000019  EM
+           1102 -0.15560908D+04    0.0030137    0.0000019  EM
+           1103 -0.15560878D+04    0.0030084    0.0000019  EM
+           1104 -0.15560848D+04    0.0030030    0.0000019  EM
+           1105 -0.15560818D+04    0.0029977    0.0000019  EM
+           1106 -0.15560788D+04    0.0029924    0.0000019  EM
+           1107 -0.15560758D+04    0.0029871    0.0000019  EM
+           1108 -0.15560728D+04    0.0029818    0.0000019  EM
+           1109 -0.15560698D+04    0.0029765    0.0000019  EM
+           1110 -0.15560668D+04    0.0029713    0.0000019  EM
+           1111 -0.15560639D+04    0.0029660    0.0000019  EM
+           1112 -0.15560609D+04    0.0029608    0.0000019  EM
+           1113 -0.15560580D+04    0.0029556    0.0000019  EM
+           1114 -0.15560550D+04    0.0029504    0.0000019  EM
+           1115 -0.15560521D+04    0.0029452    0.0000019  EM
+           1116 -0.15560491D+04    0.0029400    0.0000019  EM
+           1117 -0.15560462D+04    0.0029349    0.0000019  EM
+           1118 -0.15560433D+04    0.0029297    0.0000019  EM
+           1119 -0.15560403D+04    0.0029246    0.0000019  EM
+           1120 -0.15560374D+04    0.0029195    0.0000019  EM
+           1121 -0.15560345D+04    0.0029144    0.0000019  EM
+           1122 -0.15560316D+04    0.0029093    0.0000019  EM
+           1123 -0.15560287D+04    0.0029042    0.0000019  EM
+           1124 -0.15560258D+04    0.0028992    0.0000019  EM
+           1125 -0.15560229D+04    0.0028941    0.0000019  EM
+           1126 -0.15560200D+04    0.0028891    0.0000019  EM
+           1127 -0.15560171D+04    0.0028841    0.0000019  EM
+           1128 -0.15560142D+04    0.0028791    0.0000019  EM
+           1129 -0.15560114D+04    0.0028741    0.0000018  EM
+           1130 -0.15560085D+04    0.0028691    0.0000018  EM
+           1131 -0.15560056D+04    0.0028641    0.0000018  EM
+           1132 -0.15560028D+04    0.0028592    0.0000018  EM
+           1133 -0.15559999D+04    0.0028542    0.0000018  EM
+           1134 -0.15559971D+04    0.0028493    0.0000018  EM
+           1135 -0.15559942D+04    0.0028444    0.0000018  EM
+           1136 -0.15559914D+04    0.0028395    0.0000018  EM
+           1137 -0.15559886D+04    0.0028346    0.0000018  EM
+           1138 -0.15559857D+04    0.0028297    0.0000018  EM
+           1139 -0.15559829D+04    0.0028249    0.0000018  EM
+           1140 -0.15559801D+04    0.0028200    0.0000018  EM
+           1141 -0.15559773D+04    0.0028152    0.0000018  EM
+           1142 -0.15559745D+04    0.0028103    0.0000018  EM
+           1143 -0.15559717D+04    0.0028055    0.0000018  EM
+           1144 -0.15559688D+04    0.0028007    0.0000018  EM
+           1145 -0.15559661D+04    0.0027959    0.0000018  EM
+           1146 -0.15559633D+04    0.0027912    0.0000018  EM
+           1147 -0.15559605D+04    0.0027864    0.0000018  EM
+           1148 -0.15559577D+04    0.0027817    0.0000018  EM
+           1149 -0.15559549D+04    0.0027769    0.0000018  EM
+           1150 -0.15559521D+04    0.0027722    0.0000018  EM
+           1151 -0.15559494D+04    0.0027675    0.0000018  EM
+           1152 -0.15559466D+04    0.0027628    0.0000018  EM
+           1153 -0.15559439D+04    0.0027581    0.0000018  EM
+           1154 -0.15559411D+04    0.0027534    0.0000018  EM
+           1155 -0.15559384D+04    0.0027488    0.0000018  EM
+           1156 -0.15559356D+04    0.0027441    0.0000018  EM
+           1157 -0.15559329D+04    0.0027395    0.0000018  EM
+           1158 -0.15559301D+04    0.0027349    0.0000018  EM
+           1159 -0.15559274D+04    0.0027302    0.0000018  EM
+           1160 -0.15559247D+04    0.0027256    0.0000018  EM
+           1161 -0.15559220D+04    0.0027211    0.0000017  EM
+           1162 -0.15559192D+04    0.0027165    0.0000017  EM
+           1163 -0.15559165D+04    0.0027119    0.0000017  EM
+           1164 -0.15559138D+04    0.0027074    0.0000017  EM
+           1165 -0.15559111D+04    0.0027028    0.0000017  EM
+           1166 -0.15559084D+04    0.0026983    0.0000017  EM
+           1167 -0.15559057D+04    0.0026938    0.0000017  EM
+           1168 -0.15559030D+04    0.0026893    0.0000017  EM
+           1169 -0.15559004D+04    0.0026848    0.0000017  EM
+           1170 -0.15558977D+04    0.0026803    0.0000017  EM
+           1171 -0.15558950D+04    0.0026758    0.0000017  EM
+           1172 -0.15558923D+04    0.0026713    0.0000017  EM
+           1173 -0.15558897D+04    0.0026669    0.0000017  EM
+           1174 -0.15558870D+04    0.0026625    0.0000017  EM
+           1175 -0.15558843D+04    0.0026580    0.0000017  EM
+           1176 -0.15558817D+04    0.0026536    0.0000017  EM
+           1177 -0.15558790D+04    0.0026492    0.0000017  EM
+           1178 -0.15558764D+04    0.0026448    0.0000017  EM
+           1179 -0.15558738D+04    0.0026404    0.0000017  EM
+           1180 -0.15558711D+04    0.0026361    0.0000017  EM
+           1181 -0.15558685D+04    0.0026317    0.0000017  EM
+           1182 -0.15558659D+04    0.0026274    0.0000017  EM
+           1183 -0.15558632D+04    0.0026230    0.0000017  EM
+           1184 -0.15558606D+04    0.0026187    0.0000017  EM
+           1185 -0.15558580D+04    0.0026144    0.0000017  EM
+           1186 -0.15558554D+04    0.0026101    0.0000017  EM
+           1187 -0.15558528D+04    0.0026058    0.0000017  EM
+           1188 -0.15558502D+04    0.0026015    0.0000017  EM
+           1189 -0.15558476D+04    0.0025972    0.0000017  EM
+           1190 -0.15558450D+04    0.0025930    0.0000017  EM
+           1191 -0.15558424D+04    0.0025887    0.0000017  EM
+           1192 -0.15558398D+04    0.0025845    0.0000017  EM
+           1193 -0.15558372D+04    0.0025802    0.0000017  EM
+           1194 -0.15558347D+04    0.0025760    0.0000017  EM
+           1195 -0.15558321D+04    0.0025718    0.0000017  EM
+           1196 -0.15558295D+04    0.0025676    0.0000017  EM
+           1197 -0.15558270D+04    0.0025634    0.0000016  EM
+           1198 -0.15558244D+04    0.0025593    0.0000016  EM
+           1199 -0.15558218D+04    0.0025551    0.0000016  EM
+           1200 -0.15558193D+04    0.0025509    0.0000016  EM
+           1201 -0.15558167D+04    0.0025468    0.0000016  EM
+           1202 -0.15558142D+04    0.0025427    0.0000016  EM
+           1203 -0.15558117D+04    0.0025385    0.0000016  EM
+           1204 -0.15558091D+04    0.0025344    0.0000016  EM
+           1205 -0.15558066D+04    0.0025303    0.0000016  EM
+           1206 -0.15558041D+04    0.0025262    0.0000016  EM
+           1207 -0.15558016D+04    0.0025221    0.0000016  EM
+           1208 -0.15557990D+04    0.0025181    0.0000016  EM
+           1209 -0.15557965D+04    0.0025140    0.0000016  EM
+           1210 -0.15557940D+04    0.0025100    0.0000016  EM
+           1211 -0.15557915D+04    0.0025059    0.0000016  EM
+           1212 -0.15557890D+04    0.0025019    0.0000016  EM
+           1213 -0.15557865D+04    0.0024979    0.0000016  EM
+           1214 -0.15557840D+04    0.0024938    0.0000016  EM
+           1215 -0.15557815D+04    0.0024898    0.0000016  EM
+           1216 -0.15557790D+04    0.0024858    0.0000016  EM
+           1217 -0.15557766D+04    0.0024819    0.0000016  EM
+           1218 -0.15557741D+04    0.0024779    0.0000016  EM
+           1219 -0.15557716D+04    0.0024739    0.0000016  EM
+           1220 -0.15557691D+04    0.0024700    0.0000016  EM
+           1221 -0.15557667D+04    0.0024660    0.0000016  EM
+           1222 -0.15557642D+04    0.0024621    0.0000016  EM
+           1223 -0.15557617D+04    0.0024582    0.0000016  EM
+           1224 -0.15557593D+04    0.0024543    0.0000016  EM
+           1225 -0.15557568D+04    0.0024504    0.0000016  EM
+           1226 -0.15557544D+04    0.0024465    0.0000016  EM
+           1227 -0.15557520D+04    0.0024426    0.0000016  EM
+           1228 -0.15557495D+04    0.0024387    0.0000016  EM
+           1229 -0.15557471D+04    0.0024348    0.0000016  EM
+           1230 -0.15557446D+04    0.0024310    0.0000016  EM
+           1231 -0.15557422D+04    0.0024271    0.0000016  EM
+           1232 -0.15557398D+04    0.0024233    0.0000016  EM
+           1233 -0.15557374D+04    0.0024195    0.0000016  EM
+           1234 -0.15557350D+04    0.0024156    0.0000016  EM
+           1235 -0.15557326D+04    0.0024118    0.0000016  EM
+           1236 -0.15557301D+04    0.0024080    0.0000015  EM
+           1237 -0.15557277D+04    0.0024042    0.0000015  EM
+           1238 -0.15557253D+04    0.0024005    0.0000015  EM
+           1239 -0.15557229D+04    0.0023967    0.0000015  EM
+           1240 -0.15557205D+04    0.0023929    0.0000015  EM
+           1241 -0.15557182D+04    0.0023892    0.0000015  EM
+           1242 -0.15557158D+04    0.0023854    0.0000015  EM
+           1243 -0.15557134D+04    0.0023817    0.0000015  EM
+           1244 -0.15557110D+04    0.0023780    0.0000015  EM
+           1245 -0.15557086D+04    0.0023742    0.0000015  EM
+           1246 -0.15557063D+04    0.0023705    0.0000015  EM
+           1247 -0.15557039D+04    0.0023668    0.0000015  EM
+           1248 -0.15557015D+04    0.0023631    0.0000015  EM
+           1249 -0.15556992D+04    0.0023594    0.0000015  EM
+           1250 -0.15556968D+04    0.0023558    0.0000015  EM
+           1251 -0.15556945D+04    0.0023521    0.0000015  EM
+           1252 -0.15556921D+04    0.0023484    0.0000015  EM
+           1253 -0.15556898D+04    0.0023448    0.0000015  EM
+           1254 -0.15556874D+04    0.0023412    0.0000015  EM
+           1255 -0.15556851D+04    0.0023375    0.0000015  EM
+           1256 -0.15556828D+04    0.0023339    0.0000015  EM
+           1257 -0.15556804D+04    0.0023303    0.0000015  EM
+           1258 -0.15556781D+04    0.0023267    0.0000015  EM
+           1259 -0.15556758D+04    0.0023231    0.0000015  EM
+           1260 -0.15556735D+04    0.0023195    0.0000015  EM
+           1261 -0.15556712D+04    0.0023159    0.0000015  EM
+           1262 -0.15556688D+04    0.0023124    0.0000015  EM
+           1263 -0.15556665D+04    0.0023088    0.0000015  EM
+           1264 -0.15556642D+04    0.0023052    0.0000015  EM
+           1265 -0.15556619D+04    0.0023017    0.0000015  EM
+           1266 -0.15556596D+04    0.0022982    0.0000015  EM
+           1267 -0.15556573D+04    0.0022946    0.0000015  EM
+           1268 -0.15556550D+04    0.0022911    0.0000015  EM
+           1269 -0.15556528D+04    0.0022876    0.0000015  EM
+           1270 -0.15556505D+04    0.0022841    0.0000015  EM
+           1271 -0.15556482D+04    0.0022806    0.0000015  EM
+           1272 -0.15556459D+04    0.0022771    0.0000015  EM
+           1273 -0.15556436D+04    0.0022736    0.0000015  EM
+           1274 -0.15556414D+04    0.0022702    0.0000015  EM
+           1275 -0.15556391D+04    0.0022667    0.0000015  EM
+           1276 -0.15556368D+04    0.0022632    0.0000015  EM
+           1277 -0.15556346D+04    0.0022598    0.0000015  EM
+           1278 -0.15556323D+04    0.0022564    0.0000015  EM
+           1279 -0.15556301D+04    0.0022529    0.0000014  EM
+           1280 -0.15556278D+04    0.0022495    0.0000014  EM
+           1281 -0.15556256D+04    0.0022461    0.0000014  EM
+           1282 -0.15556233D+04    0.0022427    0.0000014  EM
+           1283 -0.15556211D+04    0.0022393    0.0000014  EM
+           1284 -0.15556189D+04    0.0022359    0.0000014  EM
+           1285 -0.15556166D+04    0.0022325    0.0000014  EM
+           1286 -0.15556144D+04    0.0022291    0.0000014  EM
+           1287 -0.15556122D+04    0.0022258    0.0000014  EM
+           1288 -0.15556099D+04    0.0022224    0.0000014  EM
+           1289 -0.15556077D+04    0.0022191    0.0000014  EM
+           1290 -0.15556055D+04    0.0022157    0.0000014  EM
+           1291 -0.15556033D+04    0.0022124    0.0000014  EM
+           1292 -0.15556011D+04    0.0022091    0.0000014  EM
+           1293 -0.15555989D+04    0.0022057    0.0000014  EM
+           1294 -0.15555967D+04    0.0022024    0.0000014  EM
+           1295 -0.15555945D+04    0.0021991    0.0000014  EM
+           1296 -0.15555923D+04    0.0021958    0.0000014  EM
+           1297 -0.15555901D+04    0.0021925    0.0000014  EM
+           1298 -0.15555879D+04    0.0021893    0.0000014  EM
+           1299 -0.15555857D+04    0.0021860    0.0000014  EM
+           1300 -0.15555835D+04    0.0021827    0.0000014  EM
+           1301 -0.15555814D+04    0.0021795    0.0000014  EM
+           1302 -0.15555792D+04    0.0021762    0.0000014  EM
+           1303 -0.15555770D+04    0.0021730    0.0000014  EM
+           1304 -0.15555748D+04    0.0021697    0.0000014  EM
+           1305 -0.15555727D+04    0.0021665    0.0000014  EM
+           1306 -0.15555705D+04    0.0021633    0.0000014  EM
+           1307 -0.15555683D+04    0.0021601    0.0000014  EM
+           1308 -0.15555662D+04    0.0021569    0.0000014  EM
+           1309 -0.15555640D+04    0.0021537    0.0000014  EM
+           1310 -0.15555619D+04    0.0021505    0.0000014  EM
+           1311 -0.15555597D+04    0.0021473    0.0000014  EM
+           1312 -0.15555576D+04    0.0021441    0.0000014  EM
+           1313 -0.15555555D+04    0.0021409    0.0000014  EM
+           1314 -0.15555533D+04    0.0021378    0.0000014  EM
+           1315 -0.15555512D+04    0.0021346    0.0000014  EM
+           1316 -0.15555490D+04    0.0021315    0.0000014  EM
+           1317 -0.15555469D+04    0.0021283    0.0000014  EM
+           1318 -0.15555448D+04    0.0021252    0.0000014  EM
+           1319 -0.15555427D+04    0.0021221    0.0000014  EM
+           1320 -0.15555406D+04    0.0021189    0.0000014  EM
+           1321 -0.15555384D+04    0.0021158    0.0000014  EM
+           1322 -0.15555363D+04    0.0021127    0.0000014  EM
+           1323 -0.15555342D+04    0.0021096    0.0000014  EM
+           1324 -0.15555321D+04    0.0021065    0.0000014  EM
+           1325 -0.15555300D+04    0.0021035    0.0000014  EM
+           1326 -0.15555279D+04    0.0021004    0.0000014  EM
+           1327 -0.15555258D+04    0.0020973    0.0000013  EM
+           1328 -0.15555237D+04    0.0020942    0.0000013  EM
+           1329 -0.15555216D+04    0.0020912    0.0000013  EM
+           1330 -0.15555195D+04    0.0020881    0.0000013  EM
+           1331 -0.15555174D+04    0.0020851    0.0000013  EM
+           1332 -0.15555154D+04    0.0020821    0.0000013  EM
+           1333 -0.15555133D+04    0.0020790    0.0000013  EM
+           1334 -0.15555112D+04    0.0020760    0.0000013  EM
+           1335 -0.15555091D+04    0.0020730    0.0000013  EM
+           1336 -0.15555071D+04    0.0020700    0.0000013  EM
+           1337 -0.15555050D+04    0.0020670    0.0000013  EM
+           1338 -0.15555029D+04    0.0020640    0.0000013  EM
+           1339 -0.15555009D+04    0.0020610    0.0000013  EM
+           1340 -0.15554988D+04    0.0020580    0.0000013  EM
+           1341 -0.15554968D+04    0.0020550    0.0000013  EM
+           1342 -0.15554947D+04    0.0020521    0.0000013  EM
+           1343 -0.15554927D+04    0.0020491    0.0000013  EM
+           1344 -0.15554906D+04    0.0020461    0.0000013  EM
+           1345 -0.15554886D+04    0.0020432    0.0000013  EM
+           1346 -0.15554865D+04    0.0020402    0.0000013  EM
+           1347 -0.15554845D+04    0.0020373    0.0000013  EM
+           1348 -0.15554825D+04    0.0020344    0.0000013  EM
+           1349 -0.15554804D+04    0.0020315    0.0000013  EM
+           1350 -0.15554784D+04    0.0020285    0.0000013  EM
+           1351 -0.15554764D+04    0.0020256    0.0000013  EM
+           1352 -0.15554744D+04    0.0020227    0.0000013  EM
+           1353 -0.15554723D+04    0.0020198    0.0000013  EM
+           1354 -0.15554703D+04    0.0020169    0.0000013  EM
+           1355 -0.15554683D+04    0.0020140    0.0000013  EM
+           1356 -0.15554663D+04    0.0020112    0.0000013  EM
+           1357 -0.15554643D+04    0.0020083    0.0000013  EM
+           1358 -0.15554623D+04    0.0020054    0.0000013  EM
+           1359 -0.15554603D+04    0.0020026    0.0000013  EM
+           1360 -0.15554583D+04    0.0019997    0.0000013  EM
+           1361 -0.15554563D+04    0.0019969    0.0000013  EM
+           1362 -0.15554543D+04    0.0019940    0.0000013  EM
+           1363 -0.15554523D+04    0.0019912    0.0000013  EM
+           1364 -0.15554503D+04    0.0019884    0.0000013  EM
+           1365 -0.15554483D+04    0.0019855    0.0000013  EM
+           1366 -0.15554463D+04    0.0019827    0.0000013  EM
+           1367 -0.15554444D+04    0.0019799    0.0000013  EM
+           1368 -0.15554424D+04    0.0019771    0.0000013  EM
+           1369 -0.15554404D+04    0.0019743    0.0000013  EM
+           1370 -0.15554384D+04    0.0019715    0.0000013  EM
+           1371 -0.15554365D+04    0.0019687    0.0000013  EM
+           1372 -0.15554345D+04    0.0019660    0.0000013  EM
+           1373 -0.15554325D+04    0.0019632    0.0000013  EM
+           1374 -0.15554306D+04    0.0019604    0.0000013  EM
+           1375 -0.15554286D+04    0.0019577    0.0000013  EM
+           1376 -0.15554267D+04    0.0019549    0.0000013  EM
+           1377 -0.15554247D+04    0.0019522    0.0000013  EM
+           1378 -0.15554228D+04    0.0019494    0.0000013  EM
+           1379 -0.15554208D+04    0.0019467    0.0000013  EM
+           1380 -0.15554189D+04    0.0019439    0.0000012  EM
+           1381 -0.15554169D+04    0.0019412    0.0000012  EM
+           1382 -0.15554150D+04    0.0019385    0.0000012  EM
+           1383 -0.15554131D+04    0.0019358    0.0000012  EM
+           1384 -0.15554111D+04    0.0019331    0.0000012  EM
+           1385 -0.15554092D+04    0.0019304    0.0000012  EM
+           1386 -0.15554073D+04    0.0019277    0.0000012  EM
+           1387 -0.15554053D+04    0.0019250    0.0000012  EM
+           1388 -0.15554034D+04    0.0019223    0.0000012  EM
+           1389 -0.15554015D+04    0.0019196    0.0000012  EM
+           1390 -0.15553996D+04    0.0019170    0.0000012  EM
+           1391 -0.15553977D+04    0.0019143    0.0000012  EM
+           1392 -0.15553958D+04    0.0019116    0.0000012  EM
+           1393 -0.15553938D+04    0.0019090    0.0000012  EM
+           1394 -0.15553919D+04    0.0019063    0.0000012  EM
+           1395 -0.15553900D+04    0.0019037    0.0000012  EM
+           1396 -0.15553881D+04    0.0019010    0.0000012  EM
+           1397 -0.15553862D+04    0.0018984    0.0000012  EM
+           1398 -0.15553843D+04    0.0018958    0.0000012  EM
+           1399 -0.15553824D+04    0.0018931    0.0000012  EM
+           1400 -0.15553806D+04    0.0018905    0.0000012  EM
+           1401 -0.15553787D+04    0.0018879    0.0000012  EM
+           1402 -0.15553768D+04    0.0018853    0.0000012  EM
+           1403 -0.15553749D+04    0.0018827    0.0000012  EM
+           1404 -0.15553730D+04    0.0018801    0.0000012  EM
+           1405 -0.15553711D+04    0.0018775    0.0000012  EM
+           1406 -0.15553693D+04    0.0018750    0.0000012  EM
+           1407 -0.15553674D+04    0.0018724    0.0000012  EM
+           1408 -0.15553655D+04    0.0018698    0.0000012  EM
+           1409 -0.15553637D+04    0.0018672    0.0000012  EM
+           1410 -0.15553618D+04    0.0018647    0.0000012  EM
+           1411 -0.15553599D+04    0.0018621    0.0000012  EM
+           1412 -0.15553581D+04    0.0018596    0.0000012  EM
+           1413 -0.15553562D+04    0.0018570    0.0000012  EM
+           1414 -0.15553544D+04    0.0018545    0.0000012  EM
+           1415 -0.15553525D+04    0.0018519    0.0000012  EM
+           1416 -0.15553507D+04    0.0018494    0.0000012  EM
+           1417 -0.15553488D+04    0.0018469    0.0000012  EM
+           1418 -0.15553470D+04    0.0018444    0.0000012  EM
+           1419 -0.15553451D+04    0.0018419    0.0000012  EM
+           1420 -0.15553433D+04    0.0018394    0.0000012  EM
+           1421 -0.15553415D+04    0.0018368    0.0000012  EM
+           1422 -0.15553396D+04    0.0018344    0.0000012  EM
+           1423 -0.15553378D+04    0.0018319    0.0000012  EM
+           1424 -0.15553360D+04    0.0018294    0.0000012  EM
+           1425 -0.15553341D+04    0.0018269    0.0000012  EM
+           1426 -0.15553323D+04    0.0018244    0.0000012  EM
+           1427 -0.15553305D+04    0.0018219    0.0000012  EM
+           1428 -0.15553287D+04    0.0018195    0.0000012  EM
+           1429 -0.15553268D+04    0.0018170    0.0000012  EM
+           1430 -0.15553250D+04    0.0018146    0.0000012  EM
+           1431 -0.15553232D+04    0.0018121    0.0000012  EM
+           1432 -0.15553214D+04    0.0018097    0.0000012  EM
+           1433 -0.15553196D+04    0.0018072    0.0000012  EM
+           1434 -0.15553178D+04    0.0018048    0.0000012  EM
+           1435 -0.15553160D+04    0.0018024    0.0000012  EM
+           1436 -0.15553142D+04    0.0017999    0.0000012  EM
+           1437 -0.15553124D+04    0.0017975    0.0000012  EM
+           1438 -0.15553106D+04    0.0017951    0.0000012  EM
+           1439 -0.15553088D+04    0.0017927    0.0000012  EM
+           1440 -0.15553070D+04    0.0017903    0.0000012  EM
+           1441 -0.15553052D+04    0.0017879    0.0000011  EM
+           1442 -0.15553034D+04    0.0017855    0.0000011  EM
+           1443 -0.15553017D+04    0.0017831    0.0000011  EM
+           1444 -0.15552999D+04    0.0017807    0.0000011  EM
+           1445 -0.15552981D+04    0.0017783    0.0000011  EM
+           1446 -0.15552963D+04    0.0017759    0.0000011  EM
+           1447 -0.15552946D+04    0.0017736    0.0000011  EM
+           1448 -0.15552928D+04    0.0017712    0.0000011  EM
+           1449 -0.15552910D+04    0.0017688    0.0000011  EM
+           1450 -0.15552892D+04    0.0017665    0.0000011  EM
+           1451 -0.15552875D+04    0.0017641    0.0000011  EM
+           1452 -0.15552857D+04    0.0017618    0.0000011  EM
+           1453 -0.15552840D+04    0.0017595    0.0000011  EM
+           1454 -0.15552822D+04    0.0017571    0.0000011  EM
+           1455 -0.15552805D+04    0.0017548    0.0000011  EM
+           1456 -0.15552787D+04    0.0017525    0.0000011  EM
+           1457 -0.15552769D+04    0.0017501    0.0000011  EM
+           1458 -0.15552752D+04    0.0017478    0.0000011  EM
+           1459 -0.15552735D+04    0.0017455    0.0000011  EM
+           1460 -0.15552717D+04    0.0017432    0.0000011  EM
+           1461 -0.15552700D+04    0.0017409    0.0000011  EM
+           1462 -0.15552682D+04    0.0017386    0.0000011  EM
+           1463 -0.15552665D+04    0.0017363    0.0000011  EM
+           1464 -0.15552648D+04    0.0017340    0.0000011  EM
+           1465 -0.15552630D+04    0.0017317    0.0000011  EM
+           1466 -0.15552613D+04    0.0017294    0.0000011  EM
+           1467 -0.15552596D+04    0.0017272    0.0000011  EM
+           1468 -0.15552578D+04    0.0017249    0.0000011  EM
+           1469 -0.15552561D+04    0.0017226    0.0000011  EM
+           1470 -0.15552544D+04    0.0017204    0.0000011  EM
+           1471 -0.15552527D+04    0.0017181    0.0000011  EM
+           1472 -0.15552510D+04    0.0017159    0.0000011  EM
+           1473 -0.15552493D+04    0.0017136    0.0000011  EM
+           1474 -0.15552475D+04    0.0017114    0.0000011  EM
+           1475 -0.15552458D+04    0.0017091    0.0000011  EM
+           1476 -0.15552441D+04    0.0017069    0.0000011  EM
+           1477 -0.15552424D+04    0.0017047    0.0000011  EM
+           1478 -0.15552407D+04    0.0017024    0.0000011  EM
+           1479 -0.15552390D+04    0.0017002    0.0000011  EM
+           1480 -0.15552373D+04    0.0016980    0.0000011  EM
+           1481 -0.15552356D+04    0.0016958    0.0000011  EM
+           1482 -0.15552339D+04    0.0016936    0.0000011  EM
+           1483 -0.15552322D+04    0.0016914    0.0000011  EM
+           1484 -0.15552306D+04    0.0016892    0.0000011  EM
+           1485 -0.15552289D+04    0.0016870    0.0000011  EM
+           1486 -0.15552272D+04    0.0016848    0.0000011  EM
+           1487 -0.15552255D+04    0.0016826    0.0000011  EM
+           1488 -0.15552238D+04    0.0016804    0.0000011  EM
+           1489 -0.15552221D+04    0.0016782    0.0000011  EM
+           1490 -0.15552205D+04    0.0016761    0.0000011  EM
+           1491 -0.15552188D+04    0.0016739    0.0000011  EM
+           1492 -0.15552171D+04    0.0016717    0.0000011  EM
+           1493 -0.15552155D+04    0.0016696    0.0000011  EM
+           1494 -0.15552138D+04    0.0016674    0.0000011  EM
+           1495 -0.15552121D+04    0.0016653    0.0000011  EM
+           1496 -0.15552105D+04    0.0016631    0.0000011  EM
+           1497 -0.15552088D+04    0.0016610    0.0000011  EM
+           1498 -0.15552071D+04    0.0016588    0.0000011  EM
+           1499 -0.15552055D+04    0.0016567    0.0000011  EM
+           1500 -0.15552038D+04    0.0016546    0.0000011  EM
+           1501 -0.15552022D+04    0.0016524    0.0000011  EM
+           1502 -0.15552005D+04    0.0016503    0.0000011  EM
+           1503 -0.15551989D+04    0.0016482    0.0000011  EM
+           1504 -0.15551972D+04    0.0016461    0.0000011  EM
+           1505 -0.15551956D+04    0.0016440    0.0000011  EM
+           1506 -0.15551939D+04    0.0016419    0.0000011  EM
+           1507 -0.15551923D+04    0.0016398    0.0000011  EM
+           1508 -0.15551907D+04    0.0016377    0.0000011  EM
+           1509 -0.15551890D+04    0.0016356    0.0000011  EM
+           1510 -0.15551874D+04    0.0016335    0.0000011  EM
+           1511 -0.15551858D+04    0.0016314    0.0000010  EM
+           1512 -0.15551841D+04    0.0016293    0.0000010  EM
+           1513 -0.15551825D+04    0.0016273    0.0000010  EM
+           1514 -0.15551809D+04    0.0016252    0.0000010  EM
+           1515 -0.15551793D+04    0.0016231    0.0000010  EM
+           1516 -0.15551776D+04    0.0016211    0.0000010  EM
+           1517 -0.15551760D+04    0.0016190    0.0000010  EM
+           1518 -0.15551744D+04    0.0016169    0.0000010  EM
+           1519 -0.15551728D+04    0.0016149    0.0000010  EM
+           1520 -0.15551712D+04    0.0016128    0.0000010  EM
+           1521 -0.15551696D+04    0.0016108    0.0000010  EM
+           1522 -0.15551680D+04    0.0016088    0.0000010  EM
+           1523 -0.15551663D+04    0.0016067    0.0000010  EM
+           1524 -0.15551647D+04    0.0016047    0.0000010  EM
+           1525 -0.15551631D+04    0.0016027    0.0000010  EM
+           1526 -0.15551615D+04    0.0016006    0.0000010  EM
+           1527 -0.15551599D+04    0.0015986    0.0000010  EM
+           1528 -0.15551583D+04    0.0015966    0.0000010  EM
+           1529 -0.15551567D+04    0.0015946    0.0000010  EM
+           1530 -0.15551552D+04    0.0015926    0.0000010  EM
+           1531 -0.15551536D+04    0.0015906    0.0000010  EM
+           1532 -0.15551520D+04    0.0015886    0.0000010  EM
+           1533 -0.15551504D+04    0.0015866    0.0000010  EM
+           1534 -0.15551488D+04    0.0015846    0.0000010  EM
+           1535 -0.15551472D+04    0.0015826    0.0000010  EM
+           1536 -0.15551456D+04    0.0015806    0.0000010  EM
+           1537 -0.15551441D+04    0.0015786    0.0000010  EM
+           1538 -0.15551425D+04    0.0015767    0.0000010  EM
+           1539 -0.15551409D+04    0.0015747    0.0000010  EM
+           1540 -0.15551393D+04    0.0015727    0.0000010  EM
+           1541 -0.15551378D+04    0.0015708    0.0000010  EM
+           1542 -0.15551362D+04    0.0015688    0.0000010  EM
+           1543 -0.15551346D+04    0.0015668    0.0000010  EM
+           1544 -0.15551331D+04    0.0015649    0.0000010  EM
+           1545 -0.15551315D+04    0.0015629    0.0000010  EM
+           1546 -0.15551299D+04    0.0015610    0.0000010  EM
+           1547 -0.15551284D+04    0.0015590    0.0000010  EM
+           1548 -0.15551268D+04    0.0015571    0.0000010  EM
+           1549 -0.15551253D+04    0.0015552    0.0000010  EM
+           1550 -0.15551237D+04    0.0015532    0.0000010  EM
+           1551 -0.15551222D+04    0.0015513    0.0000010  EM
+           1552 -0.15551206D+04    0.0015494    0.0000010  EM
+           1553 -0.15551191D+04    0.0015475    0.0000010  EM
+           1554 -0.15551175D+04    0.0015455    0.0000010  EM
+           1555 -0.15551160D+04    0.0015436    0.0000010  EM
+           1556 -0.15551144D+04    0.0015417    0.0000010  EM
+           1557 -0.15551129D+04    0.0015398    0.0000010  EM
+           1558 -0.15551114D+04    0.0015379    0.0000010  EM
+           1559 -0.15551098D+04    0.0015360    0.0000010  EM
+           1560 -0.15551083D+04    0.0015341    0.0000010  EM
+           1561 -0.15551068D+04    0.0015322    0.0000010  EM
+           1562 -0.15551052D+04    0.0015303    0.0000010  EM
+           1563 -0.15551037D+04    0.0015284    0.0000010  EM
+           1564 -0.15551022D+04    0.0015266    0.0000010  EM
+           1565 -0.15551007D+04    0.0015247    0.0000010  EM
+           1566 -0.15550991D+04    0.0015228    0.0000010  EM
+           1567 -0.15550976D+04    0.0015209    0.0000010  EM
+           1568 -0.15550961D+04    0.0015191    0.0000010  EM
+           1569 -0.15550946D+04    0.0015172    0.0000010  EM
+           1570 -0.15550931D+04    0.0015154    0.0000010  EM
+           1571 -0.15550915D+04    0.0015135    0.0000010  EM
+           1572 -0.15550900D+04    0.0015116    0.0000010  EM
+           1573 -0.15550885D+04    0.0015098    0.0000010  EM
+           1574 -0.15550870D+04    0.0015079    0.0000010  EM
+           1575 -0.15550855D+04    0.0015061    0.0000010  EM
+           1576 -0.15550840D+04    0.0015043    0.0000010  EM
+           1577 -0.15550825D+04    0.0015024    0.0000010  EM
+           1578 -0.15550810D+04    0.0015006    0.0000010  EM
+           1579 -0.15550795D+04    0.0014988    0.0000010  EM
+           1580 -0.15550780D+04    0.0014969    0.0000010  EM
+           1581 -0.15550765D+04    0.0014951    0.0000010  EM
+           1582 -0.15550750D+04    0.0014933    0.0000010  EM
+           1583 -0.15550735D+04    0.0014915    0.0000010  EM
+           1584 -0.15550720D+04    0.0014897    0.0000010  EM
+           1585 -0.15550705D+04    0.0014879    0.0000010  EM
+           1586 -0.15550691D+04    0.0014861    0.0000010  EM
+           1587 -0.15550676D+04    0.0014843    0.0000010  EM
+           1588 -0.15550661D+04    0.0014825    0.0000010  EM
+           1589 -0.15550646D+04    0.0014807    0.0000010  EM
+           1590 -0.15550631D+04    0.0014789    0.0000010  EM
+           1591 -0.15550617D+04    0.0014771    0.0000009  EM
+           1592 -0.15550602D+04    0.0014753    0.0000009  EM
+           1593 -0.15550587D+04    0.0014735    0.0000009  EM
+           1594 -0.15550572D+04    0.0014717    0.0000009  EM
+           1595 -0.15550558D+04    0.0014700    0.0000009  EM
+           1596 -0.15550543D+04    0.0014682    0.0000009  EM
+           1597 -0.15550528D+04    0.0014664    0.0000009  EM
+           1598 -0.15550514D+04    0.0014647    0.0000009  EM
+           1599 -0.15550499D+04    0.0014629    0.0000009  EM
+           1600 -0.15550484D+04    0.0014612    0.0000009  EM
+           1601 -0.15550470D+04    0.0014594    0.0000009  EM
+           1602 -0.15550455D+04    0.0014576    0.0000009  EM
+           1603 -0.15550441D+04    0.0014559    0.0000009  EM
+           1604 -0.15550426D+04    0.0014542    0.0000009  EM
+           1605 -0.15550412D+04    0.0014524    0.0000009  EM
+           1606 -0.15550397D+04    0.0014507    0.0000009  EM
+           1607 -0.15550383D+04    0.0014489    0.0000009  EM
+           1608 -0.15550368D+04    0.0014472    0.0000009  EM
+           1609 -0.15550354D+04    0.0014455    0.0000009  EM
+           1610 -0.15550339D+04    0.0014437    0.0000009  EM
+           1611 -0.15550325D+04    0.0014420    0.0000009  EM
+           1612 -0.15550310D+04    0.0014403    0.0000009  EM
+           1613 -0.15550296D+04    0.0014386    0.0000009  EM
+           1614 -0.15550282D+04    0.0014369    0.0000009  EM
+           1615 -0.15550267D+04    0.0014352    0.0000009  EM
+           1616 -0.15550253D+04    0.0014335    0.0000009  EM
+           1617 -0.15550239D+04    0.0014318    0.0000009  EM
+           1618 -0.15550224D+04    0.0014301    0.0000009  EM
+           1619 -0.15550210D+04    0.0014284    0.0000009  EM
+           1620 -0.15550196D+04    0.0014267    0.0000009  EM
+           1621 -0.15550182D+04    0.0014250    0.0000009  EM
+           1622 -0.15550167D+04    0.0014233    0.0000009  EM
+           1623 -0.15550153D+04    0.0014216    0.0000009  EM
+           1624 -0.15550139D+04    0.0014199    0.0000009  EM
+           1625 -0.15550125D+04    0.0014182    0.0000009  EM
+           1626 -0.15550111D+04    0.0014166    0.0000009  EM
+           1627 -0.15550096D+04    0.0014149    0.0000009  EM
+           1628 -0.15550082D+04    0.0014132    0.0000009  EM
+           1629 -0.15550068D+04    0.0014116    0.0000009  EM
+           1630 -0.15550054D+04    0.0014099    0.0000009  EM
+           1631 -0.15550040D+04    0.0014082    0.0000009  EM
+           1632 -0.15550026D+04    0.0014066    0.0000009  EM
+           1633 -0.15550012D+04    0.0014049    0.0000009  EM
+           1634 -0.15549998D+04    0.0014033    0.0000009  EM
+           1635 -0.15549984D+04    0.0014016    0.0000009  EM
+           1636 -0.15549970D+04    0.0014000    0.0000009  EM
+           1637 -0.15549956D+04    0.0013983    0.0000009  EM
+           1638 -0.15549942D+04    0.0013967    0.0000009  EM
+           1639 -0.15549928D+04    0.0013950    0.0000009  EM
+           1640 -0.15549914D+04    0.0013934    0.0000009  EM
+           1641 -0.15549900D+04    0.0013918    0.0000009  EM
+           1642 -0.15549886D+04    0.0013902    0.0000009  EM
+           1643 -0.15549872D+04    0.0013885    0.0000009  EM
+           1644 -0.15549858D+04    0.0013869    0.0000009  EM
+           1645 -0.15549845D+04    0.0013853    0.0000009  EM
+           1646 -0.15549831D+04    0.0013837    0.0000009  EM
+           1647 -0.15549817D+04    0.0013821    0.0000009  EM
+           1648 -0.15549803D+04    0.0013805    0.0000009  EM
+           1649 -0.15549789D+04    0.0013788    0.0000009  EM
+           1650 -0.15549776D+04    0.0013772    0.0000009  EM
+           1651 -0.15549762D+04    0.0013756    0.0000009  EM
+           1652 -0.15549748D+04    0.0013740    0.0000009  EM
+           1653 -0.15549734D+04    0.0013724    0.0000009  EM
+           1654 -0.15549721D+04    0.0013708    0.0000009  EM
+           1655 -0.15549707D+04    0.0013693    0.0000009  EM
+           1656 -0.15549693D+04    0.0013677    0.0000009  EM
+           1657 -0.15549680D+04    0.0013661    0.0000009  EM
+           1658 -0.15549666D+04    0.0013645    0.0000009  EM
+           1659 -0.15549652D+04    0.0013629    0.0000009  EM
+           1660 -0.15549639D+04    0.0013613    0.0000009  EM
+           1661 -0.15549625D+04    0.0013598    0.0000009  EM
+           1662 -0.15549612D+04    0.0013582    0.0000009  EM
+           1663 -0.15549598D+04    0.0013566    0.0000009  EM
+           1664 -0.15549584D+04    0.0013551    0.0000009  EM
+           1665 -0.15549571D+04    0.0013535    0.0000009  EM
+           1666 -0.15549557D+04    0.0013520    0.0000009  EM
+           1667 -0.15549544D+04    0.0013504    0.0000009  EM
+           1668 -0.15549530D+04    0.0013488    0.0000009  EM
+           1669 -0.15549517D+04    0.0013473    0.0000009  EM
+           1670 -0.15549503D+04    0.0013457    0.0000009  EM
+           1671 -0.15549490D+04    0.0013442    0.0000009  EM
+           1672 -0.15549477D+04    0.0013427    0.0000009  EM
+           1673 -0.15549463D+04    0.0013411    0.0000009  EM
+           1674 -0.15549450D+04    0.0013396    0.0000009  EM
+           1675 -0.15549436D+04    0.0013380    0.0000009  EM
+           1676 -0.15549423D+04    0.0013365    0.0000009  EM
+           1677 -0.15549410D+04    0.0013350    0.0000009  EM
+           1678 -0.15549396D+04    0.0013335    0.0000009  EM
+           1679 -0.15549383D+04    0.0013319    0.0000009  EM
+           1680 -0.15549370D+04    0.0013304    0.0000009  EM
+           1681 -0.15549356D+04    0.0013289    0.0000009  EM
+           1682 -0.15549343D+04    0.0013274    0.0000009  EM
+           1683 -0.15549330D+04    0.0013259    0.0000009  EM
+           1684 -0.15549317D+04    0.0013243    0.0000009  EM
+           1685 -0.15549303D+04    0.0013228    0.0000009  EM
+           1686 -0.15549290D+04    0.0013213    0.0000008  EM
+           1687 -0.15549277D+04    0.0013198    0.0000008  EM
+           1688 -0.15549264D+04    0.0013183    0.0000008  EM
+           1689 -0.15549251D+04    0.0013168    0.0000008  EM
+           1690 -0.15549238D+04    0.0013153    0.0000008  EM
+           1691 -0.15549224D+04    0.0013139    0.0000008  EM
+           1692 -0.15549211D+04    0.0013124    0.0000008  EM
+           1693 -0.15549198D+04    0.0013109    0.0000008  EM
+           1694 -0.15549185D+04    0.0013094    0.0000008  EM
+           1695 -0.15549172D+04    0.0013079    0.0000008  EM
+           1696 -0.15549159D+04    0.0013064    0.0000008  EM
+           1697 -0.15549146D+04    0.0013050    0.0000008  EM
+           1698 -0.15549133D+04    0.0013035    0.0000008  EM
+           1699 -0.15549120D+04    0.0013020    0.0000008  EM
+           1700 -0.15549107D+04    0.0013005    0.0000008  EM
+           1701 -0.15549094D+04    0.0012991    0.0000008  EM
+           1702 -0.15549081D+04    0.0012976    0.0000008  EM
+           1703 -0.15549068D+04    0.0012961    0.0000008  EM
+           1704 -0.15549055D+04    0.0012947    0.0000008  EM
+           1705 -0.15549042D+04    0.0012932    0.0000008  EM
+           1706 -0.15549029D+04    0.0012918    0.0000008  EM
+           1707 -0.15549016D+04    0.0012903    0.0000008  EM
+           1708 -0.15549003D+04    0.0012889    0.0000008  EM
+           1709 -0.15548990D+04    0.0012874    0.0000008  EM
+           1710 -0.15548978D+04    0.0012860    0.0000008  EM
+           1711 -0.15548965D+04    0.0012845    0.0000008  EM
+           1712 -0.15548952D+04    0.0012831    0.0000008  EM
+           1713 -0.15548939D+04    0.0012817    0.0000008  EM
+           1714 -0.15548926D+04    0.0012802    0.0000008  EM
+           1715 -0.15548913D+04    0.0012788    0.0000008  EM
+           1716 -0.15548901D+04    0.0012774    0.0000008  EM
+           1717 -0.15548888D+04    0.0012760    0.0000008  EM
+           1718 -0.15548875D+04    0.0012745    0.0000008  EM
+           1719 -0.15548862D+04    0.0012731    0.0000008  EM
+           1720 -0.15548850D+04    0.0012717    0.0000008  EM
+           1721 -0.15548837D+04    0.0012703    0.0000008  EM
+           1722 -0.15548824D+04    0.0012689    0.0000008  EM
+           1723 -0.15548812D+04    0.0012675    0.0000008  EM
+           1724 -0.15548799D+04    0.0012660    0.0000008  EM
+           1725 -0.15548786D+04    0.0012646    0.0000008  EM
+           1726 -0.15548774D+04    0.0012632    0.0000008  EM
+           1727 -0.15548761D+04    0.0012618    0.0000008  EM
+           1728 -0.15548749D+04    0.0012604    0.0000008  EM
+           1729 -0.15548736D+04    0.0012590    0.0000008  EM
+           1730 -0.15548723D+04    0.0012576    0.0000008  EM
+           1731 -0.15548711D+04    0.0012563    0.0000008  EM
+           1732 -0.15548698D+04    0.0012549    0.0000008  EM
+           1733 -0.15548686D+04    0.0012535    0.0000008  EM
+           1734 -0.15548673D+04    0.0012521    0.0000008  EM
+           1735 -0.15548661D+04    0.0012507    0.0000008  EM
+           1736 -0.15548648D+04    0.0012493    0.0000008  EM
+           1737 -0.15548636D+04    0.0012479    0.0000008  EM
+           1738 -0.15548623D+04    0.0012466    0.0000008  EM
+           1739 -0.15548611D+04    0.0012452    0.0000008  EM
+           1740 -0.15548598D+04    0.0012438    0.0000008  EM
+           1741 -0.15548586D+04    0.0012425    0.0000008  EM
+           1742 -0.15548574D+04    0.0012411    0.0000008  EM
+           1743 -0.15548561D+04    0.0012397    0.0000008  EM
+           1744 -0.15548549D+04    0.0012384    0.0000008  EM
+           1745 -0.15548536D+04    0.0012370    0.0000008  EM
+           1746 -0.15548524D+04    0.0012357    0.0000008  EM
+           1747 -0.15548512D+04    0.0012343    0.0000008  EM
+           1748 -0.15548499D+04    0.0012329    0.0000008  EM
+           1749 -0.15548487D+04    0.0012316    0.0000008  EM
+           1750 -0.15548475D+04    0.0012302    0.0000008  EM
+           1751 -0.15548462D+04    0.0012289    0.0000008  EM
+           1752 -0.15548450D+04    0.0012276    0.0000008  EM
+           1753 -0.15548438D+04    0.0012262    0.0000008  EM
+           1754 -0.15548426D+04    0.0012249    0.0000008  EM
+           1755 -0.15548413D+04    0.0012235    0.0000008  EM
+           1756 -0.15548401D+04    0.0012222    0.0000008  EM
+           1757 -0.15548389D+04    0.0012209    0.0000008  EM
+           1758 -0.15548377D+04    0.0012195    0.0000008  EM
+           1759 -0.15548365D+04    0.0012182    0.0000008  EM
+           1760 -0.15548352D+04    0.0012169    0.0000008  EM
+           1761 -0.15548340D+04    0.0012156    0.0000008  EM
+           1762 -0.15548328D+04    0.0012142    0.0000008  EM
+           1763 -0.15548316D+04    0.0012129    0.0000008  EM
+           1764 -0.15548304D+04    0.0012116    0.0000008  EM
+           1765 -0.15548292D+04    0.0012103    0.0000008  EM
+           1766 -0.15548280D+04    0.0012090    0.0000008  EM
+           1767 -0.15548268D+04    0.0012077    0.0000008  EM
+           1768 -0.15548256D+04    0.0012064    0.0000008  EM
+           1769 -0.15548243D+04    0.0012051    0.0000008  EM
+           1770 -0.15548231D+04    0.0012038    0.0000008  EM
+           1771 -0.15548219D+04    0.0012025    0.0000008  EM
+           1772 -0.15548207D+04    0.0012012    0.0000008  EM
+           1773 -0.15548195D+04    0.0011999    0.0000008  EM
+           1774 -0.15548183D+04    0.0011986    0.0000008  EM
+           1775 -0.15548171D+04    0.0011973    0.0000008  EM
+           1776 -0.15548159D+04    0.0011960    0.0000008  EM
+           1777 -0.15548148D+04    0.0011947    0.0000008  EM
+           1778 -0.15548136D+04    0.0011934    0.0000008  EM
+           1779 -0.15548124D+04    0.0011921    0.0000008  EM
+           1780 -0.15548112D+04    0.0011909    0.0000008  EM
+           1781 -0.15548100D+04    0.0011896    0.0000008  EM
+           1782 -0.15548088D+04    0.0011883    0.0000008  EM
+           1783 -0.15548076D+04    0.0011870    0.0000008  EM
+           1784 -0.15548064D+04    0.0011857    0.0000008  EM
+           1785 -0.15548052D+04    0.0011845    0.0000008  EM
+           1786 -0.15548041D+04    0.0011832    0.0000008  EM
+           1787 -0.15548029D+04    0.0011819    0.0000008  EM
+           1788 -0.15548017D+04    0.0011807    0.0000008  EM
+           1789 -0.15548005D+04    0.0011794    0.0000008  EM
+           1790 -0.15547993D+04    0.0011781    0.0000008  EM
+           1791 -0.15547982D+04    0.0011769    0.0000008  EM
+           1792 -0.15547970D+04    0.0011756    0.0000008  EM
+           1793 -0.15547958D+04    0.0011744    0.0000008  EM
+           1794 -0.15547946D+04    0.0011731    0.0000008  EM
+           1795 -0.15547935D+04    0.0011719    0.0000008  EM
+           1796 -0.15547923D+04    0.0011706    0.0000008  EM
+           1797 -0.15547911D+04    0.0011694    0.0000008  EM
+           1798 -0.15547900D+04    0.0011681    0.0000008  EM
+           1799 -0.15547888D+04    0.0011669    0.0000008  EM
+           1800 -0.15547876D+04    0.0011657    0.0000007  EM
+           1801 -0.15547865D+04    0.0011644    0.0000007  EM
+           1802 -0.15547853D+04    0.0011632    0.0000007  EM
+           1803 -0.15547841D+04    0.0011620    0.0000007  EM
+           1804 -0.15547830D+04    0.0011607    0.0000007  EM
+           1805 -0.15547818D+04    0.0011595    0.0000007  EM
+           1806 -0.15547807D+04    0.0011583    0.0000007  EM
+           1807 -0.15547795D+04    0.0011570    0.0000007  EM
+           1808 -0.15547783D+04    0.0011558    0.0000007  EM
+           1809 -0.15547772D+04    0.0011546    0.0000007  EM
+           1810 -0.15547760D+04    0.0011534    0.0000007  EM
+           1811 -0.15547749D+04    0.0011522    0.0000007  EM
+           1812 -0.15547737D+04    0.0011509    0.0000007  EM
+           1813 -0.15547726D+04    0.0011497    0.0000007  EM
+           1814 -0.15547714D+04    0.0011485    0.0000007  EM
+           1815 -0.15547703D+04    0.0011473    0.0000007  EM
+           1816 -0.15547691D+04    0.0011461    0.0000007  EM
+           1817 -0.15547680D+04    0.0011449    0.0000007  EM
+           1818 -0.15547669D+04    0.0011437    0.0000007  EM
+           1819 -0.15547657D+04    0.0011425    0.0000007  EM
+           1820 -0.15547646D+04    0.0011413    0.0000007  EM
+           1821 -0.15547634D+04    0.0011401    0.0000007  EM
+           1822 -0.15547623D+04    0.0011389    0.0000007  EM
+           1823 -0.15547612D+04    0.0011377    0.0000007  EM
+           1824 -0.15547600D+04    0.0011365    0.0000007  EM
+           1825 -0.15547589D+04    0.0011353    0.0000007  EM
+           1826 -0.15547577D+04    0.0011341    0.0000007  EM
+           1827 -0.15547566D+04    0.0011329    0.0000007  EM
+           1828 -0.15547555D+04    0.0011318    0.0000007  EM
+           1829 -0.15547544D+04    0.0011306    0.0000007  EM
+           1830 -0.15547532D+04    0.0011294    0.0000007  EM
+           1831 -0.15547521D+04    0.0011282    0.0000007  EM
+           1832 -0.15547510D+04    0.0011270    0.0000007  EM
+           1833 -0.15547498D+04    0.0011259    0.0000007  EM
+           1834 -0.15547487D+04    0.0011247    0.0000007  EM
+           1835 -0.15547476D+04    0.0011235    0.0000007  EM
+           1836 -0.15547465D+04    0.0011223    0.0000007  EM
+           1837 -0.15547454D+04    0.0011212    0.0000007  EM
+           1838 -0.15547442D+04    0.0011200    0.0000007  EM
+           1839 -0.15547431D+04    0.0011188    0.0000007  EM
+           1840 -0.15547420D+04    0.0011177    0.0000007  EM
+           1841 -0.15547409D+04    0.0011165    0.0000007  EM
+           1842 -0.15547398D+04    0.0011154    0.0000007  EM
+           1843 -0.15547386D+04    0.0011142    0.0000007  EM
+           1844 -0.15547375D+04    0.0011131    0.0000007  EM
+           1845 -0.15547364D+04    0.0011119    0.0000007  EM
+           1846 -0.15547353D+04    0.0011108    0.0000007  EM
+           1847 -0.15547342D+04    0.0011096    0.0000007  EM
+           1848 -0.15547331D+04    0.0011085    0.0000007  EM
+           1849 -0.15547320D+04    0.0011073    0.0000007  EM
+           1850 -0.15547309D+04    0.0011062    0.0000007  EM
+           1851 -0.15547298D+04    0.0011050    0.0000007  EM
+           1852 -0.15547287D+04    0.0011039    0.0000007  EM
+           1853 -0.15547276D+04    0.0011028    0.0000007  EM
+           1854 -0.15547265D+04    0.0011016    0.0000007  EM
+           1855 -0.15547254D+04    0.0011005    0.0000007  EM
+           1856 -0.15547243D+04    0.0010994    0.0000007  EM
+           1857 -0.15547232D+04    0.0010982    0.0000007  EM
+           1858 -0.15547221D+04    0.0010971    0.0000007  EM
+           1859 -0.15547210D+04    0.0010960    0.0000007  EM
+           1860 -0.15547199D+04    0.0010948    0.0000007  EM
+           1861 -0.15547188D+04    0.0010937    0.0000007  EM
+           1862 -0.15547177D+04    0.0010926    0.0000007  EM
+           1863 -0.15547166D+04    0.0010915    0.0000007  EM
+           1864 -0.15547155D+04    0.0010904    0.0000007  EM
+           1865 -0.15547144D+04    0.0010892    0.0000007  EM
+           1866 -0.15547133D+04    0.0010881    0.0000007  EM
+           1867 -0.15547122D+04    0.0010870    0.0000007  EM
+           1868 -0.15547112D+04    0.0010859    0.0000007  EM
+           1869 -0.15547101D+04    0.0010848    0.0000007  EM
+           1870 -0.15547090D+04    0.0010837    0.0000007  EM
+           1871 -0.15547079D+04    0.0010826    0.0000007  EM
+           1872 -0.15547068D+04    0.0010815    0.0000007  EM
+           1873 -0.15547058D+04    0.0010804    0.0000007  EM
+           1874 -0.15547047D+04    0.0010793    0.0000007  EM
+           1875 -0.15547036D+04    0.0010782    0.0000007  EM
+           1876 -0.15547025D+04    0.0010771    0.0000007  EM
+           1877 -0.15547014D+04    0.0010760    0.0000007  EM
+           1878 -0.15547004D+04    0.0010749    0.0000007  EM
+           1879 -0.15546993D+04    0.0010738    0.0000007  EM
+           1880 -0.15546982D+04    0.0010727    0.0000007  EM
+           1881 -0.15546971D+04    0.0010716    0.0000007  EM
+           1882 -0.15546961D+04    0.0010705    0.0000007  EM
+           1883 -0.15546950D+04    0.0010694    0.0000007  EM
+           1884 -0.15546939D+04    0.0010684    0.0000007  EM
+           1885 -0.15546929D+04    0.0010673    0.0000007  EM
+           1886 -0.15546918D+04    0.0010662    0.0000007  EM
+           1887 -0.15546907D+04    0.0010651    0.0000007  EM
+           1888 -0.15546897D+04    0.0010640    0.0000007  EM
+           1889 -0.15546886D+04    0.0010630    0.0000007  EM
+           1890 -0.15546876D+04    0.0010619    0.0000007  EM
+           1891 -0.15546865D+04    0.0010608    0.0000007  EM
+           1892 -0.15546854D+04    0.0010598    0.0000007  EM
+           1893 -0.15546844D+04    0.0010587    0.0000007  EM
+           1894 -0.15546833D+04    0.0010576    0.0000007  EM
+           1895 -0.15546823D+04    0.0010566    0.0000007  EM
+           1896 -0.15546812D+04    0.0010555    0.0000007  EM
+           1897 -0.15546801D+04    0.0010544    0.0000007  EM
+           1898 -0.15546791D+04    0.0010534    0.0000007  EM
+           1899 -0.15546780D+04    0.0010523    0.0000007  EM
+           1900 -0.15546770D+04    0.0010513    0.0000007  EM
+           1901 -0.15546759D+04    0.0010502    0.0000007  EM
+           1902 -0.15546749D+04    0.0010491    0.0000007  EM
+           1903 -0.15546738D+04    0.0010481    0.0000007  EM
+           1904 -0.15546728D+04    0.0010470    0.0000007  EM
+           1905 -0.15546718D+04    0.0010460    0.0000007  EM
+           1906 -0.15546707D+04    0.0010449    0.0000007  EM
+           1907 -0.15546697D+04    0.0010439    0.0000007  EM
+           1908 -0.15546686D+04    0.0010429    0.0000007  EM
+           1909 -0.15546676D+04    0.0010418    0.0000007  EM
+           1910 -0.15546665D+04    0.0010408    0.0000007  EM
+           1911 -0.15546655D+04    0.0010397    0.0000007  EM
+           1912 -0.15546645D+04    0.0010387    0.0000007  EM
+           1913 -0.15546634D+04    0.0010377    0.0000007  EM
+           1914 -0.15546624D+04    0.0010366    0.0000007  EM
+           1915 -0.15546613D+04    0.0010356    0.0000007  EM
+           1916 -0.15546603D+04    0.0010346    0.0000007  EM
+           1917 -0.15546593D+04    0.0010335    0.0000007  EM
+           1918 -0.15546582D+04    0.0010325    0.0000007  EM
+           1919 -0.15546572D+04    0.0010315    0.0000007  EM
+           1920 -0.15546562D+04    0.0010305    0.0000007  EM
+           1921 -0.15546552D+04    0.0010294    0.0000007  EM
+           1922 -0.15546541D+04    0.0010284    0.0000007  EM
+           1923 -0.15546531D+04    0.0010274    0.0000007  EM
+           1924 -0.15546521D+04    0.0010264    0.0000007  EM
+           1925 -0.15546510D+04    0.0010254    0.0000007  EM
+           1926 -0.15546500D+04    0.0010243    0.0000007  EM
+           1927 -0.15546490D+04    0.0010233    0.0000007  EM
+           1928 -0.15546480D+04    0.0010223    0.0000007  EM
+           1929 -0.15546470D+04    0.0010213    0.0000007  EM
+           1930 -0.15546459D+04    0.0010203    0.0000007  EM
+           1931 -0.15546449D+04    0.0010193    0.0000007  EM
+           1932 -0.15546439D+04    0.0010183    0.0000007  EM
+           1933 -0.15546429D+04    0.0010173    0.0000007  EM
+           1934 -0.15546419D+04    0.0010163    0.0000007  EM
+           1935 -0.15546409D+04    0.0010153    0.0000007  EM
+           1936 -0.15546398D+04    0.0010143    0.0000007  EM
+           1937 -0.15546388D+04    0.0010133    0.0000007  EM
+           1938 -0.15546378D+04    0.0010123    0.0000007  EM
+           1939 -0.15546368D+04    0.0010113    0.0000007  EM
+           1940 -0.15546358D+04    0.0010103    0.0000006  EM
+           1941 -0.15546348D+04    0.0010093    0.0000006  EM
+           1942 -0.15546338D+04    0.0010083    0.0000006  EM
+           1943 -0.15546328D+04    0.0010073    0.0000006  EM
+           1944 -0.15546318D+04    0.0010063    0.0000006  EM
+           1945 -0.15546308D+04    0.0010054    0.0000006  EM
+           1946 -0.15546297D+04    0.0010044    0.0000006  EM
+           1947 -0.15546287D+04    0.0010034    0.0000006  EM
+           1948 -0.15546277D+04    0.0010024    0.0000006  EM
+           1949 -0.15546267D+04    0.0010014    0.0000006  EM
+           1950 -0.15546257D+04    0.0010004    0.0000006  EM
+           1951 -0.15546247D+04    0.0009995    0.0000006  EM
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  16:02:46
+        Ending Time:  16:04:10
+       Elapsed Time:  00:01:24
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

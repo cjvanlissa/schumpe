@@ -1,0 +1,48 @@
+TITLE:
+contain_protest
+DATA:
+FILE = "contain_protest_3f803a9408e0cda97376bda9f0db3d0c.dat";
+ 
+VARIABLE:
+NAMES = id country DV_contain_protest age gender religious politx polity
+     political_view education date Dt clear_message trust_government
+     proximity_corona contain_protest tightness; 
+ MISSING=.;
+ CLUSTER = country id;
+WITHIN = 
+date
+Dt
+clear_message
+trust_government
+proximity_corona
+contain_protest
+age
+gender
+religious
+politx
+polity
+political_view
+education
+;
+BETWEEN = tightness;
+ANALYSIS:
+TYPE = COMPLEX TWOLEVEL RANDOM;
+MODEL:
+%WITHIN%
+s1 | DV_contain_protest ON date;
+s2 | DV_contain_protest ON Dt;
+s3 | DV_contain_protest ON clear_message;
+s4 | DV_contain_protest ON trust_government;
+s5 | DV_contain_protest ON proximity_corona;
+s6 | DV_contain_protest ON contain_protest;
+s7 | DV_contain_protest ON age;
+s8 | DV_contain_protest ON gender;
+s9 | DV_contain_protest ON religious;
+s10 | DV_contain_protest ON politx;
+s11 | DV_contain_protest ON polity;
+s12 | DV_contain_protest ON political_view;
+s13 | DV_contain_protest ON education;
+%BETWEEN%
+DV_contain_protest ON tightness;
+OUTPUT:
+TECH1 TECH8 stdyx;

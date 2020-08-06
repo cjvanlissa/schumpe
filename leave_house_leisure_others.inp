@@ -1,0 +1,64 @@
+TITLE:
+leave_house_leisure_others
+DATA:
+FILE = "leave_house_leisure_others_e7feb624850c6ba811cf017ca6504358.dat";
+ 
+VARIABLE:
+NAMES = id country DV_leave_house_leisure_others age gender religious politx polity
+     political_view education date Dt risk_perception_infect
+     economic_risk_perception distancing_social_norm clear_message trust_government
+     preference_tightness punishing_deviation conspiracy1 employment_status
+     proximity_corona leave_house_leisure_others tightness; 
+ MISSING=.;
+ CLUSTER = country id;
+WITHIN = 
+date
+Dt
+risk_perception_infect
+economic_risk_perception
+distancing_social_norm
+clear_message
+trust_government
+preference_tightness
+punishing_deviation
+conspiracy1
+employment_status
+proximity_corona
+leave_house_leisure_others
+age
+gender
+religious
+politx
+polity
+political_view
+education
+;
+BETWEEN = tightness;
+ANALYSIS:
+TYPE = COMPLEX TWOLEVEL RANDOM;
+MODEL:
+%WITHIN%
+s1 | DV_leave_house_leisure_others ON date;
+s2 | DV_leave_house_leisure_others ON Dt;
+s3 | DV_leave_house_leisure_others ON risk_perception_infect;
+s4 | DV_leave_house_leisure_others ON economic_risk_perception;
+s5 | DV_leave_house_leisure_others ON distancing_social_norm;
+s6 | DV_leave_house_leisure_others ON clear_message;
+s7 | DV_leave_house_leisure_others ON trust_government;
+s8 | DV_leave_house_leisure_others ON preference_tightness;
+s9 | DV_leave_house_leisure_others ON punishing_deviation;
+s10 | DV_leave_house_leisure_others ON conspiracy1;
+s11 | DV_leave_house_leisure_others ON employment_status;
+s12 | DV_leave_house_leisure_others ON proximity_corona;
+s13 | DV_leave_house_leisure_others ON leave_house_leisure_others;
+s14 | DV_leave_house_leisure_others ON age;
+s15 | DV_leave_house_leisure_others ON gender;
+s16 | DV_leave_house_leisure_others ON religious;
+s17 | DV_leave_house_leisure_others ON politx;
+s18 | DV_leave_house_leisure_others ON polity;
+s19 | DV_leave_house_leisure_others ON political_view;
+s20 | DV_leave_house_leisure_others ON education;
+%BETWEEN%
+DV_leave_house_leisure_others ON tightness;
+OUTPUT:
+TECH1 TECH8 stdyx;

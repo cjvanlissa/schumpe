@@ -1,0 +1,57 @@
+TITLE:
+wash_hands
+DATA:
+FILE = "wash_hands_16aa1c4dc9900ae754268e4dbd5bf8e7.dat";
+ 
+VARIABLE:
+NAMES = id country DV_wash_hands age gender religious politx polity political_view
+     education distancing_social_norm preference_tightness conspiracy1 date Dt
+     risk_perception_infect economic_risk_perception clear_message trust_government
+     punishing_deviation employment_status proximity_corona wash_hands
+     int_risk_perception_infect int_economic_risk_perception int_clear_message
+     int_trust_government int_punishing_deviation int_employment_status
+     int_proximity_corona int_wash_hands tightness; 
+ USEVARIABLES = DV_wash_hands age gender religious politx polity political_view
+     education distancing_social_norm preference_tightness conspiracy1 date Dt
+     risk_perception_infect economic_risk_perception clear_message trust_government
+     punishing_deviation employment_status proximity_corona wash_hands
+; 
+ MISSING=.;
+ CLUSTER =  country id;
+WITHIN = 
+DV_wash_hands age gender religious politx polity political_view
+     education distancing_social_norm preference_tightness conspiracy1 date Dt
+     risk_perception_infect economic_risk_perception clear_message trust_government
+     punishing_deviation employment_status proximity_corona wash_hands
+   ;
+
+
+ANALYSIS:
+TYPE=COMPLEX TWOLEVEL RANDOM;
+
+MODEL:
+%within%
+S1 | DV_wash_hands ON date;
+S2 | DV_wash_hands ON Dt;
+S3 | DV_wash_hands ON risk_perception_infect;
+S4 | DV_wash_hands ON economic_risk_perception;
+S5 | DV_wash_hands ON clear_message;
+S6 | DV_wash_hands ON trust_government;
+S7 | DV_wash_hands ON punishing_deviation;
+S8 | DV_wash_hands ON employment_status;
+S9 | DV_wash_hands ON proximity_corona;
+S10 | DV_wash_hands ON wash_hands;
+
+S11 | DV_wash_hands ON age;
+S12 | DV_wash_hands ON gender;
+S13 | DV_wash_hands ON religious;
+S14 | DV_wash_hands ON politx;
+S15 | DV_wash_hands ON polity;
+S16 | DV_wash_hands ON political_view;
+S17 | DV_wash_hands ON education;
+S18 | DV_wash_hands ON distancing_social_norm;
+S19 | DV_wash_hands ON preference_tightness;
+S20 | DV_wash_hands ON conspiracy1;
+
+OUTPUT:
+TECH1 TECH8;

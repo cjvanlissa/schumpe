@@ -1,0 +1,48 @@
+TITLE:
+face_mask
+DATA:
+FILE = "face_mask_48495437b3d8d27c1ede7976e3d2fe59.dat";
+ 
+VARIABLE:
+NAMES = id country DV_face_mask age gender religious politx polity political_view
+     education date Dt clear_message trust_government proximity_corona face_mask
+     tightness; 
+ MISSING=.;
+ CLUSTER = country id;
+WITHIN = 
+date
+Dt
+clear_message
+trust_government
+proximity_corona
+face_mask
+age
+gender
+religious
+politx
+polity
+political_view
+education
+;
+BETWEEN = tightness;
+ANALYSIS:
+TYPE = COMPLEX TWOLEVEL RANDOM;
+MODEL:
+%WITHIN%
+s1 | DV_face_mask ON date;
+s2 | DV_face_mask ON Dt;
+s3 | DV_face_mask ON clear_message;
+s4 | DV_face_mask ON trust_government;
+s5 | DV_face_mask ON proximity_corona;
+s6 | DV_face_mask ON face_mask;
+s7 | DV_face_mask ON age;
+s8 | DV_face_mask ON gender;
+s9 | DV_face_mask ON religious;
+s10 | DV_face_mask ON politx;
+s11 | DV_face_mask ON polity;
+s12 | DV_face_mask ON political_view;
+s13 | DV_face_mask ON education;
+%BETWEEN%
+DV_face_mask ON tightness;
+OUTPUT:
+TECH1 TECH8 stdyx;

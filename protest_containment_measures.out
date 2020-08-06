@@ -1,0 +1,94 @@
+Mplus VERSION 8
+MUTHEN & MUTHEN
+07/26/2020   9:29 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+  protest_containment_measures
+  DATA:
+  FILE = "prot_15246e377b8a897f6f54b47bf1775620.dat";
+
+  VARIABLE:
+  NAMES = id country DV_protest_containment_measures age gender religious politx
+       polity political_view education date Dt clear_message trust_government
+       proximity_corona protest_containment_measures int_clear_message
+       int_trust_government int_proximity_corona int_protest_containment_measures
+       tightness;
+   MISSING=.;
+   CLUSTER = country id;
+  WITHIN =
+  date
+  Dt
+  clear_message
+  trust_government
+  proximity_corona
+  protest_containment_measures
+  int_clear_message
+  int_trust_government
+  int_proximity_corona
+  int_protest_containment_measures
+  ;
+  BETWEEN = (country) tightness
+  (id) age
+  (id) gender
+  (id) religious
+  (id) politx
+  (id) polity
+  (id) political_view
+  (id) education
+  ;
+  ANALYSIS:
+  TYPE = THREELEVEL RANDOM;
+  MODEL:
+  %WITHIN%
+  DV_protest_containment_measures ON date;
+  DV_protest_containment_measures ON Dt;
+  DV_protest_containment_measures ON clear_message;
+  DV_protest_containment_measures ON trust_government;
+  DV_protest_containment_measures ON proximity_corona;
+  DV_protest_containment_measures ON protest_containment_measures;
+  DV_protest_containment_measures ON int_clear_message;
+  DV_protest_containment_measures ON int_trust_government;
+  DV_protest_containment_measures ON int_proximity_corona;
+  DV_protest_containment_measures ON int_protest_containment_measures;
+  DV_protest_containment_measures ON protest_containment_measures;
+  %BETWEEN id%
+  DV_protest_containment_measures ON age;
+  DV_protest_containment_measures ON gender;
+  DV_protest_containment_measures ON religious;
+  DV_protest_containment_measures ON politx;
+  DV_protest_containment_measures ON polity;
+  DV_protest_containment_measures ON political_view;
+  DV_protest_containment_measures ON education;
+  %BETWEEN country%
+  DV_protest_containment_measures ON tightness;
+  OUTPUT:
+  TECH1 TECH8 stdyx;
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** ERROR in MODEL command
+  A latent variable declared on one of the between levels cannot be used on the
+  within level.  Problem with variable:  INT_PROTEST_CONTAINMENT_MEASURES
+*** ERROR
+  The following MODEL statements are ignored:
+  * Statements in the WITHIN level:
+    DV_PROTEST_CONTAINMENT_MEASURES ON INT_PROTEST_CONTAINMENT_MEASURES
+*** WARNING
+  Data set contains cases with missing on x-variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on x-variables:  1812
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

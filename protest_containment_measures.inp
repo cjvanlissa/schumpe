@@ -1,0 +1,61 @@
+TITLE:
+protest_containment_measures
+DATA:
+FILE = "prot_15246e377b8a897f6f54b47bf1775620.dat";
+ 
+VARIABLE:
+NAMES = id country DV_protest_containment_measures age gender religious politx
+     polity political_view education date Dt clear_message trust_government
+     proximity_corona protest_containment_measures int_clear_message
+     int_trust_government int_proximity_corona int_protest_containment_measures
+     tightness; 
+ MISSING=.;
+ CLUSTER = country id;
+WITHIN = 
+date
+Dt
+clear_message
+trust_government
+proximity_corona
+protest_containment_measures
+int_clear_message
+int_trust_government
+int_proximity_corona
+int_protest_containment_measures
+;
+BETWEEN = (country) tightness
+(id) age
+(id) gender
+(id) religious
+(id) politx
+(id) polity
+(id) political_view
+(id) education
+;
+ANALYSIS:
+TYPE = THREELEVEL RANDOM;
+MODEL:
+%WITHIN%
+DV_protest_containment_measures ON date;
+DV_protest_containment_measures ON Dt;
+DV_protest_containment_measures ON clear_message;
+DV_protest_containment_measures ON trust_government;
+DV_protest_containment_measures ON proximity_corona;
+DV_protest_containment_measures ON protest_containment_measures;
+DV_protest_containment_measures ON int_clear_message;
+DV_protest_containment_measures ON int_trust_government;
+DV_protest_containment_measures ON int_proximity_corona;
+DV_protest_containment_measures ON int_protest_containment_measures;
+DV_protest_containment_measures ON protest_containment_measures;
+%BETWEEN id%
+DV_protest_containment_measures ON age;
+DV_protest_containment_measures ON gender;
+DV_protest_containment_measures ON religious;
+DV_protest_containment_measures ON politx;
+DV_protest_containment_measures ON polity;
+DV_protest_containment_measures ON political_view;
+DV_protest_containment_measures ON education;
+%BETWEEN country%
+DV_protest_containment_measures ON tightness;
+OUTPUT:
+TECH1 TECH8 stdyx;

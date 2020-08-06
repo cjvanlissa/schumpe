@@ -1,2 +1,14 @@
 "Title"	"LL"	"Parameters"	"AIC"	"BIC"	"RMSEA_Estimate"	"CFI"	"TLI"
-" wash_hands"	-3484.236	33	7034.472	7231.047	0	1	1
+" wash_hands"	-3367.466	44	6822.932	7085.032
+" avoid_crowd"	-3159.859	44	6407.718	6669.834
+" quarantine"	-4518.946	44	9125.892	9387.992
+" mandatory_vaccination"	-4848.167	44	9784.333	10048.804
+" mandatory_quarantine"	-4253.153	44	8594.307	8858.777
+" contain_protest"	-1554.625	30	3169.249	3319.232
+" face_mask"	-1561.34	30	3182.68	3328.31
+" days_left_house"	-3282.053	44	6652.105	6918.504
+" social_contact_others"	-6231.857	44	12551.715	12817.777
+" contain_protest"	-1554.625	30	3169.249	3319.232
+" frienfam"	-6349.745	44	12787.489	13053.748
+"leavleis"	NA	NA	NA	NA
+"willvacc"	NA	NA	NA	NA

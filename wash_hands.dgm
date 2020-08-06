@@ -1,0 +1,512 @@
+VERSION 1.1.0
+INPUT
+TITLE:
+
+wash_hands
+DATA:
+FILE = "wash_hands_16aa1c4dc9900ae754268e4dbd5bf8e7.dat";
+VARIABLE:
+NAMES = id country DV_wash_hands age gender religious politx polity political_view
+     education distancing_social_norm preference_tightness conspiracy1 date Dt
+     risk_perception_infect economic_risk_perception clear_message trust_government
+     punishing_deviation employment_status proximity_corona wash_hands
+     int_risk_perception_infect int_economic_risk_perception int_clear_message
+     int_trust_government int_punishing_deviation int_employment_status
+     int_proximity_corona int_wash_hands tightness;
+ USEVARIABLES = DV_wash_hands age gender religious politx polity political_view
+     education distancing_social_norm preference_tightness conspiracy1 date Dt
+     risk_perception_infect economic_risk_perception clear_message trust_government
+     punishing_deviation employment_status proximity_corona wash_hands
+     int_risk_perception_infect int_economic_risk_perception int_clear_message
+     int_trust_government int_punishing_deviation int_employment_status
+     int_proximity_corona int_wash_hands tightness;
+ MISSING=.;
+ CLUSTER = id;
+ANALYSIS:
+TYPE=COMPLEX;
+OUTPUT:
+TECH1 TECH8;
+MODEL:
+DV_wash_hands ON date;
+DV_wash_hands ON Dt;
+DV_wash_hands ON risk_perception_infect;
+DV_wash_hands ON economic_risk_perception;
+DV_wash_hands ON clear_message;
+DV_wash_hands ON trust_government;
+DV_wash_hands ON punishing_deviation;
+DV_wash_hands ON employment_status;
+DV_wash_hands ON proximity_corona;
+DV_wash_hands ON wash_hands;
+DV_wash_hands ON int_risk_perception_infect;
+DV_wash_hands ON int_economic_risk_perception;
+DV_wash_hands ON int_clear_message;
+DV_wash_hands ON int_trust_government;
+DV_wash_hands ON int_punishing_deviation;
+DV_wash_hands ON int_employment_status;
+DV_wash_hands ON int_proximity_corona;
+DV_wash_hands ON int_wash_hands;
+DV_wash_hands ON wash_hands;
+DV_wash_hands ON age;
+DV_wash_hands ON gender;
+DV_wash_hands ON religious;
+DV_wash_hands ON politx;
+DV_wash_hands ON polity;
+DV_wash_hands ON political_view;
+DV_wash_hands ON education;
+DV_wash_hands ON distancing_social_norm;
+DV_wash_hands ON preference_tightness;
+DV_wash_hands ON conspiracy1;
+DV_wash_hands ON tightness;
+INPUT_END
+2
+0
+0
+0
+MLR
+1
+GENERAL
+0
+1
+0
+29
+dv_wash_hands age gender religious politx polity political_view education distancing_social_norm preference_tightness conspiracy1 date dt risk_perception_infect economic_risk_perception clear_message trust_government punishing_deviation employment_status proximity_corona wash_hands int_risk_perception_infect int_economic_risk_perception int_clear_message int_trust_government int_punishing_deviation int_employment_status int_proximity_corona int_wash_hands tightness
+2
+1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0
+0
+1 1 date dv_wash_hands   -0.005    0.003
+1 1 dt dv_wash_hands   -0.017    0.024
+1 1 risk_perception_infect dv_wash_hands    0.060    0.021
+1 1 economic_risk_perception dv_wash_hands   -0.013    0.017
+1 1 clear_message dv_wash_hands    0.053    0.019
+1 1 trust_government dv_wash_hands    0.019    0.016
+1 1 punishing_deviation dv_wash_hands    0.018    0.017
+1 1 employment_status dv_wash_hands   -0.003    0.034
+1 1 proximity_corona dv_wash_hands   -0.006    0.039
+1 1 wash_hands dv_wash_hands    0.842    0.038
+1 1 int_risk_perception_infect dv_wash_hands   -0.013    0.020
+1 1 int_economic_risk_perception dv_wash_hands   -0.006    0.015
+1 1 int_clear_message dv_wash_hands    0.011    0.019
+1 1 int_trust_government dv_wash_hands   -0.016    0.016
+1 1 int_punishing_deviation dv_wash_hands   -0.010    0.018
+1 1 int_employment_status dv_wash_hands   -0.032    0.033
+1 1 int_proximity_corona dv_wash_hands    0.045    0.041
+1 1 int_wash_hands dv_wash_hands   -0.020    0.028
+1 1 age dv_wash_hands    0.024    0.020
+1 1 gender dv_wash_hands    0.000    0.030
+1 1 religious dv_wash_hands    0.000    0.030
+1 1 politx dv_wash_hands    0.002    0.014
+1 1 polity dv_wash_hands    0.022    0.018
+1 1 political_view dv_wash_hands   -0.002    0.018
+1 1 education dv_wash_hands    0.000    0.015
+1 1 distancing_social_norm dv_wash_hands    0.085    0.020
+1 1 preference_tightness dv_wash_hands    0.019    0.015
+1 1 conspiracy1 dv_wash_hands    0.029    0.017
+1 1 tightness dv_wash_hands   -0.017    0.018
+4 1 dv_wash_hands    0.672    0.044
+2 1 age gender  999.000  999.000
+2 1 age religious  999.000  999.000
+2 1 age politx  999.000  999.000
+2 1 age polity  999.000  999.000
+2 1 age political_view  999.000  999.000
+2 1 age education  999.000  999.000
+2 1 age distancing_social_norm  999.000  999.000
+2 1 age preference_tightness  999.000  999.000
+2 1 age conspiracy1  999.000  999.000
+2 1 age date  999.000  999.000
+2 1 age dt  999.000  999.000
+2 1 age risk_perception_infect  999.000  999.000
+2 1 age economic_risk_perception  999.000  999.000
+2 1 age clear_message  999.000  999.000
+2 1 age trust_government  999.000  999.000
+2 1 age punishing_deviation  999.000  999.000
+2 1 age employment_status  999.000  999.000
+2 1 age proximity_corona  999.000  999.000
+2 1 age wash_hands  999.000  999.000
+2 1 age int_risk_perception_infect  999.000  999.000
+2 1 age int_economic_risk_perception  999.000  999.000
+2 1 age int_clear_message  999.000  999.000
+2 1 age int_trust_government  999.000  999.000
+2 1 age int_punishing_deviation  999.000  999.000
+2 1 age int_employment_status  999.000  999.000
+2 1 age int_proximity_corona  999.000  999.000
+2 1 age int_wash_hands  999.000  999.000
+2 1 age tightness  999.000  999.000
+2 1 gender religious  999.000  999.000
+2 1 gender politx  999.000  999.000
+2 1 gender polity  999.000  999.000
+2 1 gender political_view  999.000  999.000
+2 1 gender education  999.000  999.000
+2 1 gender distancing_social_norm  999.000  999.000
+2 1 gender preference_tightness  999.000  999.000
+2 1 gender conspiracy1  999.000  999.000
+2 1 gender date  999.000  999.000
+2 1 gender dt  999.000  999.000
+2 1 gender risk_perception_infect  999.000  999.000
+2 1 gender economic_risk_perception  999.000  999.000
+2 1 gender clear_message  999.000  999.000
+2 1 gender trust_government  999.000  999.000
+2 1 gender punishing_deviation  999.000  999.000
+2 1 gender employment_status  999.000  999.000
+2 1 gender proximity_corona  999.000  999.000
+2 1 gender wash_hands  999.000  999.000
+2 1 gender int_risk_perception_infect  999.000  999.000
+2 1 gender int_economic_risk_perception  999.000  999.000
+2 1 gender int_clear_message  999.000  999.000
+2 1 gender int_trust_government  999.000  999.000
+2 1 gender int_punishing_deviation  999.000  999.000
+2 1 gender int_employment_status  999.000  999.000
+2 1 gender int_proximity_corona  999.000  999.000
+2 1 gender int_wash_hands  999.000  999.000
+2 1 gender tightness  999.000  999.000
+2 1 religious politx  999.000  999.000
+2 1 religious polity  999.000  999.000
+2 1 religious political_view  999.000  999.000
+2 1 religious education  999.000  999.000
+2 1 religious distancing_social_norm  999.000  999.000
+2 1 religious preference_tightness  999.000  999.000
+2 1 religious conspiracy1  999.000  999.000
+2 1 religious date  999.000  999.000
+2 1 religious dt  999.000  999.000
+2 1 religious risk_perception_infect  999.000  999.000
+2 1 religious economic_risk_perception  999.000  999.000
+2 1 religious clear_message  999.000  999.000
+2 1 religious trust_government  999.000  999.000
+2 1 religious punishing_deviation  999.000  999.000
+2 1 religious employment_status  999.000  999.000
+2 1 religious proximity_corona  999.000  999.000
+2 1 religious wash_hands  999.000  999.000
+2 1 religious int_risk_perception_infect  999.000  999.000
+2 1 religious int_economic_risk_perception  999.000  999.000
+2 1 religious int_clear_message  999.000  999.000
+2 1 religious int_trust_government  999.000  999.000
+2 1 religious int_punishing_deviation  999.000  999.000
+2 1 religious int_employment_status  999.000  999.000
+2 1 religious int_proximity_corona  999.000  999.000
+2 1 religious int_wash_hands  999.000  999.000
+2 1 religious tightness  999.000  999.000
+2 1 politx polity  999.000  999.000
+2 1 politx political_view  999.000  999.000
+2 1 politx education  999.000  999.000
+2 1 politx distancing_social_norm  999.000  999.000
+2 1 politx preference_tightness  999.000  999.000
+2 1 politx conspiracy1  999.000  999.000
+2 1 politx date  999.000  999.000
+2 1 politx dt  999.000  999.000
+2 1 politx risk_perception_infect  999.000  999.000
+2 1 politx economic_risk_perception  999.000  999.000
+2 1 politx clear_message  999.000  999.000
+2 1 politx trust_government  999.000  999.000
+2 1 politx punishing_deviation  999.000  999.000
+2 1 politx employment_status  999.000  999.000
+2 1 politx proximity_corona  999.000  999.000
+2 1 politx wash_hands  999.000  999.000
+2 1 politx int_risk_perception_infect  999.000  999.000
+2 1 politx int_economic_risk_perception  999.000  999.000
+2 1 politx int_clear_message  999.000  999.000
+2 1 politx int_trust_government  999.000  999.000
+2 1 politx int_punishing_deviation  999.000  999.000
+2 1 politx int_employment_status  999.000  999.000
+2 1 politx int_proximity_corona  999.000  999.000
+2 1 politx int_wash_hands  999.000  999.000
+2 1 politx tightness  999.000  999.000
+2 1 polity political_view  999.000  999.000
+2 1 polity education  999.000  999.000
+2 1 polity distancing_social_norm  999.000  999.000
+2 1 polity preference_tightness  999.000  999.000
+2 1 polity conspiracy1  999.000  999.000
+2 1 polity date  999.000  999.000
+2 1 polity dt  999.000  999.000
+2 1 polity risk_perception_infect  999.000  999.000
+2 1 polity economic_risk_perception  999.000  999.000
+2 1 polity clear_message  999.000  999.000
+2 1 polity trust_government  999.000  999.000
+2 1 polity punishing_deviation  999.000  999.000
+2 1 polity employment_status  999.000  999.000
+2 1 polity proximity_corona  999.000  999.000
+2 1 polity wash_hands  999.000  999.000
+2 1 polity int_risk_perception_infect  999.000  999.000
+2 1 polity int_economic_risk_perception  999.000  999.000
+2 1 polity int_clear_message  999.000  999.000
+2 1 polity int_trust_government  999.000  999.000
+2 1 polity int_punishing_deviation  999.000  999.000
+2 1 polity int_employment_status  999.000  999.000
+2 1 polity int_proximity_corona  999.000  999.000
+2 1 polity int_wash_hands  999.000  999.000
+2 1 polity tightness  999.000  999.000
+2 1 political_view education  999.000  999.000
+2 1 political_view distancing_social_norm  999.000  999.000
+2 1 political_view preference_tightness  999.000  999.000
+2 1 political_view conspiracy1  999.000  999.000
+2 1 political_view date  999.000  999.000
+2 1 political_view dt  999.000  999.000
+2 1 political_view risk_perception_infect  999.000  999.000
+2 1 political_view economic_risk_perception  999.000  999.000
+2 1 political_view clear_message  999.000  999.000
+2 1 political_view trust_government  999.000  999.000
+2 1 political_view punishing_deviation  999.000  999.000
+2 1 political_view employment_status  999.000  999.000
+2 1 political_view proximity_corona  999.000  999.000
+2 1 political_view wash_hands  999.000  999.000
+2 1 political_view int_risk_perception_infect  999.000  999.000
+2 1 political_view int_economic_risk_perception  999.000  999.000
+2 1 political_view int_clear_message  999.000  999.000
+2 1 political_view int_trust_government  999.000  999.000
+2 1 political_view int_punishing_deviation  999.000  999.000
+2 1 political_view int_employment_status  999.000  999.000
+2 1 political_view int_proximity_corona  999.000  999.000
+2 1 political_view int_wash_hands  999.000  999.000
+2 1 political_view tightness  999.000  999.000
+2 1 education distancing_social_norm  999.000  999.000
+2 1 education preference_tightness  999.000  999.000
+2 1 education conspiracy1  999.000  999.000
+2 1 education date  999.000  999.000
+2 1 education dt  999.000  999.000
+2 1 education risk_perception_infect  999.000  999.000
+2 1 education economic_risk_perception  999.000  999.000
+2 1 education clear_message  999.000  999.000
+2 1 education trust_government  999.000  999.000
+2 1 education punishing_deviation  999.000  999.000
+2 1 education employment_status  999.000  999.000
+2 1 education proximity_corona  999.000  999.000
+2 1 education wash_hands  999.000  999.000
+2 1 education int_risk_perception_infect  999.000  999.000
+2 1 education int_economic_risk_perception  999.000  999.000
+2 1 education int_clear_message  999.000  999.000
+2 1 education int_trust_government  999.000  999.000
+2 1 education int_punishing_deviation  999.000  999.000
+2 1 education int_employment_status  999.000  999.000
+2 1 education int_proximity_corona  999.000  999.000
+2 1 education int_wash_hands  999.000  999.000
+2 1 education tightness  999.000  999.000
+2 1 distancing_social_norm preference_tightness  999.000  999.000
+2 1 distancing_social_norm conspiracy1  999.000  999.000
+2 1 distancing_social_norm date  999.000  999.000
+2 1 distancing_social_norm dt  999.000  999.000
+2 1 distancing_social_norm risk_perception_infect  999.000  999.000
+2 1 distancing_social_norm economic_risk_perception  999.000  999.000
+2 1 distancing_social_norm clear_message  999.000  999.000
+2 1 distancing_social_norm trust_government  999.000  999.000
+2 1 distancing_social_norm punishing_deviation  999.000  999.000
+2 1 distancing_social_norm employment_status  999.000  999.000
+2 1 distancing_social_norm proximity_corona  999.000  999.000
+2 1 distancing_social_norm wash_hands  999.000  999.000
+2 1 distancing_social_norm int_risk_perception_infect  999.000  999.000
+2 1 distancing_social_norm int_economic_risk_perception  999.000  999.000
+2 1 distancing_social_norm int_clear_message  999.000  999.000
+2 1 distancing_social_norm int_trust_government  999.000  999.000
+2 1 distancing_social_norm int_punishing_deviation  999.000  999.000
+2 1 distancing_social_norm int_employment_status  999.000  999.000
+2 1 distancing_social_norm int_proximity_corona  999.000  999.000
+2 1 distancing_social_norm int_wash_hands  999.000  999.000
+2 1 distancing_social_norm tightness  999.000  999.000
+2 1 preference_tightness conspiracy1  999.000  999.000
+2 1 preference_tightness date  999.000  999.000
+2 1 preference_tightness dt  999.000  999.000
+2 1 preference_tightness risk_perception_infect  999.000  999.000
+2 1 preference_tightness economic_risk_perception  999.000  999.000
+2 1 preference_tightness clear_message  999.000  999.000
+2 1 preference_tightness trust_government  999.000  999.000
+2 1 preference_tightness punishing_deviation  999.000  999.000
+2 1 preference_tightness employment_status  999.000  999.000
+2 1 preference_tightness proximity_corona  999.000  999.000
+2 1 preference_tightness wash_hands  999.000  999.000
+2 1 preference_tightness int_risk_perception_infect  999.000  999.000
+2 1 preference_tightness int_economic_risk_perception  999.000  999.000
+2 1 preference_tightness int_clear_message  999.000  999.000
+2 1 preference_tightness int_trust_government  999.000  999.000
+2 1 preference_tightness int_punishing_deviation  999.000  999.000
+2 1 preference_tightness int_employment_status  999.000  999.000
+2 1 preference_tightness int_proximity_corona  999.000  999.000
+2 1 preference_tightness int_wash_hands  999.000  999.000
+2 1 preference_tightness tightness  999.000  999.000
+2 1 conspiracy1 date  999.000  999.000
+2 1 conspiracy1 dt  999.000  999.000
+2 1 conspiracy1 risk_perception_infect  999.000  999.000
+2 1 conspiracy1 economic_risk_perception  999.000  999.000
+2 1 conspiracy1 clear_message  999.000  999.000
+2 1 conspiracy1 trust_government  999.000  999.000
+2 1 conspiracy1 punishing_deviation  999.000  999.000
+2 1 conspiracy1 employment_status  999.000  999.000
+2 1 conspiracy1 proximity_corona  999.000  999.000
+2 1 conspiracy1 wash_hands  999.000  999.000
+2 1 conspiracy1 int_risk_perception_infect  999.000  999.000
+2 1 conspiracy1 int_economic_risk_perception  999.000  999.000
+2 1 conspiracy1 int_clear_message  999.000  999.000
+2 1 conspiracy1 int_trust_government  999.000  999.000
+2 1 conspiracy1 int_punishing_deviation  999.000  999.000
+2 1 conspiracy1 int_employment_status  999.000  999.000
+2 1 conspiracy1 int_proximity_corona  999.000  999.000
+2 1 conspiracy1 int_wash_hands  999.000  999.000
+2 1 conspiracy1 tightness  999.000  999.000
+2 1 date dt  999.000  999.000
+2 1 date risk_perception_infect  999.000  999.000
+2 1 date economic_risk_perception  999.000  999.000
+2 1 date clear_message  999.000  999.000
+2 1 date trust_government  999.000  999.000
+2 1 date punishing_deviation  999.000  999.000
+2 1 date employment_status  999.000  999.000
+2 1 date proximity_corona  999.000  999.000
+2 1 date wash_hands  999.000  999.000
+2 1 date int_risk_perception_infect  999.000  999.000
+2 1 date int_economic_risk_perception  999.000  999.000
+2 1 date int_clear_message  999.000  999.000
+2 1 date int_trust_government  999.000  999.000
+2 1 date int_punishing_deviation  999.000  999.000
+2 1 date int_employment_status  999.000  999.000
+2 1 date int_proximity_corona  999.000  999.000
+2 1 date int_wash_hands  999.000  999.000
+2 1 date tightness  999.000  999.000
+2 1 dt risk_perception_infect  999.000  999.000
+2 1 dt economic_risk_perception  999.000  999.000
+2 1 dt clear_message  999.000  999.000
+2 1 dt trust_government  999.000  999.000
+2 1 dt punishing_deviation  999.000  999.000
+2 1 dt employment_status  999.000  999.000
+2 1 dt proximity_corona  999.000  999.000
+2 1 dt wash_hands  999.000  999.000
+2 1 dt int_risk_perception_infect  999.000  999.000
+2 1 dt int_economic_risk_perception  999.000  999.000
+2 1 dt int_clear_message  999.000  999.000
+2 1 dt int_trust_government  999.000  999.000
+2 1 dt int_punishing_deviation  999.000  999.000
+2 1 dt int_employment_status  999.000  999.000
+2 1 dt int_proximity_corona  999.000  999.000
+2 1 dt int_wash_hands  999.000  999.000
+2 1 dt tightness  999.000  999.000
+2 1 risk_perception_infect economic_risk_perception  999.000  999.000
+2 1 risk_perception_infect clear_message  999.000  999.000
+2 1 risk_perception_infect trust_government  999.000  999.000
+2 1 risk_perception_infect punishing_deviation  999.000  999.000
+2 1 risk_perception_infect employment_status  999.000  999.000
+2 1 risk_perception_infect proximity_corona  999.000  999.000
+2 1 risk_perception_infect wash_hands  999.000  999.000
+2 1 risk_perception_infect int_risk_perception_infect  999.000  999.000
+2 1 risk_perception_infect int_economic_risk_perception  999.000  999.000
+2 1 risk_perception_infect int_clear_message  999.000  999.000
+2 1 risk_perception_infect int_trust_government  999.000  999.000
+2 1 risk_perception_infect int_punishing_deviation  999.000  999.000
+2 1 risk_perception_infect int_employment_status  999.000  999.000
+2 1 risk_perception_infect int_proximity_corona  999.000  999.000
+2 1 risk_perception_infect int_wash_hands  999.000  999.000
+2 1 risk_perception_infect tightness  999.000  999.000
+2 1 economic_risk_perception clear_message  999.000  999.000
+2 1 economic_risk_perception trust_government  999.000  999.000
+2 1 economic_risk_perception punishing_deviation  999.000  999.000
+2 1 economic_risk_perception employment_status  999.000  999.000
+2 1 economic_risk_perception proximity_corona  999.000  999.000
+2 1 economic_risk_perception wash_hands  999.000  999.000
+2 1 economic_risk_perception int_risk_perception_infect  999.000  999.000
+2 1 economic_risk_perception int_economic_risk_perception  999.000  999.000
+2 1 economic_risk_perception int_clear_message  999.000  999.000
+2 1 economic_risk_perception int_trust_government  999.000  999.000
+2 1 economic_risk_perception int_punishing_deviation  999.000  999.000
+2 1 economic_risk_perception int_employment_status  999.000  999.000
+2 1 economic_risk_perception int_proximity_corona  999.000  999.000
+2 1 economic_risk_perception int_wash_hands  999.000  999.000
+2 1 economic_risk_perception tightness  999.000  999.000
+2 1 clear_message trust_government  999.000  999.000
+2 1 clear_message punishing_deviation  999.000  999.000
+2 1 clear_message employment_status  999.000  999.000
+2 1 clear_message proximity_corona  999.000  999.000
+2 1 clear_message wash_hands  999.000  999.000
+2 1 clear_message int_risk_perception_infect  999.000  999.000
+2 1 clear_message int_economic_risk_perception  999.000  999.000
+2 1 clear_message int_clear_message  999.000  999.000
+2 1 clear_message int_trust_government  999.000  999.000
+2 1 clear_message int_punishing_deviation  999.000  999.000
+2 1 clear_message int_employment_status  999.000  999.000
+2 1 clear_message int_proximity_corona  999.000  999.000
+2 1 clear_message int_wash_hands  999.000  999.000
+2 1 clear_message tightness  999.000  999.000
+2 1 trust_government punishing_deviation  999.000  999.000
+2 1 trust_government employment_status  999.000  999.000
+2 1 trust_government proximity_corona  999.000  999.000
+2 1 trust_government wash_hands  999.000  999.000
+2 1 trust_government int_risk_perception_infect  999.000  999.000
+2 1 trust_government int_economic_risk_perception  999.000  999.000
+2 1 trust_government int_clear_message  999.000  999.000
+2 1 trust_government int_trust_government  999.000  999.000
+2 1 trust_government int_punishing_deviation  999.000  999.000
+2 1 trust_government int_employment_status  999.000  999.000
+2 1 trust_government int_proximity_corona  999.000  999.000
+2 1 trust_government int_wash_hands  999.000  999.000
+2 1 trust_government tightness  999.000  999.000
+2 1 punishing_deviation employment_status  999.000  999.000
+2 1 punishing_deviation proximity_corona  999.000  999.000
+2 1 punishing_deviation wash_hands  999.000  999.000
+2 1 punishing_deviation int_risk_perception_infect  999.000  999.000
+2 1 punishing_deviation int_economic_risk_perception  999.000  999.000
+2 1 punishing_deviation int_clear_message  999.000  999.000
+2 1 punishing_deviation int_trust_government  999.000  999.000
+2 1 punishing_deviation int_punishing_deviation  999.000  999.000
+2 1 punishing_deviation int_employment_status  999.000  999.000
+2 1 punishing_deviation int_proximity_corona  999.000  999.000
+2 1 punishing_deviation int_wash_hands  999.000  999.000
+2 1 punishing_deviation tightness  999.000  999.000
+2 1 employment_status proximity_corona  999.000  999.000
+2 1 employment_status wash_hands  999.000  999.000
+2 1 employment_status int_risk_perception_infect  999.000  999.000
+2 1 employment_status int_economic_risk_perception  999.000  999.000
+2 1 employment_status int_clear_message  999.000  999.000
+2 1 employment_status int_trust_government  999.000  999.000
+2 1 employment_status int_punishing_deviation  999.000  999.000
+2 1 employment_status int_employment_status  999.000  999.000
+2 1 employment_status int_proximity_corona  999.000  999.000
+2 1 employment_status int_wash_hands  999.000  999.000
+2 1 employment_status tightness  999.000  999.000
+2 1 proximity_corona wash_hands  999.000  999.000
+2 1 proximity_corona int_risk_perception_infect  999.000  999.000
+2 1 proximity_corona int_economic_risk_perception  999.000  999.000
+2 1 proximity_corona int_clear_message  999.000  999.000
+2 1 proximity_corona int_trust_government  999.000  999.000
+2 1 proximity_corona int_punishing_deviation  999.000  999.000
+2 1 proximity_corona int_employment_status  999.000  999.000
+2 1 proximity_corona int_proximity_corona  999.000  999.000
+2 1 proximity_corona int_wash_hands  999.000  999.000
+2 1 proximity_corona tightness  999.000  999.000
+2 1 wash_hands int_risk_perception_infect  999.000  999.000
+2 1 wash_hands int_economic_risk_perception  999.000  999.000
+2 1 wash_hands int_clear_message  999.000  999.000
+2 1 wash_hands int_trust_government  999.000  999.000
+2 1 wash_hands int_punishing_deviation  999.000  999.000
+2 1 wash_hands int_employment_status  999.000  999.000
+2 1 wash_hands int_proximity_corona  999.000  999.000
+2 1 wash_hands int_wash_hands  999.000  999.000
+2 1 wash_hands tightness  999.000  999.000
+2 1 int_risk_perception_infect int_economic_risk_perception  999.000  999.000
+2 1 int_risk_perception_infect int_clear_message  999.000  999.000
+2 1 int_risk_perception_infect int_trust_government  999.000  999.000
+2 1 int_risk_perception_infect int_punishing_deviation  999.000  999.000
+2 1 int_risk_perception_infect int_employment_status  999.000  999.000
+2 1 int_risk_perception_infect int_proximity_corona  999.000  999.000
+2 1 int_risk_perception_infect int_wash_hands  999.000  999.000
+2 1 int_risk_perception_infect tightness  999.000  999.000
+2 1 int_economic_risk_perception int_clear_message  999.000  999.000
+2 1 int_economic_risk_perception int_trust_government  999.000  999.000
+2 1 int_economic_risk_perception int_punishing_deviation  999.000  999.000
+2 1 int_economic_risk_perception int_employment_status  999.000  999.000
+2 1 int_economic_risk_perception int_proximity_corona  999.000  999.000
+2 1 int_economic_risk_perception int_wash_hands  999.000  999.000
+2 1 int_economic_risk_perception tightness  999.000  999.000
+2 1 int_clear_message int_trust_government  999.000  999.000
+2 1 int_clear_message int_punishing_deviation  999.000  999.000
+2 1 int_clear_message int_employment_status  999.000  999.000
+2 1 int_clear_message int_proximity_corona  999.000  999.000
+2 1 int_clear_message int_wash_hands  999.000  999.000
+2 1 int_clear_message tightness  999.000  999.000
+2 1 int_trust_government int_punishing_deviation  999.000  999.000
+2 1 int_trust_government int_employment_status  999.000  999.000
+2 1 int_trust_government int_proximity_corona  999.000  999.000
+2 1 int_trust_government int_wash_hands  999.000  999.000
+2 1 int_trust_government tightness  999.000  999.000
+2 1 int_punishing_deviation int_employment_status  999.000  999.000
+2 1 int_punishing_deviation int_proximity_corona  999.000  999.000
+2 1 int_punishing_deviation int_wash_hands  999.000  999.000
+2 1 int_punishing_deviation tightness  999.000  999.000
+2 1 int_employment_status int_proximity_corona  999.000  999.000
+2 1 int_employment_status int_wash_hands  999.000  999.000
+2 1 int_employment_status tightness  999.000  999.000
+2 1 int_proximity_corona int_wash_hands  999.000  999.000
+2 1 int_proximity_corona tightness  999.000  999.000
+2 1 int_wash_hands tightness  999.000  999.000

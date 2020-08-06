@@ -1,0 +1,63 @@
+TITLE:
+quarantine
+DATA:
+FILE = "quarantine_c58d3a9790da0d3be84f7d11510baa05.dat";
+ 
+VARIABLE:
+NAMES = id country DV_quarantine age gender religious politx polity political_view
+     education distancing_social_norm preference_tightness conspiracy1 date Dt
+     risk_perception_infect economic_risk_perception clear_message trust_government
+     punishing_deviation employment_status proximity_corona quarantine tightness; 
+ MISSING=.;
+ CLUSTER = country id;
+WITHIN = 
+date
+Dt
+risk_perception_infect
+economic_risk_perception
+clear_message
+trust_government
+punishing_deviation
+employment_status
+proximity_corona
+quarantine
+age
+gender
+religious
+politx
+polity
+political_view
+education
+distancing_social_norm
+preference_tightness
+conspiracy1
+;
+BETWEEN = tightness;
+ANALYSIS:
+TYPE = COMPLEX TWOLEVEL RANDOM;
+MODEL:
+%WITHIN%
+s1 | DV_quarantine ON date;
+s2 | DV_quarantine ON Dt;
+s3 | DV_quarantine ON risk_perception_infect;
+s4 | DV_quarantine ON economic_risk_perception;
+s5 | DV_quarantine ON clear_message;
+s6 | DV_quarantine ON trust_government;
+s7 | DV_quarantine ON punishing_deviation;
+s8 | DV_quarantine ON employment_status;
+s9 | DV_quarantine ON proximity_corona;
+s10 | DV_quarantine ON quarantine;
+s11 | DV_quarantine ON age;
+s12 | DV_quarantine ON gender;
+s13 | DV_quarantine ON religious;
+s14 | DV_quarantine ON politx;
+s15 | DV_quarantine ON polity;
+s16 | DV_quarantine ON political_view;
+s17 | DV_quarantine ON education;
+s18 | DV_quarantine ON distancing_social_norm;
+s19 | DV_quarantine ON preference_tightness;
+s20 | DV_quarantine ON conspiracy1;
+%BETWEEN%
+DV_quarantine ON tightness;
+OUTPUT:
+TECH1 TECH8 stdyx;

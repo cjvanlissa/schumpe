@@ -1,0 +1,57 @@
+TITLE:
+willvacc
+DATA:
+FILE = "willvacc_382f47f5538b87893f3e840d2cbc75d4.dat";
+ 
+VARIABLE:
+NAMES = id country DV_willvacc age gender religious politx polity political_view
+     education risk_perception_infect economic_risk_perception clear_message
+     trust_government punishing_deviation employment_status proximity_corona date Dt
+     willvacc tightness; 
+ MISSING=.;
+ CLUSTER = country id;
+WITHIN = 
+date
+Dt
+willvacc
+age
+gender
+religious
+politx
+polity
+political_view
+education
+risk_perception_infect
+economic_risk_perception
+clear_message
+trust_government
+punishing_deviation
+employment_status
+proximity_corona
+;
+BETWEEN = tightness;
+ANALYSIS:
+TYPE = COMPLEX TWOLEVEL RANDOM;
+MODEL:
+%WITHIN%
+s1 | DV_willvacc ON date;
+s2 | DV_willvacc ON Dt;
+s3 | DV_willvacc ON willvacc;
+s4 | DV_willvacc ON age;
+s5 | DV_willvacc ON gender;
+s6 | DV_willvacc ON religious;
+s7 | DV_willvacc ON politx;
+s8 | DV_willvacc ON polity;
+s9 | DV_willvacc ON political_view;
+s10 | DV_willvacc ON education;
+s11 | DV_willvacc ON risk_perception_infect;
+s12 | DV_willvacc ON economic_risk_perception;
+s13 | DV_willvacc ON clear_message;
+s14 | DV_willvacc ON trust_government;
+s15 | DV_willvacc ON punishing_deviation;
+s16 | DV_willvacc ON employment_status;
+s17 | DV_willvacc ON proximity_corona;
+%BETWEEN%
+DV_willvacc ON tightness;
+OUTPUT:
+TECH1 TECH8 stdyx;

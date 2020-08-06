@@ -1,0 +1,64 @@
+TITLE:
+mandatory_vaccination
+DATA:
+FILE = "mandatory_vaccination_b7fbc5d44adffb2053cf38fb6a5933f6.dat";
+ 
+VARIABLE:
+NAMES = id country DV_mandatory_vaccination age gender religious politx polity
+     political_view education distancing_social_norm preference_tightness
+     conspiracy1 date Dt risk_perception_infect economic_risk_perception
+     clear_message trust_government punishing_deviation employment_status
+     proximity_corona mandatory_vaccination tightness; 
+ MISSING=.;
+ CLUSTER = country id;
+WITHIN = 
+date
+Dt
+risk_perception_infect
+economic_risk_perception
+clear_message
+trust_government
+punishing_deviation
+employment_status
+proximity_corona
+mandatory_vaccination
+age
+gender
+religious
+politx
+polity
+political_view
+education
+distancing_social_norm
+preference_tightness
+conspiracy1
+;
+BETWEEN = tightness;
+ANALYSIS:
+TYPE = COMPLEX TWOLEVEL RANDOM;
+MODEL:
+%WITHIN%
+s1 | DV_mandatory_vaccination ON date;
+s2 | DV_mandatory_vaccination ON Dt;
+s3 | DV_mandatory_vaccination ON risk_perception_infect;
+s4 | DV_mandatory_vaccination ON economic_risk_perception;
+s5 | DV_mandatory_vaccination ON clear_message;
+s6 | DV_mandatory_vaccination ON trust_government;
+s7 | DV_mandatory_vaccination ON punishing_deviation;
+s8 | DV_mandatory_vaccination ON employment_status;
+s9 | DV_mandatory_vaccination ON proximity_corona;
+s10 | DV_mandatory_vaccination ON mandatory_vaccination;
+s11 | DV_mandatory_vaccination ON age;
+s12 | DV_mandatory_vaccination ON gender;
+s13 | DV_mandatory_vaccination ON religious;
+s14 | DV_mandatory_vaccination ON politx;
+s15 | DV_mandatory_vaccination ON polity;
+s16 | DV_mandatory_vaccination ON political_view;
+s17 | DV_mandatory_vaccination ON education;
+s18 | DV_mandatory_vaccination ON distancing_social_norm;
+s19 | DV_mandatory_vaccination ON preference_tightness;
+s20 | DV_mandatory_vaccination ON conspiracy1;
+%BETWEEN%
+DV_mandatory_vaccination ON tightness;
+OUTPUT:
+TECH1 TECH8 stdyx;

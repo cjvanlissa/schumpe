@@ -1,0 +1,63 @@
+TITLE:
+avoid_crowd
+DATA:
+FILE = "avoid_crowd_e1f756551ae61760d61c7b5cee4afe0f.dat";
+ 
+VARIABLE:
+NAMES = id country DV_avoid_crowd age gender religious politx polity political_view
+     education distancing_social_norm preference_tightness conspiracy1 date Dt
+     risk_perception_infect economic_risk_perception clear_message trust_government
+     punishing_deviation employment_status proximity_corona avoid_crowd tightness; 
+ MISSING=.;
+ CLUSTER = country id;
+WITHIN = 
+date
+Dt
+risk_perception_infect
+economic_risk_perception
+clear_message
+trust_government
+punishing_deviation
+employment_status
+proximity_corona
+avoid_crowd
+age
+gender
+religious
+politx
+polity
+political_view
+education
+distancing_social_norm
+preference_tightness
+conspiracy1
+;
+BETWEEN = tightness;
+ANALYSIS:
+TYPE = COMPLEX TWOLEVEL RANDOM;
+MODEL:
+%WITHIN%
+s1 | DV_avoid_crowd ON date;
+s2 | DV_avoid_crowd ON Dt;
+s3 | DV_avoid_crowd ON risk_perception_infect;
+s4 | DV_avoid_crowd ON economic_risk_perception;
+s5 | DV_avoid_crowd ON clear_message;
+s6 | DV_avoid_crowd ON trust_government;
+s7 | DV_avoid_crowd ON punishing_deviation;
+s8 | DV_avoid_crowd ON employment_status;
+s9 | DV_avoid_crowd ON proximity_corona;
+s10 | DV_avoid_crowd ON avoid_crowd;
+s11 | DV_avoid_crowd ON age;
+s12 | DV_avoid_crowd ON gender;
+s13 | DV_avoid_crowd ON religious;
+s14 | DV_avoid_crowd ON politx;
+s15 | DV_avoid_crowd ON polity;
+s16 | DV_avoid_crowd ON political_view;
+s17 | DV_avoid_crowd ON education;
+s18 | DV_avoid_crowd ON distancing_social_norm;
+s19 | DV_avoid_crowd ON preference_tightness;
+s20 | DV_avoid_crowd ON conspiracy1;
+%BETWEEN%
+DV_avoid_crowd ON tightness;
+OUTPUT:
+TECH1 TECH8 stdyx;

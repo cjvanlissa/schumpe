@@ -222,7 +222,7 @@ for(thisdv in vars$dv){
       make_invar[which(pred_time_var == this_pred)] <- TRUE
     }
   }
-  
+  becomes_invar <- pred_time_var[make_invar]
   pred_invar <- c(pred_invar, pred_time_var[make_invar])
   pred_time_var <- pred_time_var[keep_timevar]
   
@@ -230,7 +230,9 @@ for(thisdv in vars$dv){
   use_data <- t(sapply(c(thisdv, pred_time_var), function(x){
     the_waves %in% names(thisdv_preds[[x]])[names(thisdv_preds[[x]]) %in% use_waves]
   }))
-  use_data[2:nrow(use_data), ncol(use_data)] <- FALSE
+  if(nrow(use_data) > 1){
+    use_data[2:nrow(use_data), ncol(use_data)] <- FALSE
+  }
   colnames(use_data) <- the_waves
   df_plot <- as.data.frame.table(use_data)
   df_plot[1:2] <- lapply(df_plot[1:2], ordered)
@@ -254,14 +256,12 @@ for(thisdv in vars$dv){
   
   df_anal[center_these] <-  sapply(df_anal[center_these], function(x){as.vector(scale(x, scale = TRUE))})
   
-  df_anal[paste0("int_", pred_time_var)] <- lapply(df_anal[pred_time_var], function(x){x*df_anal$Dt})
-  pred_time_var <- c("date", "Dt", pred_time_var, paste0("int_", pred_time_var))
+  pred_time_var <- c("date", "Dt", pred_time_var)
 
   use_these <- c(pred_invar, pred_time_var, "tightness")
-  use_these <- use_these[!use_these == "int_date"]
   df_anal <- df_anal[!is.na(df_anal$Dt), ]
-  rename <- c("protest_containment_measures")
-  names(rename) <- "contain_protest"
+  rename <- c("protest_containment_measures", "social_contact_friendsandfamily", "leave_house_leisure_others", "willingness_vaccinated")
+  names(rename) <- c("contain_protest", "frienfam", "leavleis", "willvacc")
   for(i in 1:length(rename)){
     pred_time_var <- gsub(rename[i], names(rename)[i], pred_time_var)
     names(df_anal) <- gsub(rename[i], names(rename)[i], names(df_anal))
@@ -270,33 +270,44 @@ for(thisdv in vars$dv){
   }
   
 # Make Mplus model object
+
   mod <- mplusObject(
     TITLE = thisdv,
     VARIABLE = paste0(c(
       "CLUSTER = country id;",
-      paste0(c("WITHIN = ", pred_time_var, ";"), collapse = "\n"),
-      paste0(c("BETWEEN = (country) tightness", paste0("(id) ", pred_invar)), collapse = "\n"), ";"), collapse = "\n"),
-    ANALYSIS = "TYPE = THREELEVEL RANDOM;",
+      paste0(c("WITHIN = ", pred_time_var, pred_invar, ";"), collapse = "\n"),
+      "BETWEEN = tightness;"), collapse = "\n"),
+    ANALYSIS = "TYPE = COMPLEX TWOLEVEL RANDOM;",
     MODEL = c(
       "%WITHIN%",
-      paste0(paste0("DV_", thisdv), " ON ", c(pred_time_var, thisdv), ";"),
-      "%BETWEEN id%",
-      paste0(paste0("DV_", thisdv), " ON ", pred_invar, ";"),
-      "%BETWEEN country%",
+      paste0("s", 1:length(c(pred_time_var, pred_invar)), " | ", paste0("DV_", thisdv), " ON ", c(c(pred_time_var, pred_invar)), ";"),
+      "%BETWEEN%",
       paste0(paste0("DV_", thisdv), " ON ", "tightness", ";")),
     OUTPUT = "TECH1 TECH8 stdyx;",
     rdata = df_anal[c("id", "country", paste0("DV_", thisdv), use_these)]
   )
   # Estimate Mplus model
-  res <- mplusModeler(mod, modelout = paste0(thisdv, ".inp"), run = 1L)
+  tryCatch({
+    res <- mplusModeler(mod, modelout = paste0(thisdv, ".inp"), run = 1L)
+    
+    tab <- table_results(res, columns = NULL)
+    tab <- tab[grepl("^(T|S)", tab$param), ]
+    for(i in 1:length(c(pred_time_var, pred_invar))){
+      tab$param <- gsub(paste0("^S", i, "$"), c(pred_time_var, pred_invar)[i], tab$param)
+    }
+    tab <- tab[, c("paramheader", "param", "est_sig", "pval", "confint")]
+    write.csv(tab, paste0("results_", thisdv, ".csv"), row.names = FALSE)
+    
+    fit <- SummaryTable(res, keepCols = c("Title", "LL", "Parameters", "AIC", "BIC", "RMSEA_Estimate", "CFI", "TLI"), type = "none")
+    write.table(fit, "model_fits.csv", append = TRUE, sep = "\t", row.names = FALSE, col.names = FALSE)
+  }, error = function(e){
+    fit <- structure(list(Title = thisdv, LL = NA, Parameters = NA, 
+                          AIC = NA, BIC = NA), row.names = c(NA, -1L), class = c("data.frame", 
+                                                                                             "mplus.summaries"))
+    write.table(fit, "model_fits.csv", append = TRUE, sep = "\t", row.names = FALSE, col.names = FALSE)
+    message("Model failed for variable ", thisdv)
+    })
   
-  tab <- table_results(res, columns = NULL)
-  tab <- tab[tab$op == "~", c("param", "level", "est_sig", "pval", "confint")]
-  tab$param <- c(pred_time_var, pred_invar, thisdv, "Dt", "tightness")[pmatch(tolower(tab$param), c(pred_time_var, pred_invar, thisdv, "Dt", "tightness"))]
-  write.csv(tab, paste0("results_", thisdv, ".csv"), row.names = FALSE)
-  
-  fit <- SummaryTable(res, keepCols = c("Title", "LL", "Parameters", "AIC", "BIC", "RMSEA_Estimate", "CFI", "TLI"), type = "none")
-  write.table(fit, "model_fits.csv", append = TRUE, sep = "\t", row.names = FALSE, col.names = FALSE)
 }
 
 

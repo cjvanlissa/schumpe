@@ -1,0 +1,64 @@
+TITLE:
+days_left_house
+DATA:
+FILE = "days_left_house_e37ae0f5901aa22a00f61f20c1502d8f.dat";
+ 
+VARIABLE:
+NAMES = id country DV_days_left_house age gender religious politx polity
+     political_view education date Dt risk_perception_infect
+     economic_risk_perception distancing_social_norm clear_message trust_government
+     preference_tightness punishing_deviation conspiracy1 employment_status
+     proximity_corona days_left_house tightness; 
+ MISSING=.;
+ CLUSTER = country id;
+WITHIN = 
+date
+Dt
+risk_perception_infect
+economic_risk_perception
+distancing_social_norm
+clear_message
+trust_government
+preference_tightness
+punishing_deviation
+conspiracy1
+employment_status
+proximity_corona
+days_left_house
+age
+gender
+religious
+politx
+polity
+political_view
+education
+;
+BETWEEN = tightness;
+ANALYSIS:
+TYPE = COMPLEX TWOLEVEL RANDOM;
+MODEL:
+%WITHIN%
+s1 | DV_days_left_house ON date;
+s2 | DV_days_left_house ON Dt;
+s3 | DV_days_left_house ON risk_perception_infect;
+s4 | DV_days_left_house ON economic_risk_perception;
+s5 | DV_days_left_house ON distancing_social_norm;
+s6 | DV_days_left_house ON clear_message;
+s7 | DV_days_left_house ON trust_government;
+s8 | DV_days_left_house ON preference_tightness;
+s9 | DV_days_left_house ON punishing_deviation;
+s10 | DV_days_left_house ON conspiracy1;
+s11 | DV_days_left_house ON employment_status;
+s12 | DV_days_left_house ON proximity_corona;
+s13 | DV_days_left_house ON days_left_house;
+s14 | DV_days_left_house ON age;
+s15 | DV_days_left_house ON gender;
+s16 | DV_days_left_house ON religious;
+s17 | DV_days_left_house ON politx;
+s18 | DV_days_left_house ON polity;
+s19 | DV_days_left_house ON political_view;
+s20 | DV_days_left_house ON education;
+%BETWEEN%
+DV_days_left_house ON tightness;
+OUTPUT:
+TECH1 TECH8 stdyx;

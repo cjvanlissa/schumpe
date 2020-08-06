@@ -1,0 +1,57 @@
+TITLE:
+willingness_vaccinated
+DATA:
+FILE = "willingness_vaccinated_ae3550cfa38e3115cb1abb2d1fc42b82.dat";
+ 
+VARIABLE:
+NAMES = id country DV_willingness_vaccinated age gender religious politx polity
+     political_view education risk_perception_infect economic_risk_perception
+     clear_message trust_government punishing_deviation employment_status
+     proximity_corona date Dt willingness_vaccinated tightness; 
+ MISSING=.;
+ CLUSTER = country id;
+WITHIN = 
+date
+Dt
+willingness_vaccinated
+age
+gender
+religious
+politx
+polity
+political_view
+education
+risk_perception_infect
+economic_risk_perception
+clear_message
+trust_government
+punishing_deviation
+employment_status
+proximity_corona
+;
+BETWEEN = tightness;
+ANALYSIS:
+TYPE = COMPLEX TWOLEVEL RANDOM;
+MODEL:
+%WITHIN%
+s1 | DV_willingness_vaccinated ON date;
+s2 | DV_willingness_vaccinated ON Dt;
+s3 | DV_willingness_vaccinated ON willingness_vaccinated;
+s4 | DV_willingness_vaccinated ON age;
+s5 | DV_willingness_vaccinated ON gender;
+s6 | DV_willingness_vaccinated ON religious;
+s7 | DV_willingness_vaccinated ON politx;
+s8 | DV_willingness_vaccinated ON polity;
+s9 | DV_willingness_vaccinated ON political_view;
+s10 | DV_willingness_vaccinated ON education;
+s11 | DV_willingness_vaccinated ON risk_perception_infect;
+s12 | DV_willingness_vaccinated ON economic_risk_perception;
+s13 | DV_willingness_vaccinated ON clear_message;
+s14 | DV_willingness_vaccinated ON trust_government;
+s15 | DV_willingness_vaccinated ON punishing_deviation;
+s16 | DV_willingness_vaccinated ON employment_status;
+s17 | DV_willingness_vaccinated ON proximity_corona;
+%BETWEEN%
+DV_willingness_vaccinated ON tightness;
+OUTPUT:
+TECH1 TECH8 stdyx;

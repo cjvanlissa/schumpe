@@ -1,16 +1,13 @@
 TITLE:
 wash_hands
 DATA:
-FILE = "wash_hands_16aa1c4dc9900ae754268e4dbd5bf8e7.dat";
+FILE = "wash_hands_e2e0344e8f7073828a417da1253aee8c.dat";
  
 VARIABLE:
 NAMES = id country DV_wash_hands age gender religious politx polity political_view
      education distancing_social_norm preference_tightness conspiracy1 date Dt
      risk_perception_infect economic_risk_perception clear_message trust_government
-     punishing_deviation employment_status proximity_corona wash_hands
-     int_risk_perception_infect int_economic_risk_perception int_clear_message
-     int_trust_government int_punishing_deviation int_employment_status
-     int_proximity_corona int_wash_hands tightness; 
+     punishing_deviation employment_status proximity_corona wash_hands tightness; 
  MISSING=.;
  CLUSTER = country id;
 WITHIN = 
@@ -24,62 +21,43 @@ punishing_deviation
 employment_status
 proximity_corona
 wash_hands
-int_risk_perception_infect
-int_economic_risk_perception
-int_clear_message
-int_trust_government
-int_punishing_deviation
-int_employment_status
-int_proximity_corona
-int_wash_hands
+age
+gender
+religious
+politx
+polity
+political_view
+education
+distancing_social_norm
+preference_tightness
+conspiracy1
 ;
-BETWEEN = (country) tightness
-(id) age
-(id) gender
-(id) religious
-(id) politx
-(id) polity
-(id) political_view
-(id) education
-(id) distancing_social_norm
-(id) preference_tightness
-(id) conspiracy1
-;
+BETWEEN = tightness;
 ANALYSIS:
-TYPE = THREELEVEL RANDOM;
+TYPE = COMPLEX TWOLEVEL RANDOM;
 MODEL:
 %WITHIN%
-DV_wash_hands ON date;
-DV_wash_hands ON Dt;
-DV_wash_hands ON risk_perception_infect;
-DV_wash_hands ON economic_risk_perception;
-DV_wash_hands ON clear_message;
-DV_wash_hands ON trust_government;
-DV_wash_hands ON punishing_deviation;
-DV_wash_hands ON employment_status;
-DV_wash_hands ON proximity_corona;
-DV_wash_hands ON wash_hands;
-DV_wash_hands ON int_risk_perception_infect;
-DV_wash_hands ON int_economic_risk_perception;
-DV_wash_hands ON int_clear_message;
-DV_wash_hands ON int_trust_government;
-DV_wash_hands ON int_punishing_deviation;
-DV_wash_hands ON int_employment_status;
-DV_wash_hands ON int_proximity_corona;
-DV_wash_hands ON int_wash_hands;
-DV_wash_hands ON wash_hands;
-%BETWEEN id%
-DV_wash_hands ON age;
-DV_wash_hands ON gender;
-DV_wash_hands ON religious;
-DV_wash_hands ON politx;
-DV_wash_hands ON polity;
-DV_wash_hands ON political_view;
-DV_wash_hands ON education;
-DV_wash_hands ON distancing_social_norm;
-DV_wash_hands ON preference_tightness;
-DV_wash_hands ON conspiracy1;
-%BETWEEN country%
+s1 | DV_wash_hands ON date;
+s2 | DV_wash_hands ON Dt;
+s3 | DV_wash_hands ON risk_perception_infect;
+s4 | DV_wash_hands ON economic_risk_perception;
+s5 | DV_wash_hands ON clear_message;
+s6 | DV_wash_hands ON trust_government;
+s7 | DV_wash_hands ON punishing_deviation;
+s8 | DV_wash_hands ON employment_status;
+s9 | DV_wash_hands ON proximity_corona;
+s10 | DV_wash_hands ON wash_hands;
+s11 | DV_wash_hands ON age;
+s12 | DV_wash_hands ON gender;
+s13 | DV_wash_hands ON religious;
+s14 | DV_wash_hands ON politx;
+s15 | DV_wash_hands ON polity;
+s16 | DV_wash_hands ON political_view;
+s17 | DV_wash_hands ON education;
+s18 | DV_wash_hands ON distancing_social_norm;
+s19 | DV_wash_hands ON preference_tightness;
+s20 | DV_wash_hands ON conspiracy1;
+%BETWEEN%
 DV_wash_hands ON tightness;
 OUTPUT:
-TECH1 TECH8;
+TECH1 TECH8 stdyx;
