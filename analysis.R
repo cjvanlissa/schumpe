@@ -178,8 +178,9 @@ the_waves <- unique(df_long$time)
 write.table(t(c("Title", "LL", "Parameters", "AIC", "BIC", "RMSEA_Estimate", 
               "CFI", "TLI")), "model_fits.csv", sep = "\t", row.names = FALSE, col.names = FALSE)
 
-for(thisdv in vars$dv[2:length(vars$dv)]){
-  use_waves <- unique(df_long$time[df_long$variable == vars$dv[1]])
+
+for(thisdv in vars$dv){
+  use_waves <- unique(df_long$time[df_long$variable == thisdv])
   next_waves <- use_waves[-length(use_waves)]
   names(next_waves) <- use_waves[-1]
   
@@ -198,7 +199,7 @@ for(thisdv in vars$dv[2:length(vars$dv)]){
   df_anal <- merge(df_wide, df_nextwave, by = c("id", "time"), all.x = TRUE)
   
   df_anal$Dt <- df_anal$DV_date - df_anal$date
-  table(sign(df_anal$Dt))
+  #table(sign(df_anal$Dt))
   
   
   thisdv_preds <- tapply(df_long$time, df_long$variable, table)
@@ -253,13 +254,20 @@ for(thisdv in vars$dv[2:length(vars$dv)]){
   
   df_anal[center_these] <-  sapply(df_anal[center_these], function(x){as.vector(scale(x, scale = TRUE))})
   
-  
   df_anal[paste0("int_", pred_time_var)] <- lapply(df_anal[pred_time_var], function(x){x*df_anal$Dt})
   pred_time_var <- c("date", "Dt", pred_time_var, paste0("int_", pred_time_var))
 
   use_these <- c(pred_invar, pred_time_var, "tightness")
   use_these <- use_these[!use_these == "int_date"]
   df_anal <- df_anal[!is.na(df_anal$Dt), ]
+  rename <- c("protest_containment_measures")
+  names(rename) <- "contain_protest"
+  for(i in 1:length(rename)){
+    pred_time_var <- gsub(rename[i], names(rename)[i], pred_time_var)
+    names(df_anal) <- gsub(rename[i], names(rename)[i], names(df_anal))
+    thisdv <- gsub(rename[i], names(rename)[i], thisdv)
+    use_these <- gsub(rename[i], names(rename)[i], use_these)
+  }
   
 # Make Mplus model object
   mod <- mplusObject(
@@ -276,7 +284,7 @@ for(thisdv in vars$dv[2:length(vars$dv)]){
       paste0(paste0("DV_", thisdv), " ON ", pred_invar, ";"),
       "%BETWEEN country%",
       paste0(paste0("DV_", thisdv), " ON ", "tightness", ";")),
-    OUTPUT = "TECH1 TECH8;",
+    OUTPUT = "TECH1 TECH8 stdyx;",
     rdata = df_anal[c("id", "country", paste0("DV_", thisdv), use_these)]
   )
   # Estimate Mplus model
