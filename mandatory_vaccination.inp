@@ -1,14 +1,14 @@
 TITLE:
 mandatory_vaccination
 DATA:
-FILE = "mandatory_vaccination_b7fbc5d44adffb2053cf38fb6a5933f6.dat";
+FILE = "mandatory_vaccination_7fce59fab00407ab497a4eff91e1a5d3.dat";
  
 VARIABLE:
 NAMES = id country DV_mandatory_vaccination age gender religious politx polity
-     political_view education distancing_social_norm preference_tightness
-     conspiracy1 date Dt risk_perception_infect economic_risk_perception
-     clear_message trust_government punishing_deviation employment_status
-     proximity_corona mandatory_vaccination tightness; 
+     education distancing_social_norm preference_tightness conspiracy1 date Dt
+     risk_perception_infect economic_risk_perception clear_message trust_government
+     punishing_deviation employment_status proximity_corona mandatory_vaccination
+     tightness; 
  MISSING=.;
  CLUSTER = country id;
 WITHIN = 
@@ -27,7 +27,6 @@ gender
 religious
 politx
 polity
-political_view
 education
 distancing_social_norm
 preference_tightness
@@ -53,11 +52,10 @@ s12 | DV_mandatory_vaccination ON gender;
 s13 | DV_mandatory_vaccination ON religious;
 s14 | DV_mandatory_vaccination ON politx;
 s15 | DV_mandatory_vaccination ON polity;
-s16 | DV_mandatory_vaccination ON political_view;
-s17 | DV_mandatory_vaccination ON education;
-s18 | DV_mandatory_vaccination ON distancing_social_norm;
-s19 | DV_mandatory_vaccination ON preference_tightness;
-s20 | DV_mandatory_vaccination ON conspiracy1;
+s16 | DV_mandatory_vaccination ON education;
+s17 | DV_mandatory_vaccination ON distancing_social_norm;
+s18 | DV_mandatory_vaccination ON preference_tightness;
+s19 | DV_mandatory_vaccination ON conspiracy1;
 %BETWEEN%
 DV_mandatory_vaccination ON tightness;
 OUTPUT:

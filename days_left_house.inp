@@ -1,14 +1,13 @@
 TITLE:
 days_left_house
 DATA:
-FILE = "days_left_house_e37ae0f5901aa22a00f61f20c1502d8f.dat";
+FILE = "days_left_house_43a632120c0b8b00595c06e9cf57dce0.dat";
  
 VARIABLE:
-NAMES = id country DV_days_left_house age gender religious politx polity
-     political_view education date Dt risk_perception_infect
-     economic_risk_perception distancing_social_norm clear_message trust_government
-     preference_tightness punishing_deviation conspiracy1 employment_status
-     proximity_corona days_left_house tightness; 
+NAMES = id country DV_days_left_house age gender religious politx polity education
+     date Dt risk_perception_infect economic_risk_perception distancing_social_norm
+     clear_message trust_government preference_tightness punishing_deviation
+     conspiracy1 employment_status proximity_corona days_left_house tightness; 
  MISSING=.;
  CLUSTER = country id;
 WITHIN = 
@@ -30,7 +29,6 @@ gender
 religious
 politx
 polity
-political_view
 education
 ;
 BETWEEN = tightness;
@@ -56,8 +54,7 @@ s15 | DV_days_left_house ON gender;
 s16 | DV_days_left_house ON religious;
 s17 | DV_days_left_house ON politx;
 s18 | DV_days_left_house ON polity;
-s19 | DV_days_left_house ON political_view;
-s20 | DV_days_left_house ON education;
+s19 | DV_days_left_house ON education;
 %BETWEEN%
 DV_days_left_house ON tightness;
 OUTPUT:

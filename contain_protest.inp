@@ -1,12 +1,12 @@
 TITLE:
 contain_protest
 DATA:
-FILE = "contain_protest_3f803a9408e0cda97376bda9f0db3d0c.dat";
+FILE = "contain_protest_a6141595076deea139ef23d774e209b3.dat";
  
 VARIABLE:
-NAMES = id country DV_contain_protest age gender religious politx polity
-     political_view education date Dt clear_message trust_government
-     proximity_corona contain_protest tightness; 
+NAMES = id country DV_contain_protest age gender religious politx polity education
+     date Dt clear_message trust_government proximity_corona contain_protest
+     tightness; 
  MISSING=.;
  CLUSTER = country id;
 WITHIN = 
@@ -21,7 +21,6 @@ gender
 religious
 politx
 polity
-political_view
 education
 ;
 BETWEEN = tightness;
@@ -40,8 +39,7 @@ s8 | DV_contain_protest ON gender;
 s9 | DV_contain_protest ON religious;
 s10 | DV_contain_protest ON politx;
 s11 | DV_contain_protest ON polity;
-s12 | DV_contain_protest ON political_view;
-s13 | DV_contain_protest ON education;
+s12 | DV_contain_protest ON education;
 %BETWEEN%
 DV_contain_protest ON tightness;
 OUTPUT:

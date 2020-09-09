@@ -16,3 +16,4 @@
 !model_fits.csv
 !results*.csv
 .RData
+*.docx

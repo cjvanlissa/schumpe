@@ -1,14 +1,13 @@
 TITLE:
 frienfam
 DATA:
-FILE = "frienfam_cee02e606aa461bc5fd5f9dec5a6e666.dat";
+FILE = "frienfam_2c0f6576dfa83b66dce9b53f525a0274.dat";
  
 VARIABLE:
-NAMES = id country DV_frienfam age gender religious politx polity political_view
-     education date Dt risk_perception_infect economic_risk_perception
-     distancing_social_norm clear_message trust_government preference_tightness
-     punishing_deviation conspiracy1 employment_status proximity_corona frienfam
-     tightness; 
+NAMES = id country DV_frienfam age gender religious politx polity education date Dt
+     risk_perception_infect economic_risk_perception distancing_social_norm
+     clear_message trust_government preference_tightness punishing_deviation
+     conspiracy1 employment_status proximity_corona frienfam tightness; 
  MISSING=.;
  CLUSTER = country id;
 WITHIN = 
@@ -30,7 +29,6 @@ gender
 religious
 politx
 polity
-political_view
 education
 ;
 BETWEEN = tightness;
@@ -56,8 +54,7 @@ s15 | DV_frienfam ON gender;
 s16 | DV_frienfam ON religious;
 s17 | DV_frienfam ON politx;
 s18 | DV_frienfam ON polity;
-s19 | DV_frienfam ON political_view;
-s20 | DV_frienfam ON education;
+s19 | DV_frienfam ON education;
 %BETWEEN%
 DV_frienfam ON tightness;
 OUTPUT:

@@ -1,11 +1,11 @@
 TITLE:
 wash_hands
 DATA:
-FILE = "wash_hands_e2e0344e8f7073828a417da1253aee8c.dat";
+FILE = "wash_hands_bf412dbbe80bcfe14927b5fda2c49eca.dat";
  
 VARIABLE:
-NAMES = id country DV_wash_hands age gender religious politx polity political_view
-     education distancing_social_norm preference_tightness conspiracy1 date Dt
+NAMES = id country DV_wash_hands age gender religious politx polity education
+     distancing_social_norm preference_tightness conspiracy1 date Dt
      risk_perception_infect economic_risk_perception clear_message trust_government
      punishing_deviation employment_status proximity_corona wash_hands tightness; 
  MISSING=.;
@@ -26,7 +26,6 @@ gender
 religious
 politx
 polity
-political_view
 education
 distancing_social_norm
 preference_tightness
@@ -52,11 +51,10 @@ s12 | DV_wash_hands ON gender;
 s13 | DV_wash_hands ON religious;
 s14 | DV_wash_hands ON politx;
 s15 | DV_wash_hands ON polity;
-s16 | DV_wash_hands ON political_view;
-s17 | DV_wash_hands ON education;
-s18 | DV_wash_hands ON distancing_social_norm;
-s19 | DV_wash_hands ON preference_tightness;
-s20 | DV_wash_hands ON conspiracy1;
+s16 | DV_wash_hands ON education;
+s17 | DV_wash_hands ON distancing_social_norm;
+s18 | DV_wash_hands ON preference_tightness;
+s19 | DV_wash_hands ON conspiracy1;
 %BETWEEN%
 DV_wash_hands ON tightness;
 OUTPUT:

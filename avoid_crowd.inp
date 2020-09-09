@@ -1,11 +1,11 @@
 TITLE:
 avoid_crowd
 DATA:
-FILE = "avoid_crowd_e1f756551ae61760d61c7b5cee4afe0f.dat";
+FILE = "avoid_crowd_e0b5e7fa23cb099d9756ca1ba19bb8a3.dat";
  
 VARIABLE:
-NAMES = id country DV_avoid_crowd age gender religious politx polity political_view
-     education distancing_social_norm preference_tightness conspiracy1 date Dt
+NAMES = id country DV_avoid_crowd age gender religious politx polity education
+     distancing_social_norm preference_tightness conspiracy1 date Dt
      risk_perception_infect economic_risk_perception clear_message trust_government
      punishing_deviation employment_status proximity_corona avoid_crowd tightness; 
  MISSING=.;
@@ -26,7 +26,6 @@ gender
 religious
 politx
 polity
-political_view
 education
 distancing_social_norm
 preference_tightness
@@ -52,11 +51,10 @@ s12 | DV_avoid_crowd ON gender;
 s13 | DV_avoid_crowd ON religious;
 s14 | DV_avoid_crowd ON politx;
 s15 | DV_avoid_crowd ON polity;
-s16 | DV_avoid_crowd ON political_view;
-s17 | DV_avoid_crowd ON education;
-s18 | DV_avoid_crowd ON distancing_social_norm;
-s19 | DV_avoid_crowd ON preference_tightness;
-s20 | DV_avoid_crowd ON conspiracy1;
+s16 | DV_avoid_crowd ON education;
+s17 | DV_avoid_crowd ON distancing_social_norm;
+s18 | DV_avoid_crowd ON preference_tightness;
+s19 | DV_avoid_crowd ON conspiracy1;
 %BETWEEN%
 DV_avoid_crowd ON tightness;
 OUTPUT:

@@ -179,7 +179,7 @@ write.table(t(c("Title", "LL", "Parameters", "AIC", "BIC", "RMSEA_Estimate",
               "CFI", "TLI")), "model_fits.csv", sep = "\t", row.names = FALSE, col.names = FALSE)
 
 
-for(thisdv in vars$dv){
+for(thisdv in vars$dv[-1]){
   use_waves <- unique(df_long$time[df_long$variable == thisdv])
   next_waves <- use_waves[-length(use_waves)]
   names(next_waves) <- use_waves[-1]
@@ -205,6 +205,7 @@ for(thisdv in vars$dv){
   thisdv_preds <- tapply(df_long$time, df_long$variable, table)
 
   pred_invar <- c(vars$predictor, vars$control)[!c(vars$predictor, vars$control) %in% longv]
+  pred_invar <- pred_invar[!pred_invar == "political_view"]
   pred_time_var <- c(vars$predictor, vars$control)[c(vars$predictor, vars$control) %in% longv]
 
   
@@ -311,7 +312,26 @@ for(thisdv in vars$dv){
 }
 
 
+f <- list.files(pattern = "^results.+?csv$")
+f <- lapply(f, read.csv, stringsAsFactors = FALSE)
+f <- lapply(f, function(x){
+  varname <- gsub("^DV_(.+?)\\.ON$", "\\1", x$paramheader[1])
+  vs <- x[x$paramheader == "Variances", ]
+  x <- merge(x[!x$paramheader == "Variances", ], vs, by = "param", all.x = TRUE)
+  x[grep("paramheader", names(x))] <- NULL
+  names(x) <- gsub("\\.x", "_mean", names(x))
+  names(x) <- gsub("\\.y", "_var", names(x))
+  names(x)[-1] <- paste0(varname, "_", names(x)[-1])
+  x
+})
+
+out <- f[[1]]
+for(i in seq_along(f)[-1]){
+  out <- merge(out, f[[i]], by = "param", all.x = TRUE)
+  
 }
+
+write.csv(out, "results_all.csv", row.names = FALSE)
 # Tot hier
 
 

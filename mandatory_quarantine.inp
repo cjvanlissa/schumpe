@@ -1,14 +1,14 @@
 TITLE:
 mandatory_quarantine
 DATA:
-FILE = "mandatory_quarantine_4c6893c3a12e060223b4c06c71d330ef.dat";
+FILE = "mandatory_quarantine_c83282f44d9d4e7e6f2556bbdace3f12.dat";
  
 VARIABLE:
 NAMES = id country DV_mandatory_quarantine age gender religious politx polity
-     political_view education distancing_social_norm preference_tightness
-     conspiracy1 date Dt risk_perception_infect economic_risk_perception
-     clear_message trust_government punishing_deviation employment_status
-     proximity_corona mandatory_quarantine tightness; 
+     education distancing_social_norm preference_tightness conspiracy1 date Dt
+     risk_perception_infect economic_risk_perception clear_message trust_government
+     punishing_deviation employment_status proximity_corona mandatory_quarantine
+     tightness; 
  MISSING=.;
  CLUSTER = country id;
 WITHIN = 
@@ -27,7 +27,6 @@ gender
 religious
 politx
 polity
-political_view
 education
 distancing_social_norm
 preference_tightness
@@ -53,11 +52,10 @@ s12 | DV_mandatory_quarantine ON gender;
 s13 | DV_mandatory_quarantine ON religious;
 s14 | DV_mandatory_quarantine ON politx;
 s15 | DV_mandatory_quarantine ON polity;
-s16 | DV_mandatory_quarantine ON political_view;
-s17 | DV_mandatory_quarantine ON education;
-s18 | DV_mandatory_quarantine ON distancing_social_norm;
-s19 | DV_mandatory_quarantine ON preference_tightness;
-s20 | DV_mandatory_quarantine ON conspiracy1;
+s16 | DV_mandatory_quarantine ON education;
+s17 | DV_mandatory_quarantine ON distancing_social_norm;
+s18 | DV_mandatory_quarantine ON preference_tightness;
+s19 | DV_mandatory_quarantine ON conspiracy1;
 %BETWEEN%
 DV_mandatory_quarantine ON tightness;
 OUTPUT:

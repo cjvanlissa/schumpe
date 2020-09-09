@@ -1,14 +1,14 @@
 TITLE:
 social_contact_others
 DATA:
-FILE = "social_contact_others_a335024f2e6ff205569530f7d704fd6e.dat";
+FILE = "social_contact_others_afa2c50c048f72663a2313e2a0d5ac53.dat";
  
 VARIABLE:
 NAMES = id country DV_social_contact_others age gender religious politx polity
-     political_view education date Dt risk_perception_infect
-     economic_risk_perception distancing_social_norm clear_message trust_government
-     preference_tightness punishing_deviation conspiracy1 employment_status
-     proximity_corona social_contact_others tightness; 
+     education date Dt risk_perception_infect economic_risk_perception
+     distancing_social_norm clear_message trust_government preference_tightness
+     punishing_deviation conspiracy1 employment_status proximity_corona
+     social_contact_others tightness; 
  MISSING=.;
  CLUSTER = country id;
 WITHIN = 
@@ -30,7 +30,6 @@ gender
 religious
 politx
 polity
-political_view
 education
 ;
 BETWEEN = tightness;
@@ -56,8 +55,7 @@ s15 | DV_social_contact_others ON gender;
 s16 | DV_social_contact_others ON religious;
 s17 | DV_social_contact_others ON politx;
 s18 | DV_social_contact_others ON polity;
-s19 | DV_social_contact_others ON political_view;
-s20 | DV_social_contact_others ON education;
+s19 | DV_social_contact_others ON education;
 %BETWEEN%
 DV_social_contact_others ON tightness;
 OUTPUT:

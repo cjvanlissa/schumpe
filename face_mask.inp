@@ -1,12 +1,11 @@
 TITLE:
 face_mask
 DATA:
-FILE = "face_mask_48495437b3d8d27c1ede7976e3d2fe59.dat";
+FILE = "face_mask_f2397122a8b90825bba62380f12e5af7.dat";
  
 VARIABLE:
-NAMES = id country DV_face_mask age gender religious politx polity political_view
-     education date Dt clear_message trust_government proximity_corona face_mask
-     tightness; 
+NAMES = id country DV_face_mask age gender religious politx polity education date Dt
+     clear_message trust_government proximity_corona face_mask tightness; 
  MISSING=.;
  CLUSTER = country id;
 WITHIN = 
@@ -21,7 +20,6 @@ gender
 religious
 politx
 polity
-political_view
 education
 ;
 BETWEEN = tightness;
@@ -40,8 +38,7 @@ s8 | DV_face_mask ON gender;
 s9 | DV_face_mask ON religious;
 s10 | DV_face_mask ON politx;
 s11 | DV_face_mask ON polity;
-s12 | DV_face_mask ON political_view;
-s13 | DV_face_mask ON education;
+s12 | DV_face_mask ON education;
 %BETWEEN%
 DV_face_mask ON tightness;
 OUTPUT:
