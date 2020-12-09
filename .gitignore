@@ -15,5 +15,7 @@
 *.sps
 !model_fits.csv
 !results*.csv
-.RData
+*.RData
 *.docx
+!timepoints.csv
+!n_by_country.csv
