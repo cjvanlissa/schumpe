@@ -78,6 +78,7 @@ length(which(apply(dat, 1, function(x){any(x<0)})))
 df[c("responseid", "representative")] <- NULL
 names(df) <- gsub("multilevel_", "", names(df))
 df$country <- trimws(df$country)
+source("table1_descriptives.R")
 
 dummy_vars <- sapply(df, function(x){length(unique(x)) < 5})
 names(df)[dummy_vars]
@@ -179,7 +180,7 @@ write.table(t(c("Title", "LL", "Parameters", "AIC", "BIC", "RMSEA_Estimate",
               "CFI", "TLI")), "model_fits.csv", sep = "\t", row.names = FALSE, col.names = FALSE)
 
 
-for(thisdv in vars$dv[-1]){
+for(thisdv in vars$dv){
   use_waves <- unique(df_long$time[df_long$variable == thisdv])
   next_waves <- use_waves[-length(use_waves)]
   names(next_waves) <- use_waves[-1]
@@ -271,7 +272,13 @@ for(thisdv in vars$dv[-1]){
   }
   
 # Make Mplus model object
-
+  if(isTRUE(file.exists("long_id.RData"))){
+    long_id <- readRDS("long_id.RData")
+  } else {
+    long_id <- NULL
+  }
+  long_id <- unique(c(long_id, df_anal$id))
+  saveRDS(long_id, "long_id.RData")
   mod <- mplusObject(
     TITLE = thisdv,
     VARIABLE = paste0(c(
