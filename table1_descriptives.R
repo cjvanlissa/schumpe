@@ -1,5 +1,6 @@
 ids <- readRDS("long_id.RData")
 df_desc <- df
+df_desc$country <- names(char_dict$country)[df_desc$country]
 df_desc$id <- 1:nrow(df_desc)
 df_desc <- df_desc[df_desc$id %in% ids, ]
 

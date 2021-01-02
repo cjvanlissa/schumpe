@@ -1,5 +1,4 @@
 #options(scipen=999)
-
 library(foreign)
 library(worcs)
 library(lme4)
@@ -13,7 +12,13 @@ library(data.table)
 library(foreign)
 library(tidySEM)
 library(multilevel)
-
+library(MplusAutomation)
+if(!require(MissMech)){
+  library(remotes)
+  install_github("cran/MissMech")
+  library(MissMech)
+}
+run_everything <- FALSE
 # Load data
 df <- read.spss("RMD10_Birga new_data_final4.sav", to.data.frame = TRUE, use.value.labels = TRUE)
 df <- df[df$representative == "Yes", ]
@@ -24,10 +29,9 @@ names(df) <- gsub("predicyot", "predictor", names(df))
 names(df) <- gsub("political_view(?=[xy])", "polit", names(df), perl = TRUE)
 
 # Use only harmonized
-grep("harmoniz", names(df), value = TRUE)
 vnames <- gsub("_harmonized$", "", names(df))
 vnames <- gsub("(_b)?_harmonized(?=_)", "", vnames, perl = TRUE)
-vnames
+
 vnames <- table(vnames)[table(vnames) == 2]
 df[names(vnames)] <- NULL
 names(df) <- gsub("_harmonized$", "", names(df))
@@ -78,11 +82,10 @@ length(which(apply(dat, 1, function(x){any(x<0)})))
 df[c("responseid", "representative")] <- NULL
 names(df) <- gsub("multilevel_", "", names(df))
 df$country <- trimws(df$country)
-source("table1_descriptives.R")
 
 dummy_vars <- sapply(df, function(x){length(unique(x)) < 5})
-names(df)[dummy_vars]
-sapply(df[dummy_vars], table)
+#names(df)[dummy_vars]
+#sapply(df[dummy_vars], table)
 df[grep("leave_house_leisure_others", names(df))] <- lapply(df[grep("leave_house_leisure_others", names(df))], function(x){as.numeric(x)-1})
 levels(df$gender_b) <- c("0", "1", "NA")
 df$gender_b <- as.numeric(as.character(df$gender_b))
@@ -116,7 +119,7 @@ for(i in 1:2){
 # Check employment status -------------------------------------------------
 
 dat <- df[, grep("employment_status", names(df))]
-table(apply(dat, 1, function(x){length(unique(na.omit(x)))}))
+#table(apply(dat, 1, function(x){length(unique(na.omit(x)))}))
 these <- apply(dat, 1, function(x){length(unique(na.omit(x)))}) > 1
 tmp <- dat[these, ]
 
@@ -165,21 +168,30 @@ df_wide <- pivot_wider(df_long, names_from = "variable", values_from = "value")
 df_wide <- df_wide[!is.na(df_wide$date), ]
 longv <- unique(c("start_date_survey_taken", long_vars))[-1]
 longv[!longv %in% names(df_wide)]
-ICCs <- mult.icc(data.frame(df_wide[, longv]), grpid = df_wide$id)
-names(ICCs)[1] <- "id"
-desc$id <- gsub("_[bw]\\d{0,}$", "", desc$name)
-
-desc <- merge(desc, ICCs, by = "id", all.x = TRUE)
-desc <- desc[!startsWith(desc$name, "DV_"), ]
-write.csv(desc, "descriptives.csv")
+if(run_everything){
+  ICCs <- mult.icc(data.frame(df_wide[, longv]), grpid = df_wide$id)
+  names(ICCs)[1] <- "id"
+  desc$id <- gsub("_[bw]\\d{0,}$", "", desc$name)
+  
+  desc <- merge(desc, ICCs, by = "id", all.x = TRUE)
+  desc <- desc[!startsWith(desc$name, "DV_"), ]
+  write.csv(desc, "descriptives.csv")
+}
 
 # Get the names of the waves
 the_waves <- unique(df_long$time)
 
-write.table(t(c("Title", "LL", "Parameters", "AIC", "BIC", "RMSEA_Estimate", 
-              "CFI", "TLI")), "model_fits.csv", sep = "\t", row.names = FALSE, col.names = FALSE)
+if(run_everything){
+  write.table(t(c("Title", "LL", "Parameters", "AIC", "BIC", "RMSEA_Estimate", 
+                  "CFI", "TLI")), "model_fits.csv", sep = "\t", row.names = FALSE, col.names = FALSE)
+}
 
+# Prepare for N by country and by timepoint
+timepoints <- list()
+countries <- list()
+miss_mcar <- list()
 
+# Run analyses for each DV
 for(thisdv in vars$dv){
   use_waves <- unique(df_long$time[df_long$variable == thisdv])
   next_waves <- use_waves[-length(use_waves)]
@@ -262,61 +274,129 @@ for(thisdv in vars$dv){
 
   use_these <- c(pred_invar, pred_time_var, "tightness")
   df_anal <- df_anal[!is.na(df_anal$Dt), ]
+  
+  # Continue with Mplus models
   rename <- c("protest_containment_measures", "social_contact_friendsandfamily", "leave_house_leisure_others", "willingness_vaccinated")
   names(rename) <- c("contain_protest", "frienfam", "leavleis", "willvacc")
   for(i in 1:length(rename)){
     pred_time_var <- gsub(rename[i], names(rename)[i], pred_time_var)
     names(df_anal) <- gsub(rename[i], names(rename)[i], names(df_anal))
+    thisdv_orig <- thisdv
     thisdv <- gsub(rename[i], names(rename)[i], thisdv)
     use_these <- gsub(rename[i], names(rename)[i], use_these)
   }
   
 # Make Mplus model object
+  r_data <- df_anal[c("id", "time", "country", paste0("DV_", thisdv), use_these)]
+  if(run_everything){
+    mod <- mplusObject(
+      TITLE = thisdv,
+      VARIABLE = paste0(c(
+        paste0("USEVARIABLES =\n", paste0(names(r_data)[!names(r_data) %in% c("id", "time", "country")], collapse = "\n"), ";"),
+        "CLUSTER = country id;",
+        "AUXILIARY = time;",
+        paste0(c("WITHIN = ", pred_time_var, pred_invar, ";"), collapse = "\n"),
+        "BETWEEN = tightness;"), collapse = "\n"),
+      ANALYSIS = "TYPE = COMPLEX TWOLEVEL RANDOM;",
+      MODEL = c(
+        "%WITHIN%",
+        paste0("s", 1:length(c(pred_time_var, pred_invar)), " | ", paste0("DV_", thisdv), " ON ", c(c(pred_time_var, pred_invar)), ";"),
+        "%BETWEEN%",
+        paste0(paste0("DV_", thisdv), " ON ", "tightness", ";")),
+      OUTPUT = "TECH1 TECH8 stdyx;",
+      SAVEDATA = paste0('file is "save_', thisdv, '.dat";'),
+      usevariables = names(r_data),
+      rdata = r_data
+    )
+    # Estimate Mplus model
+    tryCatch({
+      res <- mplusModeler(mod, modelout = paste0(thisdv, ".inp"), run = 1L)
+    }, error = function(e){
+      message("Model failed for variable ", thisdv)
+    })
+    fit <- SummaryTable(res, keepCols = c("Title", "LL", "Parameters", "AIC", "BIC", "RMSEA_Estimate", "CFI", "TLI"), type = "none")
+    write.table(fit, "model_fits.csv", append = TRUE, sep = "\t", row.names = FALSE, col.names = FALSE)
+    fit <- structure(list(Title = thisdv, LL = NA, Parameters = NA, 
+                          AIC = NA, BIC = NA), row.names = c(NA, -1L), class = c("data.frame", 
+                                                                                 "mplus.summaries"))
+    write.table(fit, "model_fits.csv", append = TRUE, sep = "\t", row.names = FALSE, col.names = FALSE)
+  }
+  res <- readModels(paste0(thisdv, ".out"))
+  save_data <- res$savedata
+  # Check missingness
+  tmp <- MissMech::TestMCARNormality(r_data[c(paste0("DV_", thisdv), use_these)])
+  miss_mcar[[thisdv]] <- tmp$pvalcomb
+  # Check N by country and wave
+  n_by_country <- rep(NA, length(char_dict$country))
+  tmp <- tapply(save_data$ID, save_data$COUNTRY, function(x){length(unique(x))})
+  n_by_country[as.numeric(names(tmp))] <- tmp
+  countries[[thisdv]] <- n_by_country
+  tmz <- unique(df_long$time)
+  n_by_wave <- rep(NA, length(tmz))
+  names(n_by_wave) <- tmz
+  tmp <- tapply(save_data$ID, save_data$TIME, function(x){length(unique(x))})
+  n_by_wave[names(tmp)] <- tmp
+  timepoints[[thisdv]] <- n_by_wave
+  
   if(isTRUE(file.exists("long_id.RData"))){
     long_id <- readRDS("long_id.RData")
   } else {
     long_id <- NULL
   }
-  long_id <- unique(c(long_id, df_anal$id))
+  long_id <- unique(c(long_id, unique(save_data$ID)))
   saveRDS(long_id, "long_id.RData")
-  mod <- mplusObject(
-    TITLE = thisdv,
-    VARIABLE = paste0(c(
-      "CLUSTER = country id;",
-      paste0(c("WITHIN = ", pred_time_var, pred_invar, ";"), collapse = "\n"),
-      "BETWEEN = tightness;"), collapse = "\n"),
-    ANALYSIS = "TYPE = COMPLEX TWOLEVEL RANDOM;",
-    MODEL = c(
-      "%WITHIN%",
-      paste0("s", 1:length(c(pred_time_var, pred_invar)), " | ", paste0("DV_", thisdv), " ON ", c(c(pred_time_var, pred_invar)), ";"),
-      "%BETWEEN%",
-      paste0(paste0("DV_", thisdv), " ON ", "tightness", ";")),
-    OUTPUT = "TECH1 TECH8 stdyx;",
-    rdata = df_anal[c("id", "country", paste0("DV_", thisdv), use_these)]
-  )
-  # Estimate Mplus model
-  tryCatch({
-    res <- mplusModeler(mod, modelout = paste0(thisdv, ".inp"), run = 1L)
-    
-    tab <- table_results(res, columns = NULL)
+  
+  tab <- table_results(res, columns = NULL)
+  if(!is.null(tab)){
     tab <- tab[grepl("^(T|S)", tab$param), ]
     for(i in 1:length(c(pred_time_var, pred_invar))){
       tab$param <- gsub(paste0("^S", i, "$"), c(pred_time_var, pred_invar)[i], tab$param)
     }
     tab <- tab[, c("paramheader", "param", "est_sig", "pval", "confint")]
     write.csv(tab, paste0("results_", thisdv, ".csv"), row.names = FALSE)
-    
-    fit <- SummaryTable(res, keepCols = c("Title", "LL", "Parameters", "AIC", "BIC", "RMSEA_Estimate", "CFI", "TLI"), type = "none")
-    write.table(fit, "model_fits.csv", append = TRUE, sep = "\t", row.names = FALSE, col.names = FALSE)
-  }, error = function(e){
-    fit <- structure(list(Title = thisdv, LL = NA, Parameters = NA, 
-                          AIC = NA, BIC = NA), row.names = c(NA, -1L), class = c("data.frame", 
-                                                                                             "mplus.summaries"))
-    write.table(fit, "model_fits.csv", append = TRUE, sep = "\t", row.names = FALSE, col.names = FALSE)
-    message("Model failed for variable ", thisdv)
-    })
-  
+  }
 }
+
+# Table N by country and timepoint
+
+countries <- data.frame(do.call(cbind, countries))
+countries <- cbind(Country = names(char_dict$country)[as.numeric(rownames(countries))], countries)
+write.csv(countries, "n_by_country.csv", row.names = FALSE)
+
+timepoints <- do.call(cbind, timepoints)
+timepoints <- cbind(wave_number = rownames(timepoints), timepoints)
+write.csv(timepoints, "timepoints.csv", row.names = FALSE)
+
+# Table descriptives by country
+ids <- readRDS("long_id.RData")
+df_desc <- df
+df_desc$country <- names(char_dict$country)[df_desc$country]
+df_desc$id <- 1:nrow(df_desc)
+df_desc <- df_desc[df_desc$id %in% ids, ]
+
+percs <- function(x){
+  tb <- table(x)
+  paste0(names(tb), " = ", formatC(prop.table(tb), digits = 2, format = "f"), "%")
+}
+max_n = max(sapply(df_desc[c("age_b", "education_b")], function(x){length(unique(x))}))
+
+tab <- lapply(names(char_dict$country), function(thiscount){
+  # thiscount = names(char_dict$country)[1]
+  tmp <- df_desc[df_desc$country == thiscount, ]
+  if(nrow(tmp) == 0) return(NULL)
+  out <- list(
+    country = thiscount,
+    N = nrow(tmp),
+    age = percs(tmp$age_b),
+    gender = percs(tmp$gender_b),
+    education = percs(tmp$education_b),
+    religious = percs(tmp$religious_b)
+  )
+  sapply(out, `length<-`, 9)
+})
+
+tab <- do.call(rbind, tab)
+write.csv(tab, "table1_descriptives.csv", row.names = FALSE)
 
 
 f <- list.files(pattern = "^results.+?csv$")

@@ -8,8 +8,8 @@ rownames(timepoints) <- unique(df_long$time)
 countries <- matrix(NA, nrow = max(df_long$country, na.rm = T), ncol = (length(vars$dv)))
 colnames(countries) <- vars$dv
 
-miss_mcar <- rep(NA, ncol(countries))
-names(miss_mcar) <- colnames(countries) 
+#miss_mcar <- rep(NA, ncol(countries))
+#names(miss_mcar) <- colnames(countries) 
 
 for(thisdv in vars$dv){
   use_waves <- unique(df_long$time[df_long$variable == thisdv])
@@ -100,8 +100,8 @@ for(thisdv in vars$dv){
   n_by_wave <- tapply(df_anal$id, df_anal$time, function(x){length(unique(x))})
   
   timepoints[match(names(n_by_wave), rownames(timepoints)), match(thisdv, colnames(timepoints))] <- n_by_wave
-  tmp <- MissMech::TestMCARNormality(df_anal[c(paste0("DV_", thisdv), use_these)])
-  miss_mcar[thisdv] <- tmp$pvalcomb
+  #tmp <- MissMech::TestMCARNormality(df_anal[c(paste0("DV_", thisdv), use_these)])
+  #miss_mcar[thisdv] <- tmp$pvalcomb
   
   
   tmp <- df_anal[c("id", "country", paste0("DV_", thisdv), use_these)]
@@ -112,9 +112,10 @@ for(thisdv in vars$dv){
 }
 
 countries <- cbind(country_number = 1:nrow(countries), countries)
+countries[,1] <- names(char_dict$country)[countries[,1]]
 write.csv(countries, "n_by_country.csv", row.names = FALSE)
 
 timepoints <- cbind(wave_number = rownames(timepoints), timepoints)
 write.csv(timepoints, "timepoints.csv", row.names = FALSE)
 
-saveRDS(miss_mcar, "miss_mcar.RData")
+#saveRDS(miss_mcar, "miss_mcar.RData")
